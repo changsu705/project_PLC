@@ -65,7 +65,17 @@ public abstract class Enemy : MonoBehaviour
     /// <summary>
     /// 플레이어를 추적하는 로직
     /// </summary>
-    public abstract void Targeting();
+    public void Targeting()
+    {
+        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, enemyStat.targetRadius, transform.forward, enemyStat.targetRange,
+            LayerMask.GetMask("Player"));
+
+        if (rayHits.Length > 0 && !isAttack)
+        {
+            StartCoroutine(Attack());
+            
+        }
+    }
 
     /// <summary>
     /// 플레이어를 공격하는 로직

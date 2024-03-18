@@ -7,4 +7,8 @@ public class EnemyStat : ScriptableObject
 {
   public int maxHp;
   public int currentHp;
+  
+  public float targetRadius;
+  public float targetRange;
+  
 }
