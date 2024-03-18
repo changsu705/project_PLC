@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,10 +7,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float dashScale;
 
+    [Header("Battle Stat")]
+    [SerializeField] private float hp;
+    [SerializeField] private float damage;
+    [SerializeField] private float[] attackCoolTimes = { 1f, 1f, 1f };
+
+    private readonly bool[] canAttack = { true, true, true };
+
     private float horizontal;
     private float vertical;
 
-    /// <summary> base : 카메라 오일러 각 y</summary>
+    /// <summary> base : 카메라 오일러 각 y </summary>
     private float sin;
 
     /// <summary> base : 카메라 오일러 각 y </summary>
@@ -72,5 +80,33 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            switch (context.ReadValue<float>())
+            {
+                case 0f:
+                    if (canAttack[0])
+                    {
+                        canAttack[0] = false;
+                        StartCoroutine(AttackCoolTime(0));
+                        Debug.Log("Basic");
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
+    private IEnumerator AttackCoolTime(int attackIdx)
+    {
+        yield return new WaitForSeconds(attackCoolTimes[attackIdx]);
+        canAttack[attackIdx] = true;
+        Debug.Log("Attack!");
     }
 }

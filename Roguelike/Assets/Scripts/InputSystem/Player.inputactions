@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "9c2e8eb7-5423-41f8-b17f-45caf557999e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -88,6 +97,17 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a7ecb03-9e86-4728-80b3-0bfbf6054b80",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "Scale(factor=0)",
+                    "groups": "PC",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
