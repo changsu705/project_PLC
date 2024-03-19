@@ -568,9 +568,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   dashScale: 2
+  dodgeForce: 5
   hp: 10
   damage: 10
-  attackCoolTime: 1
+  attackCoolTimes:
+  - 1
+  - 1
+  - 1
 --- !u!114 &474477508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,6 +649,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 9c2e8eb7-5423-41f8-b17f-45caf557999e
     m_ActionName: Control/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 474477507}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnDodge
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a39b9be2-015b-4818-9ff3-0d8b6c5a5d7b
+    m_ActionName: Control/Dodge[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: PC
   m_DefaultActionMap: Control
