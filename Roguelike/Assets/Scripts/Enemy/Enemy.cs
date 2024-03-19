@@ -27,6 +27,8 @@ public abstract class Enemy : MonoBehaviour
         nav=GetComponent<NavMeshAgent>();
 
         Invoke(nameof(ChaseStart), 2f);
+        
+        
     }
     
     private void Update()
