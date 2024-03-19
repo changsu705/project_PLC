@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -74,6 +75,31 @@ public abstract class Enemy : MonoBehaviour
         {
             StartCoroutine(Attack());
             
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Weapon"))
+        {
+            enemyStat.currentHp -= 10;
+            // 플레이어에게 데미지 받음
+            // 일단 비어 둠
+            // (애니메이션 넣을 예정)
+            StartCoroutine(IsDead());
+        }
+    }
+
+    private IEnumerator IsDead()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (enemyStat.currentHp <= 0)
+        {
+            isDead = true;
+            isChase = false;
+            nav.enabled = false;
+            //애니메이션
+            Destroy(gameObject, 4f);
         }
     }
 
