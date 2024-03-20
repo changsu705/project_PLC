@@ -1,10 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ChargingGoblin : Enemy
 {
     
+    private void Awake()
+    {
+        rb=GetComponent<Rigidbody>();
+        nav=GetComponent<NavMeshAgent>();
+    }
 
     public override IEnumerator Attack()
     {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,14 +7,20 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class Enemy : MonoBehaviour
 {
+    public int maxHp;
+    public int currentHp;
+
+    public float targetRadius;
+    public float targetRange;
     
-    public EnemyStat enemyStat;
     public Transform target;
     public BoxCollider meleeArea;
 
     public bool isChase;
     public bool isAttack;
     public bool isDead;
+    public bool isMino;
+    
     
     protected Rigidbody rb;
     protected NavMeshAgent nav;
@@ -23,17 +28,19 @@ public abstract class Enemy : MonoBehaviour
     
     private void Awake()
     {
-        rb=GetComponent<Rigidbody>();
-        nav=GetComponent<NavMeshAgent>();
+        
 
-        Invoke(nameof(ChaseStart), 2f);
+        
+        if(!isMino)
+            Invoke(nameof(ChaseStart), 2f);
         
         
     }
     
     private void Update()
     {
-        if (nav.enabled)
+
+        if (!isMino && nav.enabled) 
         {
             nav.SetDestination(target.position);
             nav.isStopped = !isChase;
@@ -70,13 +77,17 @@ public abstract class Enemy : MonoBehaviour
     /// </summary>
     public void Targeting()
     {
-        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, enemyStat.targetRadius, transform.forward, enemyStat.targetRange,
-            LayerMask.GetMask("Player"));
-
-        if (rayHits.Length > 0 && !isAttack)
+        if (!isMino && !isDead)
         {
-            StartCoroutine(Attack());
-            
+            RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward,
+                targetRange,
+                LayerMask.GetMask("Player"));
+
+            if (rayHits.Length > 0 && !isAttack)
+            {
+                StartCoroutine(Attack());
+
+            } 
         }
     }
 
@@ -84,7 +95,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Weapon"))
         {
-            enemyStat.currentHp -= 10;
+            currentHp -= 10;
             // 플레이어에게 데미지 받음
             // 일단 비어 둠
             // (애니메이션 넣을 예정)
@@ -95,7 +106,7 @@ public abstract class Enemy : MonoBehaviour
     private IEnumerator IsDead()
     {
         yield return new WaitForSeconds(0.1f);
-        if (enemyStat.currentHp <= 0)
+        if (currentHp <= 0)
         {
             isDead = true;
             isChase = false;
