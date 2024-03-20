@@ -13,9 +13,8 @@ public class PlayerController : MonoBehaviour
     [Header("Battle Stat")]
     [SerializeField] private float hp;
     [SerializeField] private float atk;
-    [SerializeField] private float[] attackCoolTimes = { 1f, 1f, 1f };
-
-    private readonly bool[] isAttack = { false, false, false };
+    [SerializeField] private float[] attackCoolTimes = { 1f, };
+    private readonly bool[] isAttack = { false, };
 
     private float horizontal;
     private float vertical;
@@ -104,6 +103,10 @@ public class PlayerController : MonoBehaviour
                     if (!isAttack[0])
                     {
                         isAttack[0] = true;
+                        Vector3 pos = transform.position;
+                        pos.y += 1f;
+                        SkillEffects.Instance.PlayEffect(SkillEffects.FX.Basic, pos, transform.rotation);
+
                         StartCoroutine(AttackCoolTime(0));
                         Debug.Log("Basic");
                     }
