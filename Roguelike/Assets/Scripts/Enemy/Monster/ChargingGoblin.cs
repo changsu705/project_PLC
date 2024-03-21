@@ -12,8 +12,8 @@ public class ChargingGoblin : Enemy
         nav=GetComponent<NavMeshAgent>();
         anim=GetComponent<Animator>();
         material=GetComponentsInChildren<SkinnedMeshRenderer>();
-
         
+        HitEffect = Resources.Load<GameObject>("HitEffect");
     }
 
     

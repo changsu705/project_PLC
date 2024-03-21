@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour 
 {
     public int maxHp;
     public int currentHp;
@@ -28,14 +28,16 @@ public abstract class Enemy : MonoBehaviour
     protected Animator anim;
     public SkinnedMeshRenderer[] material;
     
+    protected GameObject HitEffect;
+    
     private void Awake()
     {
         rb=GetComponent<Rigidbody>();
         nav=GetComponent<NavMeshAgent>();
         anim=GetComponent<Animator>();
         material=GetComponentsInChildren<SkinnedMeshRenderer>();
-
-
+    
+        HitEffect = Resources.Load<GameObject>("HitEffect");
     }
 
     private void Start()
@@ -108,7 +110,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Weapon"))
         {
-            currentHp -= 10;
+            
             Vector3 reacVec = transform.position - other.transform.position;
             StartCoroutine(OnDamage(reacVec));
             // 플레이어에게 데미지 받음
@@ -119,7 +121,14 @@ public abstract class Enemy : MonoBehaviour
 
     private IEnumerator OnDamage(Vector3 reactVec)
     {
-        print("작동중");
+        if(currentHp>0)
+        {
+            Vector3 effectVec = new Vector3(-1f, 1.5f, 0f);
+            Vector3 spawnPos= transform.position + effectVec;
+            GameObject effect = Instantiate(HitEffect, spawnPos, Quaternion.LookRotation(reactVec));
+            Destroy(effect, 1f);
+        }
+        
         foreach (SkinnedMeshRenderer mesh in material)
         {
             mesh.material.color = Color.red;
@@ -156,6 +165,8 @@ public abstract class Enemy : MonoBehaviour
 
         
     }
+
+    
     
 
     /// <summary>
