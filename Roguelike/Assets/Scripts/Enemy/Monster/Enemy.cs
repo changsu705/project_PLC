@@ -146,14 +146,15 @@ public abstract class Enemy : MonoBehaviour
             isChase = false;
             nav.enabled = false;
             anim.SetTrigger("doDie");
-
+            
+            reactVec = reactVec.normalized;
+            reactVec += Vector3.up;
+            rb.AddForce(reactVec * 5, ForceMode.Impulse);
+            Destroy(gameObject, 4f);
 
         }
 
-        reactVec = reactVec.normalized;
-        reactVec += Vector3.up;
-        rb.AddForce(reactVec * 5, ForceMode.Impulse);
-        Destroy(gameObject, 4f);
+        
     }
     
 

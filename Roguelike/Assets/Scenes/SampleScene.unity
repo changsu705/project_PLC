@@ -141,8 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17f9a9523191a4f38830c6000ae68027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 10000
-  currentHp: 10000
+  maxHp: 100
+  currentHp: 100
   targetRadius: 1.5
   targetRange: 3
   target: {fileID: 474477506}
