@@ -26,16 +26,14 @@ public abstract class Enemy : MonoBehaviour
     protected Rigidbody rb;
     protected NavMeshAgent nav;
     protected Animator anim;
-    
+    public SkinnedMeshRenderer[] material;
     
     private void Awake()
     {
         rb=GetComponent<Rigidbody>();
         nav=GetComponent<NavMeshAgent>();
         anim=GetComponent<Animator>();
-
-
-        
+        material=GetComponentsInChildren<SkinnedMeshRenderer>();
 
 
     }
@@ -111,25 +109,53 @@ public abstract class Enemy : MonoBehaviour
         if (other.CompareTag("Weapon"))
         {
             currentHp -= 10;
+            Vector3 reacVec = transform.position - other.transform.position;
+            StartCoroutine(OnDamage(reacVec));
             // 플레이어에게 데미지 받음
             // 일단 비어 둠
             // (애니메이션 넣을 예정)
-            StartCoroutine(IsDead());
         }
     }
 
-    private IEnumerator IsDead()
+    private IEnumerator OnDamage(Vector3 reactVec)
     {
-        yield return new WaitForSeconds(0.1f);
-        if (currentHp <= 0)
+        print("작동중");
+        foreach (SkinnedMeshRenderer mesh in material)
         {
+            mesh.material.color = Color.red;
+        }
+        
+        yield return new WaitForSeconds(0.1f);
+
+        if (currentHp > 0)
+        {
+            foreach (SkinnedMeshRenderer mesh in material)
+            {
+                mesh.material.color = Color.white;
+            }
+        }
+        else
+        {
+            foreach (SkinnedMeshRenderer mesh in material)
+            {
+                mesh.material.color = Color.gray;
+            }
+            
+            gameObject.layer = 14;
             isDead = true;
             isChase = false;
             nav.enabled = false;
-            anim.SetTrigger("isDead");
-            Destroy(gameObject, 4f);
+            anim.SetTrigger("doDie");
+
+
         }
+
+        reactVec = reactVec.normalized;
+        reactVec += Vector3.up;
+        rb.AddForce(reactVec * 5, ForceMode.Impulse);
+        Destroy(gameObject, 4f);
     }
+    
 
     /// <summary>
     /// 플레이어를 공격하는 로직
