@@ -570,6 +570,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   dashScale: 2
+  dodgeForce: 5
+  dodgeCoolTime: 1
+  hp: 0
+  atk: 0
+  attackCoolTimes:
+  - 1
 --- !u!114 &474477508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -736,8 +742,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dffbc30b15300432cbcf94df8d600d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyStat: {fileID: 11400000, guid: 3e268527c6ec64c4a98e1efba2e89be2, type: 2}
+  maxHp: 0
+  currentHp: 0
+  targetRadius: 0
+  targetRange: 0
   target: {fileID: 474477506}
+  meleeArea: {fileID: 0}
+  isChase: 0
+  isAttack: 0
+  isDead: 0
+  isMino: 0
+  material: []
 --- !u!54 &588394715
 Rigidbody:
   m_ObjectHideFlags: 0
