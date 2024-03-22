@@ -6,14 +6,14 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
-public abstract class Enemy : MonoBehaviour 
+public abstract class Enemy : MonoBehaviour
 {
     public int maxHp;
     public int currentHp;
 
     public float targetRadius;
     public float targetRange;
-    
+
     public Transform target;
     public BoxCollider meleeArea;
 
@@ -21,28 +21,28 @@ public abstract class Enemy : MonoBehaviour
     public bool isAttack;
     public bool isDead;
     public bool isMino;
-    
-    
+
+
     protected Rigidbody rb;
     protected NavMeshAgent nav;
     protected Animator anim;
     public SkinnedMeshRenderer[] material;
-    
+
     protected GameObject HitEffect;
-    
+
     private void Awake()
     {
-        rb=GetComponent<Rigidbody>();
-        nav=GetComponent<NavMeshAgent>();
-        anim=GetComponent<Animator>();
-        material=GetComponentsInChildren<SkinnedMeshRenderer>();
-    
+        rb = GetComponent<Rigidbody>();
+        nav = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
+        material = GetComponentsInChildren<SkinnedMeshRenderer>();
+
         HitEffect = Resources.Load<GameObject>("HitEffect");
     }
 
     private void Start()
     {
-        if(!isMino)
+        if (!isMino)
         {
             print("isMino이 아님");
             Invoke(nameof(ChaseStart), 2f);
@@ -52,21 +52,21 @@ public abstract class Enemy : MonoBehaviour
     private void Update()
     {
 
-        if (!isMino && nav.enabled) 
+        if (!isMino && nav.enabled)
         {
-            
+
             nav.SetDestination(target.position);
             nav.isStopped = !isChase;
         }
     }
-    
+
     private void FixedUpdate()
     {
         Targeting();
         FreezeVelocity();
     }
 
-   
+
     /// <summary>
     /// 추적을 시작하는 로직
     /// </summary>
@@ -74,7 +74,7 @@ public abstract class Enemy : MonoBehaviour
     {
         anim.SetBool("isWalk", true);
         isChase = true;
-        
+
     }
 
     void FreezeVelocity()
@@ -93,7 +93,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (!isMino && !isDead)
         {
-            
+
             RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward,
                 targetRange,
                 LayerMask.GetMask("Player"));
@@ -102,7 +102,7 @@ public abstract class Enemy : MonoBehaviour
             {
                 StartCoroutine(Attack());
 
-            } 
+            }
         }
     }
 
@@ -110,7 +110,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Weapon"))
         {
-            
+
             Vector3 reacVec = transform.position - other.transform.position;
             StartCoroutine(OnDamage(reacVec));
             // 플레이어에게 데미지 받음
@@ -121,19 +121,19 @@ public abstract class Enemy : MonoBehaviour
 
     private IEnumerator OnDamage(Vector3 reactVec)
     {
-        if(currentHp>0)
+        if (currentHp > 0)
         {
             Vector3 effectVec = new Vector3(-1f, 1.5f, 0f);
-            Vector3 spawnPos= transform.position + effectVec;
+            Vector3 spawnPos = transform.position + effectVec;
             GameObject effect = Instantiate(HitEffect, spawnPos, Quaternion.LookRotation(reactVec));
             Destroy(effect, 1f);
         }
-        
+
         foreach (SkinnedMeshRenderer mesh in material)
         {
             mesh.material.color = Color.red;
         }
-        
+
         yield return new WaitForSeconds(0.1f);
 
         if (currentHp > 0)
@@ -149,13 +149,13 @@ public abstract class Enemy : MonoBehaviour
             {
                 mesh.material.color = Color.gray;
             }
-            
+
             gameObject.layer = 14;
             isDead = true;
             isChase = false;
             nav.enabled = false;
             anim.SetTrigger("doDie");
-            
+
             reactVec = reactVec.normalized;
             reactVec += Vector3.up;
             rb.AddForce(reactVec * 5, ForceMode.Impulse);
@@ -163,18 +163,18 @@ public abstract class Enemy : MonoBehaviour
 
         }
 
-        
+
     }
 
-    
-    
+
+
 
     /// <summary>
     /// 플레이어를 공격하는 로직
     /// </summary>
     /// <returns></returns>
     public abstract IEnumerator Attack();
-    
+
 
 
 
