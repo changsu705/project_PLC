@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float[] attackCoolTimes = { 1f, };
     private readonly bool[] isAttack = { false, };
 
+    [Header("Skill Colliders")]
+    [SerializeField] private GameObject basicAtkColl;
+
     private float horizontal;
     private float vertical;
 
@@ -92,11 +95,14 @@ public class PlayerController : MonoBehaviour
                     {
                         isAttack[0] = true;
                         Vector3 pos = transform.position;
-                        pos.y += 1f;
-                        SkillEffects.Instance.PlayEffect(SkillEffects.FX.Basic, pos, transform.rotation);
+                        pos.y++;
+                        SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicSmash, pos, transform.rotation);
+
+                        basicAtkColl.transform.SetPositionAndRotation(pos, transform.rotation);
+
+                        basicAtkColl.SetActive(true);
 
                         StartCoroutine(AttackCoolTime(0));
-                        Debug.Log("Basic");
                     }
                     break;
 
@@ -110,14 +116,13 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(dodgeCoolTime);
         isDodge = false;
-        Debug.Log("Dodge!");
     }
 
     private IEnumerator AttackCoolTime(int attackIdx)
     {
         yield return new WaitForSeconds(attackCoolTimes[attackIdx]);
         isAttack[attackIdx] = false;
-        Debug.Log("Attack!");
+        basicAtkColl.SetActive(false);
     }
     #endregion
 }
