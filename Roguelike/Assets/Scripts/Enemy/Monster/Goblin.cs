@@ -6,12 +6,6 @@ using UnityEngine.AI;
 public class Goblin : Enemy
 {
 
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-        nav = GetComponent<NavMeshAgent>();
-    }
-
 
     public override IEnumerator Attack()
     {

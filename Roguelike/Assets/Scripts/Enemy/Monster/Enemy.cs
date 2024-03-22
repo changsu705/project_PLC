@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -26,7 +27,7 @@ public abstract class Enemy : MonoBehaviour
     protected Rigidbody rb;
     protected NavMeshAgent nav;
     protected Animator anim;
-    public SkinnedMeshRenderer[] material;
+    public MeshRenderer[] renderers;
 
     protected GameObject HitEffect;
 
@@ -35,7 +36,7 @@ public abstract class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        material = GetComponentsInChildren<SkinnedMeshRenderer>();
+        renderers = GetComponentsInChildren<MeshRenderer>();
 
         HitEffect = Resources.Load<GameObject>("HitEffect");
     }
@@ -45,7 +46,7 @@ public abstract class Enemy : MonoBehaviour
         if (!isMino)
         {
             print("isMino이 아님");
-            Invoke(nameof(ChaseStart), 2f);
+            //Invoke(nameof(ChaseStart), 2f);
         }
     }
 
@@ -110,76 +111,50 @@ public abstract class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Weapon"))
         {
-
-            Vector3 reacVec = transform.position - other.transform.position;
-            StartCoroutine(OnDamage(reacVec));
+            SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, other.transform.position, Quaternion.identity);
+            StartCoroutine(OnDamage());
             // 플레이어에게 데미지 받음
             // 일단 비어 둠
             // (애니메이션 넣을 예정)
         }
     }
 
-    private IEnumerator OnDamage(Vector3 reactVec)
+    private IEnumerator OnDamage()
     {
-        if (currentHp > 0)
-        {
-            Vector3 effectVec = new Vector3(-1f, 1.5f, 0f);
-            Vector3 spawnPos = transform.position + effectVec;
-            GameObject effect = Instantiate(HitEffect, spawnPos, Quaternion.LookRotation(reactVec));
-            Destroy(effect, 1f);
-        }
-
-        foreach (SkinnedMeshRenderer mesh in material)
+        foreach (MeshRenderer mesh in renderers)
         {
             mesh.material.color = Color.red;
         }
 
-        yield return new WaitForSeconds(0.1f);
-
-        if (currentHp > 0)
+        if (currentHp <= 0)
         {
-            foreach (SkinnedMeshRenderer mesh in material)
+            isDead = true;
+            isChase = true;
+            nav.enabled = false;
+            gameObject.layer = 0;
+            anim.SetTrigger("doDie");
+
+            yield return new WaitForSeconds(0.1f);
+
+            foreach (MeshRenderer mesh in renderers)
             {
-                mesh.material.color = Color.white;
+                mesh.material.color = Color.gray;
             }
         }
         else
         {
-            foreach (SkinnedMeshRenderer mesh in material)
+            yield return new WaitForSeconds(0.1f);
+
+            foreach (MeshRenderer mesh in renderers)
             {
-                mesh.material.color = Color.gray;
+                mesh.material.color = Color.white;
             }
-
-            gameObject.layer = 14;
-            isDead = true;
-            isChase = false;
-            nav.enabled = false;
-            anim.SetTrigger("doDie");
-
-            reactVec = reactVec.normalized;
-            reactVec += Vector3.up;
-            rb.AddForce(reactVec * 5, ForceMode.Impulse);
-            Destroy(gameObject, 4f);
-
         }
-
-
     }
-
-
-
 
     /// <summary>
     /// 플레이어를 공격하는 로직
     /// </summary>
     /// <returns></returns>
     public abstract IEnumerator Attack();
-
-
-
-
-
-
-
-
 }
