@@ -71,18 +71,6 @@ public class PlayerController : MonoBehaviour
         vertical = v.y;
     }
 
-    public void OnDash(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started)
-        {
-            speed *= dashScale;
-        }
-        else if (context.phase == InputActionPhase.Canceled)
-        {
-            speed /= dashScale;
-        }
-    }
-
     public void OnDodge(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started && !isDodge && (horizontal != 0f || vertical != 0f))
