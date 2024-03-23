@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
                     {
                         isAttack[0] = true;
                         Vector3 pos = transform.position;
-                        pos.y++;
+                        pos.y += 1f;
                         SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicSmash, pos, transform.rotation);
 
                         basicAtkColl.transform.SetPositionAndRotation(pos, transform.rotation);
@@ -120,9 +120,11 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator AttackCoolTime(int attackIdx)
     {
-        yield return new WaitForSeconds(attackCoolTimes[attackIdx]);
-        isAttack[attackIdx] = false;
+        yield return new WaitForSeconds(0.1f);
         basicAtkColl.SetActive(false);
+
+        yield return new WaitForSeconds(attackCoolTimes[attackIdx] - 0.1f);
+        isAttack[attackIdx] = false;
     }
     #endregion
 }

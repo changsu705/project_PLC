@@ -111,7 +111,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Weapon"))
         {
-            SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, other.transform.position, Quaternion.identity);
+            SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, transform.position, Quaternion.identity);
             StartCoroutine(OnDamage());
             // 플레이어에게 데미지 받음
             // 일단 비어 둠
