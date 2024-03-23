@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -14,6 +15,8 @@ public abstract class Enemy : MonoBehaviour
 
     public float targetRadius;
     public float targetRange;
+    
+    
 
     public Transform target;
     public BoxCollider meleeArea;
@@ -22,31 +25,36 @@ public abstract class Enemy : MonoBehaviour
     public bool isAttack;
     public bool isDead;
     public bool isMino;
+    
+    Dictionary<MeshRenderer,Color> originalColors = new Dictionary<MeshRenderer, Color>();
 
 
     protected Rigidbody rb;
     protected NavMeshAgent nav;
     protected Animator anim;
     public MeshRenderer[] renderers;
+    
 
-    protected GameObject HitEffect;
 
-    private void Awake()
+    protected void Awake()
     {
         rb = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         renderers = GetComponentsInChildren<MeshRenderer>();
+        
+        foreach (MeshRenderer mesh in renderers)
+        {
+            originalColors[mesh] = mesh.material.color;
+        }
 
-        HitEffect = Resources.Load<GameObject>("HitEffect");
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         if (!isMino)
         {
-            print("isMino이 아님");
-            //Invoke(nameof(ChaseStart), 2f);
+            Invoke(nameof(ChaseStart), 2f);
         }
     }
 
@@ -73,7 +81,7 @@ public abstract class Enemy : MonoBehaviour
     /// </summary>
     private void ChaseStart()
     {
-        anim.SetBool("isWalk", true);
+        // anim.SetBool("isWalk", true);
         isChase = true;
 
     }
@@ -121,10 +129,12 @@ public abstract class Enemy : MonoBehaviour
 
     private IEnumerator OnDamage()
     {
+    
         foreach (MeshRenderer mesh in renderers)
         {
             mesh.material.color = Color.red;
         }
+        
 
         if (currentHp <= 0)
         {
@@ -132,7 +142,7 @@ public abstract class Enemy : MonoBehaviour
             isChase = true;
             nav.enabled = false;
             gameObject.layer = 0;
-            anim.SetTrigger("doDie");
+            //anim.SetTrigger("doDie");
 
             yield return new WaitForSeconds(0.1f);
 
@@ -144,10 +154,15 @@ public abstract class Enemy : MonoBehaviour
         else
         {
             yield return new WaitForSeconds(0.1f);
-
-            foreach (MeshRenderer mesh in renderers)
+        
+            // foreach(MeshRenderer mesh in renderers)
+            // {
+            //     mesh.material.color = Color.white;
+            // }
+            
+            foreach (var pair in originalColors)
             {
-                mesh.material.color = Color.white;
+                 pair.Key.material.color = pair.Value;
             }
         }
     }

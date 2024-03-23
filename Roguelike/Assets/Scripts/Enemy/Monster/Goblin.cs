@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,6 +5,8 @@ using UnityEngine.AI;
 public class Goblin : Enemy
 {
 
+
+    
 
     public override IEnumerator Attack()
     {

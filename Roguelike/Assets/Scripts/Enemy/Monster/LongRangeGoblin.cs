@@ -7,12 +7,7 @@ public class LongRangeGoblin : Enemy
 
     public GameObject bullet;
     public Transform bulletPos;
-
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-        nav = GetComponent<NavMeshAgent>();
-    }
+    
 
     public override IEnumerator Attack()
     {

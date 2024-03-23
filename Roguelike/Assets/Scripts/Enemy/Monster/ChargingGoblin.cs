@@ -6,15 +6,7 @@ using UnityEngine.AI;
 public class ChargingGoblin : Enemy
 {
 
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-        nav = GetComponent<NavMeshAgent>();
-        anim = GetComponent<Animator>();
-        renderers = GetComponentsInChildren<MeshRenderer>();
-
-        HitEffect = Resources.Load<GameObject>("HitEffect");
-    }
+    
 
 
 
