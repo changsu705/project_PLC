@@ -576,6 +576,7 @@ MonoBehaviour:
   atk: 0
   attackCoolTimes:
   - 1
+  basicAtkColl: {fileID: 0}
 --- !u!114 &474477508
 MonoBehaviour:
   m_ObjectHideFlags: 0
