@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5222506189014035060}
@@ -47,7 +47,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  emitterVelocityMode: 1
+  emitterVelocityMode: 2
   looping: 0
   prewarm: 0
   playOnAwake: 0
@@ -108,7 +108,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -4916,7 +4916,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5222506189014035060}
@@ -4935,7 +4935,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  emitterVelocityMode: 1
+  emitterVelocityMode: 2
   looping: 0
   prewarm: 0
   playOnAwake: 0
@@ -4996,7 +4996,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -9836,7 +9836,7 @@ Transform:
   m_GameObject: {fileID: 4324727304931565924}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.5}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -9858,7 +9858,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  emitterVelocityMode: 1
+  emitterVelocityMode: 2
   looping: 0
   prewarm: 0
   playOnAwake: 0
@@ -9919,7 +9919,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -13670,7 +13670,7 @@ ParticleSystem:
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 2
     inside: 0
     outside: 0
@@ -14718,6 +14718,26 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2688072929273095510, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2688072929273095510, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
+      propertyPath: emitterVelocityMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830332369697274687, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4575826262787033440, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5208477534445219399, guid: 71ddca69859464f48b7f6c53dfc75066,
         type: 3}
       propertyPath: looping
@@ -14727,12 +14747,27 @@ PrefabInstance:
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5208477534445219399, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5208477534445219399, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
+      propertyPath: emitterVelocityMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5285972265258583827, guid: 71ddca69859464f48b7f6c53dfc75066,
         type: 3}
       propertyPath: m_Name
       value: FX_Hit
       objectReference: {fileID: 0}
+    - target: {fileID: 5794671180513624915, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6678615401653393991, guid: 71ddca69859464f48b7f6c53dfc75066,
         type: 3}
       propertyPath: looping
@@ -14742,6 +14777,16 @@ PrefabInstance:
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678615401653393991, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678615401653393991, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
+      propertyPath: emitterVelocityMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9199818460199458288, guid: 71ddca69859464f48b7f6c53dfc75066,
         type: 3}
@@ -14771,7 +14816,7 @@ PrefabInstance:
     - target: {fileID: 9199818460199458288, guid: 71ddca69859464f48b7f6c53dfc75066,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9199818460199458288, guid: 71ddca69859464f48b7f6c53dfc75066,
         type: 3}
@@ -14807,6 +14852,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9199818460199458288, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
