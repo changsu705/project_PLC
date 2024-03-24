@@ -14725,8 +14725,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688072929273095510, guid: 71ddca69859464f48b7f6c53dfc75066,
         type: 3}
+      propertyPath: ShapeModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2688072929273095510, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
       propertyPath: emitterVelocityMode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2688072929273095510, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2688072929273095510, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2688072929273095510, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2688072929273095510, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2688072929273095510, guid: 71ddca69859464f48b7f6c53dfc75066,
+        type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3830332369697274687, guid: 71ddca69859464f48b7f6c53dfc75066,
         type: 3}
