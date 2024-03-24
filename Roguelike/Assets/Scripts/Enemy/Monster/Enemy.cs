@@ -36,7 +36,7 @@ public abstract class Enemy : MonoBehaviour
     
 
 
-    protected void Awake()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
@@ -50,7 +50,7 @@ public abstract class Enemy : MonoBehaviour
 
     }
 
-    protected virtual void Start()
+    private void Start()
     {
         if (!isMino)
         {
@@ -98,7 +98,7 @@ public abstract class Enemy : MonoBehaviour
     /// <summary>
     /// 플레이어를 추적하는 로직
     /// </summary>
-    public void Targeting()
+    private void Targeting()
     {
         if (!isMino && !isDead)
         {
@@ -129,6 +129,9 @@ public abstract class Enemy : MonoBehaviour
 
     private IEnumerator OnDamage()
     {
+        Vector3 backVec = -transform.forward * 20f;
+        rb.AddForce(backVec,ForceMode.Impulse);
+        print("넉백");
     
         foreach (MeshRenderer mesh in renderers)
         {
