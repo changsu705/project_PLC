@@ -1412,6 +1412,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 282486850097080496, guid: dff653b61231ac74f93689dbe223f018,
         type: 3}
+      propertyPath: scalingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 282486850097080496, guid: dff653b61231ac74f93689dbe223f018,
+        type: 3}
       propertyPath: emitterVelocityMode
       value: 2
       objectReference: {fileID: 0}
@@ -1422,8 +1427,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1660869081478470832, guid: dff653b61231ac74f93689dbe223f018,
         type: 3}
+      propertyPath: scalingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660869081478470832, guid: dff653b61231ac74f93689dbe223f018,
+        type: 3}
       propertyPath: emitterVelocityMode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2002250597314692516, guid: dff653b61231ac74f93689dbe223f018,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2002250597314692516, guid: dff653b61231ac74f93689dbe223f018,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2002250597314692516, guid: dff653b61231ac74f93689dbe223f018,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2002250597314692516, guid: dff653b61231ac74f93689dbe223f018,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2700622622289624629, guid: dff653b61231ac74f93689dbe223f018,
         type: 3}
@@ -1527,12 +1557,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7993421932917580705, guid: dff653b61231ac74f93689dbe223f018,
         type: 3}
+      propertyPath: scalingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993421932917580705, guid: dff653b61231ac74f93689dbe223f018,
+        type: 3}
       propertyPath: emitterVelocityMode
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8161467304829849249, guid: dff653b61231ac74f93689dbe223f018,
         type: 3}
       propertyPath: m_RenderingLayerMask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8368597738503786391, guid: dff653b61231ac74f93689dbe223f018,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8368597738503786391, guid: dff653b61231ac74f93689dbe223f018,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8368597738503786391, guid: dff653b61231ac74f93689dbe223f018,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8368597738503786391, guid: dff653b61231ac74f93689dbe223f018,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9118575440012295624, guid: dff653b61231ac74f93689dbe223f018,
