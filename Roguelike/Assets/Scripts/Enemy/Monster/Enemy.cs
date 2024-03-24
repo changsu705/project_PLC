@@ -129,15 +129,21 @@ public abstract class Enemy : MonoBehaviour
 
     private IEnumerator OnDamage()
     {
-        Vector3 backVec = -transform.forward * 20f;
-        rb.AddForce(backVec,ForceMode.Impulse);
-        print("넉백");
+       
     
         foreach (MeshRenderer mesh in renderers)
         {
             mesh.material.color = Color.red;
         }
         
+        
+        
+        nav.enabled = false;
+                Vector3 backVec = -transform.forward * 20f;
+                rb.AddForce(backVec,ForceMode.Impulse);
+                yield return new WaitForSeconds(0.2f);
+                nav.enabled = true;
+                print("넉백");
 
         if (currentHp <= 0)
         {
