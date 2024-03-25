@@ -13,11 +13,12 @@ public class PlayerController : MonoBehaviour
     [Header("Battle Stat")]
     [SerializeField] private float hp;
     [SerializeField] private float atk;
-    [SerializeField] private float[] attackCoolTimes = { 1f, };
-    private readonly bool[] isAttack = { false, };
+    [SerializeField] private float[] attackCoolTimes;
+    [SerializeField] private float[] hitBoxActiveTimes;
+    private readonly bool[] isAttack = { false, false, false, false, false, false, };
 
     [Header("Skill Colliders")]
-    [SerializeField] private GameObject basicAtkColl;
+    [SerializeField] private GameObject[] skillColliders;
 
     private float horizontal;
     private float vertical;
@@ -93,16 +94,30 @@ public class PlayerController : MonoBehaviour
                 case 0f:
                     if (!isAttack[0])
                     {
-                        isAttack[0] = true;
                         Vector3 pos = transform.position;
                         pos.y += 1f;
                         SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicSmash, pos, transform.rotation);
 
-                        basicAtkColl.transform.SetPositionAndRotation(pos, transform.rotation);
+                        skillColliders[0].transform.SetPositionAndRotation(pos, transform.rotation);
+                        skillColliders[0].SetActive(true);
 
-                        basicAtkColl.SetActive(true);
-
+                        StartCoroutine(AttackHitBoxDisable(0));
                         StartCoroutine(AttackCoolTime(0));
+                    }
+                    break;
+
+                case 1f:
+                    if (!isAttack[1])
+                    {
+                        Vector3 pos = transform.position;
+                        pos.y += 1f;
+                        SkillEffects.Instance.PlayEffect(SkillEffects.FX.FireBall, pos, transform.rotation);
+
+                        skillColliders[1].transform.SetPositionAndRotation(pos, transform.rotation);
+                        skillColliders[1].SetActive(true);
+
+                        StartCoroutine(AttackHitBoxDisable(1));
+                        StartCoroutine(AttackCoolTime(1));
                     }
                     break;
 
@@ -118,12 +133,16 @@ public class PlayerController : MonoBehaviour
         isDodge = false;
     }
 
+    private IEnumerator AttackHitBoxDisable(int attackIdx)
+    {
+        yield return new WaitForSeconds(hitBoxActiveTimes[attackIdx]);
+        skillColliders[attackIdx].SetActive(false);
+    }
+
     private IEnumerator AttackCoolTime(int attackIdx)
     {
-        yield return new WaitForSeconds(0.1f);
-        basicAtkColl.SetActive(false);
-
-        yield return new WaitForSeconds(attackCoolTimes[attackIdx] - 0.1f);
+        isAttack[attackIdx] = true;
+        yield return new WaitForSeconds(attackCoolTimes[attackIdx]);
         isAttack[attackIdx] = false;
     }
     #endregion
