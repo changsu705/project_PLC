@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float[] attackCoolTimes = { 1f, };
     private readonly bool[] isAttack = { false, };
 
+    [Header("Skill Colliders")]
+    [SerializeField] private GameObject basicAtkColl;
+
     private float horizontal;
     private float vertical;
 
@@ -71,18 +74,6 @@ public class PlayerController : MonoBehaviour
         vertical = v.y;
     }
 
-    public void OnDash(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started)
-        {
-            speed *= dashScale;
-        }
-        else if (context.phase == InputActionPhase.Canceled)
-        {
-            speed /= dashScale;
-        }
-    }
-
     public void OnDodge(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started && !isDodge && (horizontal != 0f || vertical != 0f))
@@ -105,10 +96,13 @@ public class PlayerController : MonoBehaviour
                         isAttack[0] = true;
                         Vector3 pos = transform.position;
                         pos.y += 1f;
-                        SkillEffects.Instance.PlayEffect(SkillEffects.FX.Basic, pos, transform.rotation);
+                        SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicSmash, pos, transform.rotation);
+
+                        basicAtkColl.transform.SetPositionAndRotation(pos, transform.rotation);
+
+                        basicAtkColl.SetActive(true);
 
                         StartCoroutine(AttackCoolTime(0));
-                        Debug.Log("Basic");
                     }
                     break;
 
@@ -122,14 +116,15 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(dodgeCoolTime);
         isDodge = false;
-        Debug.Log("Dodge!");
     }
 
     private IEnumerator AttackCoolTime(int attackIdx)
     {
-        yield return new WaitForSeconds(attackCoolTimes[attackIdx]);
+        yield return new WaitForSeconds(0.1f);
+        basicAtkColl.SetActive(false);
+
+        yield return new WaitForSeconds(attackCoolTimes[attackIdx] - 0.1f);
         isAttack[attackIdx] = false;
-        Debug.Log("Attack!");
     }
     #endregion
 }

@@ -10,8 +10,8 @@ public class Mino : Enemy
 
     private void Awake()
     {
-        rb=GetComponent<Rigidbody>();
-        nav=GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
+        nav = GetComponent<NavMeshAgent>();
     }
 
     private void Start()
@@ -31,15 +31,15 @@ public class Mino : Enemy
         {
             float h = Input.GetAxisRaw("Horizontal");
             float v = Input.GetAxisRaw("Vertical");
-            lookVec= new Vector3(h, 0, v);
-            transform.LookAt(target.position+lookVec);
+            lookVec = new Vector3(h, 0, v);
+            transform.LookAt(target.position + lookVec);
         }
-        
-        
-        
-        
+
+
+
+
     }
-    
+
     private IEnumerator Think()
     {
         yield return new WaitForSeconds(0.1f);
@@ -64,53 +64,53 @@ public class Mino : Enemy
 
     }
 
-    
-    
+
+
     private IEnumerator Charging()
     {
         print("Charging");
         // 애니메이션 시작
-        
+
         yield return new WaitForSeconds(0.1f);
         rb.AddForce(transform.forward * 20, ForceMode.Impulse);
-        meleeArea.enabled= true;
-        
+        meleeArea.enabled = true;
+
         yield return new WaitForSeconds(0.5f);
         rb.velocity = Vector3.zero;
-        meleeArea.enabled= false;
-        
-        yield return new WaitForSeconds(2f);     
-        
-        
-        
+        meleeArea.enabled = false;
+
+        yield return new WaitForSeconds(2f);
+
+
+
         // 애니메이션 끝
         StartCoroutine(Think());
     }
-    
+
     private IEnumerator ShockWave() // 기획 미정
     {
         yield return new WaitForSeconds(0.1f);
-        
+
         StartCoroutine(Think());
     }
-    
-    
-    
+
+
+
     public override IEnumerator Attack()
     {
-        
+
         // 애니메이션
 
         yield return new WaitForSeconds(0.2f); // 공격 로직 시작
-        meleeArea.enabled= true;
-        
+        meleeArea.enabled = true;
+
         yield return new WaitForSeconds(0.5f); // 공격 로직 끝
-        meleeArea.enabled= false;
-        
+        meleeArea.enabled = false;
+
 
         yield return new WaitForSeconds(1f); // 1초간 대기
-        
-        
+
+
         // 애니메이션 끝
         StartCoroutine(Think());
     }

@@ -15,15 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "b97ac611-7a78-4be8-9cf8-303125f398b8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Dodge",
                     "type": "Button",
                     "id": "a39b9be2-015b-4818-9ff3-0d8b6c5a5d7b",
@@ -97,17 +88,6 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "7534b171-476b-45f8-b854-e2641de2b8bf",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",

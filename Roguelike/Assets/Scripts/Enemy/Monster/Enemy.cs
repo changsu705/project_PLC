@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
-public abstract class Enemy : MonoBehaviour 
+public abstract class Enemy : MonoBehaviour
 {
     public int maxHp;
     public int currentHp;
@@ -14,6 +16,8 @@ public abstract class Enemy : MonoBehaviour
     public float targetRadius;
     public float targetRange;
     
+    
+
     public Transform target;
     public BoxCollider meleeArea;
 
@@ -22,29 +26,34 @@ public abstract class Enemy : MonoBehaviour
     public bool isDead;
     public bool isMino;
     
-    
+    Dictionary<MeshRenderer,Color> originalColors = new Dictionary<MeshRenderer, Color>();
+
+
     protected Rigidbody rb;
     protected NavMeshAgent nav;
     protected Animator anim;
-    public SkinnedMeshRenderer[] material;
+    public MeshRenderer[] renderers;
     
-    protected GameObject HitEffect;
-    
+
+
     private void Awake()
     {
-        rb=GetComponent<Rigidbody>();
-        nav=GetComponent<NavMeshAgent>();
-        anim=GetComponent<Animator>();
-        material=GetComponentsInChildren<SkinnedMeshRenderer>();
-    
-        HitEffect = Resources.Load<GameObject>("HitEffect");
+        rb = GetComponent<Rigidbody>();
+        nav = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
+        renderers = GetComponentsInChildren<MeshRenderer>();
+        
+        foreach (MeshRenderer mesh in renderers)
+        {
+            originalColors[mesh] = mesh.material.color;
+        }
+
     }
 
     private void Start()
     {
-        if(!isMino)
+        if (!isMino)
         {
-            print("isMino이 아님");
             Invoke(nameof(ChaseStart), 2f);
         }
     }
@@ -52,29 +61,29 @@ public abstract class Enemy : MonoBehaviour
     private void Update()
     {
 
-        if (!isMino && nav.enabled) 
+        if (!isMino && nav.enabled)
         {
-            
+
             nav.SetDestination(target.position);
             nav.isStopped = !isChase;
         }
     }
-    
+
     private void FixedUpdate()
     {
         Targeting();
         FreezeVelocity();
     }
 
-   
+
     /// <summary>
     /// 추적을 시작하는 로직
     /// </summary>
     private void ChaseStart()
     {
-        anim.SetBool("isWalk", true);
+        // anim.SetBool("isWalk", true);
         isChase = true;
-        
+
     }
 
     void FreezeVelocity()
@@ -89,11 +98,11 @@ public abstract class Enemy : MonoBehaviour
     /// <summary>
     /// 플레이어를 추적하는 로직
     /// </summary>
-    public void Targeting()
+    private void Targeting()
     {
         if (!isMino && !isDead)
         {
-            
+
             RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward,
                 targetRange,
                 LayerMask.GetMask("Player"));
@@ -102,7 +111,7 @@ public abstract class Enemy : MonoBehaviour
             {
                 StartCoroutine(Attack());
 
-            } 
+            }
         }
     }
 
@@ -110,76 +119,66 @@ public abstract class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Weapon"))
         {
-            
-            Vector3 reacVec = transform.position - other.transform.position;
-            StartCoroutine(OnDamage(reacVec));
+            SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, transform.position, Quaternion.identity);
+            StartCoroutine(OnDamage());
             // 플레이어에게 데미지 받음
             // 일단 비어 둠
             // (애니메이션 넣을 예정)
         }
     }
 
-    private IEnumerator OnDamage(Vector3 reactVec)
+    private IEnumerator OnDamage()
     {
-        if(currentHp>0)
-        {
-            Vector3 effectVec = new Vector3(-1f, 1.5f, 0f);
-            Vector3 spawnPos= transform.position + effectVec;
-            GameObject effect = Instantiate(HitEffect, spawnPos, Quaternion.LookRotation(reactVec));
-            Destroy(effect, 1f);
-        }
-        
-        foreach (SkinnedMeshRenderer mesh in material)
+       
+    
+        foreach (MeshRenderer mesh in renderers)
         {
             mesh.material.color = Color.red;
         }
         
-        yield return new WaitForSeconds(0.1f);
+        
+        
+        nav.enabled = false;
+                Vector3 backVec = -transform.forward * 20f;
+                rb.AddForce(backVec,ForceMode.Impulse);
+                yield return new WaitForSeconds(0.2f);
+                nav.enabled = true;
+                print("넉백");
 
-        if (currentHp > 0)
+        if (currentHp <= 0)
         {
-            foreach (SkinnedMeshRenderer mesh in material)
+            isDead = true;
+            isChase = true;
+            nav.enabled = false;
+            gameObject.layer = 0;
+            //anim.SetTrigger("doDie");
+
+            yield return new WaitForSeconds(0.1f);
+
+            foreach (MeshRenderer mesh in renderers)
             {
-                mesh.material.color = Color.white;
+                mesh.material.color = Color.gray;
             }
         }
         else
         {
-            foreach (SkinnedMeshRenderer mesh in material)
-            {
-                mesh.material.color = Color.gray;
-            }
-            
-            gameObject.layer = 14;
-            isDead = true;
-            isChase = false;
-            nav.enabled = false;
-            anim.SetTrigger("doDie");
-            
-            reactVec = reactVec.normalized;
-            reactVec += Vector3.up;
-            rb.AddForce(reactVec * 5, ForceMode.Impulse);
-            Destroy(gameObject, 4f);
-
-        }
-
+            yield return new WaitForSeconds(0.1f);
         
+            // foreach(MeshRenderer mesh in renderers)
+            // {
+            //     mesh.material.color = Color.white;
+            // }
+            
+            foreach (var pair in originalColors)
+            {
+                 pair.Key.material.color = pair.Value;
+            }
+        }
     }
-
-    
-    
 
     /// <summary>
     /// 플레이어를 공격하는 로직
     /// </summary>
     /// <returns></returns>
     public abstract IEnumerator Attack();
-    
-
-
-
-
-
-
-
 }

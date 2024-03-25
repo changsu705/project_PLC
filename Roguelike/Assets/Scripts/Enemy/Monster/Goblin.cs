@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,11 +5,7 @@ using UnityEngine.AI;
 public class Goblin : Enemy
 {
 
-    private void Awake()
-    {
-        rb=GetComponent<Rigidbody>();
-        nav=GetComponent<NavMeshAgent>();
-    }
+
     
 
     public override IEnumerator Attack()
@@ -20,23 +15,23 @@ public class Goblin : Enemy
         // 애니메이션
 
         yield return new WaitForSeconds(0.2f); // 공격 로직 시작
-        meleeArea.enabled= true;
-        
+        meleeArea.enabled = true;
+
         yield return new WaitForSeconds(0.5f); // 공격 로직 끝
-        meleeArea.enabled= false;
-        
+        meleeArea.enabled = false;
+
 
         yield return new WaitForSeconds(1f); // 1초간 대기
-        
-        
-        isChase= true;
+
+
+        isChase = true;
         isAttack = false;
         // 애니메이션 끝
 
     }
-    
 
-   
 
-    
+
+
+
 }

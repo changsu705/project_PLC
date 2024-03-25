@@ -30,6 +30,7 @@ public class SkillEffects : MonoBehaviour
 
     public enum FX
     {
-        Basic,
+        BasicSmash,
+        BasicHit,
     }
 }
