@@ -5,10 +5,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private float dashScale;
     [SerializeField] private float dodgeForce = 5f;
     [SerializeField] private float dodgeCoolTime = 1f;
     private bool isDodge = false;
+    private bool isDodgeCoolDown = true;
 
     [Header("Battle Stat")]
     [SerializeField] private float hp;
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
         transform.LookAt(screen2world, Vector3.up);
 
-        if (horizontal != 0f || vertical != 0f)
+        if (!isDodge && (horizontal != 0f || vertical != 0f))
         {
             Vector3 movement = quaterView * new Vector3(horizontal, 0f, vertical);
 
@@ -77,12 +77,35 @@ public class PlayerController : MonoBehaviour
 
     public void OnDodge(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && !isDodge && (horizontal != 0f || vertical != 0f))
+        if (context.phase == InputActionPhase.Started && isDodgeCoolDown && (horizontal != 0f || vertical != 0f))
         {
-            transform.position += quaterView * new Vector3(horizontal, 0f, vertical) * dodgeForce;
             isDodge = true;
+            isDodgeCoolDown = false;
+            StartCoroutine(Dodge(transform.position + (quaterView * new Vector3(horizontal, 0f, vertical) * dodgeForce), 0.2f));
             StartCoroutine(DodgeCoolTime());
         }
+    }
+
+    private IEnumerator Dodge(Vector3 diredtion, float time)
+    {
+        Vector3 startPos = transform.position;
+
+        float currentTime = 0f;
+        while (currentTime < time)
+        {
+            transform.position = Vector3.Lerp(startPos, diredtion, currentTime / time);
+            currentTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        isDodge = false;
+    }
+
+    private IEnumerator DodgeCoolTime()
+    {
+        yield return new WaitForSeconds(dodgeCoolTime);
+        isDodgeCoolDown = true;
     }
 
     public void OnSkill(InputAction.CallbackContext context)
@@ -132,12 +155,6 @@ public class PlayerController : MonoBehaviour
                     break;
             }
         }
-    }
-
-    private IEnumerator DodgeCoolTime()
-    {
-        yield return new WaitForSeconds(dodgeCoolTime);
-        isDodge = false;
     }
 
     private IEnumerator AttackHitBoxDisable(int attackIdx)
