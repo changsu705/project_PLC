@@ -1465,46 +1465,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7993421932917580705, guid: dff653b61231ac74f93689dbe223f018,
-        type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7993421932917580705, guid: dff653b61231ac74f93689dbe223f018,
-        type: 3}
-      propertyPath: ShapeModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7993421932917580705, guid: dff653b61231ac74f93689dbe223f018,
-        type: 3}
-      propertyPath: ShapeModule.m_Position.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7993421932917580705, guid: dff653b61231ac74f93689dbe223f018,
-        type: 3}
-      propertyPath: ShapeModule.m_Position.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7993421932917580705, guid: dff653b61231ac74f93689dbe223f018,
-        type: 3}
-      propertyPath: ShapeModule.m_Position.z
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7993421932917580705, guid: dff653b61231ac74f93689dbe223f018,
-        type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 0.0001
-      objectReference: {fileID: 0}
-    - target: {fileID: 7993421932917580705, guid: dff653b61231ac74f93689dbe223f018,
-        type: 3}
-      propertyPath: ShapeModule.radiusThickness
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118575440012295624, guid: dff653b61231ac74f93689dbe223f018,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
