@@ -17,4 +17,6 @@ public class GameManager : MonoBehaviour
         else
             portalObject.SetActive(false);
     }
+
 }
+
