@@ -19571,7 +19571,7 @@ GameObject:
   m_Component:
   - component: {fileID: 546878769480895793}
   m_Layer: 0
-  m_Name: FX_Sword_Slash
+  m_Name: FX_Sword_Slash - Copy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

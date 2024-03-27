@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Hit_01
+  m_Name: M_Hit_02 - Copy
   m_Shader: {fileID: -6465566751694194690, guid: 42f86e71adcf85242a0cbca271dca5ca,
     type: 3}
   m_Parent: {fileID: 0}
@@ -29,7 +29,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_Tex:
-        m_Texture: {fileID: 2800000, guid: 21cb30775d64540438200af6a6e4d99b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5cba17c33ffd5ba4d8d71b674675069f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
