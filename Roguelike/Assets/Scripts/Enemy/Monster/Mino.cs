@@ -12,6 +12,13 @@ public class Mino : Enemy
     {
         rb = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
+        renderers = GetComponentsInChildren<MeshRenderer>();
+        
+        foreach (MeshRenderer mesh in renderers)
+        {
+            originalColors[mesh] = mesh.material.color;
+        }
     }
 
     private void Start()
@@ -44,7 +51,7 @@ public class Mino : Enemy
     {
         yield return new WaitForSeconds(0.1f);
 
-        int ranAction = Random.Range(0, 2);
+        int ranAction = Random.Range(1, 1);
 
         switch (ranAction)
         {
@@ -73,15 +80,17 @@ public class Mino : Enemy
 
         yield return new WaitForSeconds(0.1f);
         rb.AddForce(transform.forward * 20, ForceMode.Impulse);
+        
         meleeArea.enabled = true;
+        
 
         yield return new WaitForSeconds(0.5f);
+        
         rb.velocity = Vector3.zero;
         meleeArea.enabled = false;
 
         yield return new WaitForSeconds(2f);
-
-
+        
 
         // 애니메이션 끝
         StartCoroutine(Think());
