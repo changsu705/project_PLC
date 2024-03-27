@@ -13,9 +13,9 @@ public class PlayerController : MonoBehaviour
     [Header("Battle Stat")]
     [SerializeField] private float hp;
     [SerializeField] private float atk;
-    [SerializeField] private float[] attackCoolTimes;
+    [SerializeField] private float[] skillCoolTimes;
     [SerializeField] private float[] hitBoxActiveTimes;
-    private readonly bool[] isAttack = { false, false, false, false, false, false, };
+    private readonly bool[] doingSkills = { false, false, false, false, false, false, };
 
     [Header("Skill Colliders")]
     [SerializeField] private GameObject[] skillColliders;
@@ -85,14 +85,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnAttack(InputAction.CallbackContext context)
+    public void OnSkill(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
         {
             switch (context.ReadValue<float>())
             {
-                case 0f:
-                    if (!isAttack[0])
+                case 0f:    //basic
+                    if (!doingSkills[0])
                     {
                         Vector3 pos = transform.position;
                         pos.y += 1f;
@@ -106,8 +106,8 @@ public class PlayerController : MonoBehaviour
                     }
                     break;
 
-                case 1f:
-                    if (!isAttack[1])
+                case 1f:    //fire ball
+                    if (!doingSkills[1])
                     {
                         Vector3 pos = transform.position;
                         pos.y += 1f;
@@ -118,6 +118,13 @@ public class PlayerController : MonoBehaviour
 
                         StartCoroutine(AttackHitBoxDisable(1));
                         StartCoroutine(AttackCoolTime(1));
+                    }
+                    break;
+
+                case 2f:    //flash
+                    if (!doingSkills[2])
+                    {
+                        
                     }
                     break;
 
@@ -141,9 +148,9 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator AttackCoolTime(int attackIdx)
     {
-        isAttack[attackIdx] = true;
-        yield return new WaitForSeconds(attackCoolTimes[attackIdx]);
-        isAttack[attackIdx] = false;
+        doingSkills[attackIdx] = true;
+        yield return new WaitForSeconds(skillCoolTimes[attackIdx]);
+        doingSkills[attackIdx] = false;
     }
     #endregion
 }

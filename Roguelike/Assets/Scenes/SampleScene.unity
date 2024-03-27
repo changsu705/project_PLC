@@ -707,7 +707,7 @@ MonoBehaviour:
   dodgeCoolTime: 1
   hp: 10
   atk: 0
-  attackCoolTimes:
+  skillCoolTimes:
   - 0.5
   - 5
   hitBoxActiveTimes:
@@ -762,7 +762,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 474477507}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnAttack
+        m_MethodName: OnSkill
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
