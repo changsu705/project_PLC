@@ -63,6 +63,12 @@ public class PlayerController : MonoBehaviour
 
             transform.position += Time.deltaTime * totalSpeed * movement;
         }
+
+        if (Input.GetButton("Jump"))
+            {
+            Debug.Log("1");
+            AudioManager.instance.PlaySFX("SFX0");
+        }
     }
 
     #region InputSystem

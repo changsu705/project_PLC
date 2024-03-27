@@ -3,23 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class AudioManager : MonoBehaviour
 {
-    private static AudioManager _instance;
+    public static AudioManager instance;
 
-    public AudioSource BGM;
+    public AudioSource BGMPlayer;
+    public AudioSource SFXPlayer;
     public AudioClip[] BGMList;
+    public AudioClip[] SFXList;
 
     private void Awake()
     {
-        if (_instance == null)
+        BGMPlayer = GameObject.Find("BGMPlayer").GetComponent<AudioSource>();
+        SFXPlayer = GameObject.Find("SFXPlayer").GetComponent<AudioSource>();
+
+        if (instance == null)
         {
-            _instance = this;
+            instance = this;
             SceneManager.sceneLoaded += OnSceneLoaded;
 
         }
-        else if (_instance != this)
+        else if (instance != this)
         {
             Destroy(gameObject);
         }
@@ -33,17 +37,50 @@ public class AudioManager : MonoBehaviour
         {
             if (Scene2.name == BGMList[i].name)
             {
-                BgSoundPlay(BGMList[i]);
+                BGMPlay(BGMList[i]);
             }
 
         }
     }
 
-    public void BgSoundPlay(AudioClip clip)
+    public void BGMPlay(AudioClip clip)
     {
-        BGM.clip = clip;
-        BGM.loop = true;
-        BGM.volume = 0.1f;
-        BGM.Play();
+        BGMPlayer.clip = clip;
+        BGMPlayer.loop = true;
+        BGMPlayer.volume = 0.1f;
+        BGMPlayer.Play();
+    }
+
+    public void PlaySFX(string type)
+    {
+        int index = 0;
+        switch(type)
+        {
+            case "SFX0": index = 0; break;
+            case "SFX1": index = 1; break;
+            case "SFX2": index = 2; break;
+            case "SFX3": index = 3; break;
+            case "SFX4": index = 4; break;
+        }
+
+        SFXPlayer.clip = SFXList[index];
+        SFXPlayer.volume = 0.1f;
+        SFXPlayer.Play();
+    }
+
+    private void Update()   //테스트용
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            AudioManager.instance.PlaySFX("SFX0");
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            AudioManager.instance.PlaySFX("SFX1");
+        }
+        else if (Input.GetKeyDown(KeyCode.F))
+        {
+            AudioManager.instance.PlaySFX("SFX2");
+        }
     }
 }
