@@ -942,6 +942,7 @@ MonoBehaviour:
   BGMList:
   - {fileID: 8300000, guid: 423fb3e4714ebcf43b3313c11aa26413, type: 3}
   - {fileID: 8300000, guid: 53a126559f915714388640c48b0dd87e, type: 3}
+  - {fileID: 8300000, guid: e71704139edcece47843d65685b7fbe3, type: 3}
 --- !u!4 &804166754
 Transform:
   m_ObjectHideFlags: 0

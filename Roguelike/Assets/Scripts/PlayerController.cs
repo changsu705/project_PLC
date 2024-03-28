@@ -5,19 +5,20 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private float dashScale;
     [SerializeField] private float dodgeForce = 5f;
     [SerializeField] private float dodgeCoolTime = 1f;
     private bool isDodge = false;
+    private bool isDodgeCoolDown = true;
 
     [Header("Battle Stat")]
     [SerializeField] private float hp;
     [SerializeField] private float atk;
-    [SerializeField] private float[] attackCoolTimes = { 1f, };
-    private readonly bool[] isAttack = { false, };
+    [SerializeField] private float[] skillCoolTimes;
+    [SerializeField] private float[] hitBoxActiveTimes;
+    private readonly bool[] doingSkills = { false, false, false, false, false, false, };
 
     [Header("Skill Colliders")]
-    [SerializeField] private GameObject basicAtkColl;
+    [SerializeField] private GameObject[] skillColliders;
 
     private float horizontal;
     private float vertical;
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
         transform.LookAt(screen2world, Vector3.up);
 
-        if (horizontal != 0f || vertical != 0f)
+        if (!isDodge && (horizontal != 0f || vertical != 0f))
         {
             Vector3 movement = quaterView * new Vector3(horizontal, 0f, vertical);
 
@@ -76,33 +77,77 @@ public class PlayerController : MonoBehaviour
 
     public void OnDodge(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && !isDodge && (horizontal != 0f || vertical != 0f))
+        if (context.phase == InputActionPhase.Started && isDodgeCoolDown && (horizontal != 0f || vertical != 0f))
         {
-            transform.position += quaterView * new Vector3(horizontal, 0f, vertical) * dodgeForce;
             isDodge = true;
+            isDodgeCoolDown = false;
+            StartCoroutine(Dodge(transform.position + (quaterView * new Vector3(horizontal, 0f, vertical) * dodgeForce), 0.2f));
             StartCoroutine(DodgeCoolTime());
         }
     }
 
-    public void OnAttack(InputAction.CallbackContext context)
+    private IEnumerator Dodge(Vector3 diredtion, float time)
+    {
+        Vector3 startPos = transform.position;
+
+        float currentTime = 0f;
+        while (currentTime < time)
+        {
+            transform.position = Vector3.Lerp(startPos, diredtion, currentTime / time);
+            currentTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        isDodge = false;
+    }
+
+    private IEnumerator DodgeCoolTime()
+    {
+        yield return new WaitForSeconds(dodgeCoolTime);
+        isDodgeCoolDown = true;
+    }
+
+    public void OnSkill(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
         {
             switch (context.ReadValue<float>())
             {
-                case 0f:
-                    if (!isAttack[0])
+                case 0f:    //basic
+                    if (!doingSkills[0])
                     {
-                        isAttack[0] = true;
                         Vector3 pos = transform.position;
                         pos.y += 1f;
                         SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicSmash, pos, transform.rotation);
 
-                        basicAtkColl.transform.SetPositionAndRotation(pos, transform.rotation);
+                        skillColliders[0].transform.SetPositionAndRotation(pos, transform.rotation);
+                        skillColliders[0].SetActive(true);
 
-                        basicAtkColl.SetActive(true);
-
+                        StartCoroutine(AttackHitBoxDisable(0));
                         StartCoroutine(AttackCoolTime(0));
+                    }
+                    break;
+
+                case 1f:    //fire ball
+                    if (!doingSkills[1])
+                    {
+                        Vector3 pos = transform.position;
+                        pos.y += 1f;
+                        SkillEffects.Instance.PlayEffect(SkillEffects.FX.FireBall, pos, transform.rotation);
+
+                        skillColliders[1].transform.SetPositionAndRotation(pos, transform.rotation);
+                        skillColliders[1].SetActive(true);
+
+                        StartCoroutine(AttackHitBoxDisable(1));
+                        StartCoroutine(AttackCoolTime(1));
+                    }
+                    break;
+
+                case 2f:    //flash
+                    if (!doingSkills[2])
+                    {
+                        
                     }
                     break;
 
@@ -112,19 +157,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator DodgeCoolTime()
+    private IEnumerator AttackHitBoxDisable(int attackIdx)
     {
-        yield return new WaitForSeconds(dodgeCoolTime);
-        isDodge = false;
+        yield return new WaitForSeconds(hitBoxActiveTimes[attackIdx]);
+        skillColliders[attackIdx].SetActive(false);
     }
 
     private IEnumerator AttackCoolTime(int attackIdx)
     {
-        yield return new WaitForSeconds(0.1f);
-        basicAtkColl.SetActive(false);
-
-        yield return new WaitForSeconds(attackCoolTimes[attackIdx] - 0.1f);
-        isAttack[attackIdx] = false;
+        doingSkills[attackIdx] = true;
+        yield return new WaitForSeconds(skillCoolTimes[attackIdx]);
+        doingSkills[attackIdx] = false;
     }
     #endregion
 }

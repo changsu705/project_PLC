@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack",
+                    "name": "Skill",
                     "type": "Button",
                     "id": "9c2e8eb7-5423-41f8-b17f-45caf557999e",
                     "expectedControlType": "Button",
@@ -96,7 +96,40 @@
                     "interactions": "Press",
                     "processors": "Scale(factor=0)",
                     "groups": "PC",
-                    "action": "Attack",
+                    "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b21b5897-8869-4c52-9fe0-676e66a760e3",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Press",
+                    "processors": "Scale",
+                    "groups": "PC",
+                    "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b38271e9-0cd7-4680-aa55-02889eff3c06",
+                    "path": "<Keyboard>/r",
+                    "interactions": "Press",
+                    "processors": "Scale(factor=2)",
+                    "groups": "PC",
+                    "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b1bcba5-ff3b-4f00-ad11-3bc6a93d94e2",
+                    "path": "<Keyboard>/f",
+                    "interactions": "Press",
+                    "processors": "Scale(factor=3)",
+                    "groups": "PC",
+                    "action": "Skill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

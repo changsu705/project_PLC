@@ -8,7 +8,7 @@ using UnityEngine.Events;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour 
 {
     public int maxHp;
     public int currentHp;
@@ -26,7 +26,7 @@ public abstract class Enemy : MonoBehaviour
     public bool isDead;
     public bool isMino;
     
-    Dictionary<MeshRenderer,Color> originalColors = new Dictionary<MeshRenderer, Color>();
+    protected Dictionary<MeshRenderer,Color> originalColors = new Dictionary<MeshRenderer, Color>();
 
 
     protected Rigidbody rb;
@@ -117,64 +117,62 @@ public abstract class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Weapon"))
+        if (!isDead && other.CompareTag("Weapon")) 
         {
+            currentHp -= 10;
             SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, transform.position, Quaternion.identity);
-            StartCoroutine(OnDamage());
-            // 플레이어에게 데미지 받음
+            Vector3 reactVec = transform.position - other.transform.position;
+            StartCoroutine(OnDamage(reactVec));
+            
             // 일단 비어 둠
             // (애니메이션 넣을 예정)
         }
     }
 
-    private IEnumerator OnDamage()
+    private IEnumerator OnDamage(Vector3 reactVec)
     {
-       
-    
         foreach (MeshRenderer mesh in renderers)
         {
             mesh.material.color = Color.red;
         }
         
-        
-        
-        nav.enabled = false;
-                Vector3 backVec = -transform.forward * 20f;
-                rb.AddForce(backVec,ForceMode.Impulse);
-                yield return new WaitForSeconds(0.2f);
-                nav.enabled = true;
-                print("넉백");
+        yield return new WaitForSeconds(0.1f);
 
-        if (currentHp <= 0)
+        if (currentHp > 0)
         {
-            isDead = true;
-            isChase = true;
-            nav.enabled = false;
-            gameObject.layer = 0;
-            //anim.SetTrigger("doDie");
-
-            yield return new WaitForSeconds(0.1f);
-
+            reactVec = reactVec.normalized;
+            reactVec+= Vector3.up;
+            rb.AddForce(reactVec * 5, ForceMode.Impulse);
+            
+            foreach (var pair in originalColors)
+            {
+                pair.Key.material.color = pair.Value;
+            }
+        }
+        
+        else
+        {
             foreach (MeshRenderer mesh in renderers)
             {
                 mesh.material.color = Color.gray;
             }
-        }
-        else
-        {
-            yield return new WaitForSeconds(0.1f);
-        
-            // foreach(MeshRenderer mesh in renderers)
-            // {
-            //     mesh.material.color = Color.white;
-            // }
             
-            foreach (var pair in originalColors)
-            {
-                 pair.Key.material.color = pair.Value;
-            }
+            gameObject.layer = 0;
+            isDead = true;
+            isChase = false;
+            nav.enabled = false;
+            //anim.SetTrigger("doDie");
+            print("죽음");
+
+            reactVec = reactVec.normalized;
+            reactVec+= Vector3.up;
+            rb.AddForce(reactVec * 5, ForceMode.Impulse);
+            Destroy(gameObject,2f);
+
         }
     }
+
+    
 
     /// <summary>
     /// 플레이어를 공격하는 로직

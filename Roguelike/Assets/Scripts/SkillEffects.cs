@@ -20,7 +20,13 @@ public class SkillEffects : MonoBehaviour
             effects.Add((FX)i, (effectsObjects[i], effectsObjects[i].GetComponentInChildren<ParticleSystem>()));
         }
     }
-
+    
+    /// <summary>
+    /// 이펙트 플레이
+    /// </summary>
+    /// <param name="fx"> 이펙트 종류 </param>
+    /// <param name="position"> 이펙트 플레이 위치 </param>
+    /// <param name="rotation"> 이펙트 플레이 방향 </param>
     public void PlayEffect(FX fx, Vector3 position, Quaternion rotation)
     {
         (Transform tr, ParticleSystem effect) = effects[fx];
@@ -32,5 +38,6 @@ public class SkillEffects : MonoBehaviour
     {
         BasicSmash,
         BasicHit,
+        FireBall,
     }
 }
