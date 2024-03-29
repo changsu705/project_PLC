@@ -81,7 +81,7 @@ public abstract class Enemy : MonoBehaviour
     /// </summary>
     private void ChaseStart()
     {
-        // anim.SetBool("isWalk", true);
+        anim.SetBool("isRun", true);
         isChase = true;
 
     }
@@ -124,7 +124,7 @@ public abstract class Enemy : MonoBehaviour
             Vector3 reactVec = transform.position - other.transform.position;
             StartCoroutine(OnDamage(reactVec));
             
-            // 일단 비어 둠
+            // 주인공의 공격을 맞았을 때 애니메이션
             // (애니메이션 넣을 예정)
         }
     }
@@ -161,8 +161,7 @@ public abstract class Enemy : MonoBehaviour
             isDead = true;
             isChase = false;
             nav.enabled = false;
-            //anim.SetTrigger("doDie");
-            print("죽음");
+            anim.SetTrigger("doDie");
 
             reactVec = reactVec.normalized;
             reactVec+= Vector3.up;
