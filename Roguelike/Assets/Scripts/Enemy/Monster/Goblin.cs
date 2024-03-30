@@ -11,6 +11,7 @@ public class Goblin : Enemy
         
         isChase = false;
         isAttack = true;
+        anim.SetBool("isRun", false);
         anim.SetBool("isAttack", true);
         
         yield return new WaitForSeconds(0.2f); // 공격 로직 시작
@@ -26,6 +27,7 @@ public class Goblin : Enemy
         isChase = true;
         isAttack = false;
         anim.SetBool("isAttack", false);
+        anim.SetBool("isRun", true);
 
     }
 

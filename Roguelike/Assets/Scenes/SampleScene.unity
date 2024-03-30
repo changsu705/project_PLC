@@ -908,10 +908,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dffbc30b15300432cbcf94df8d600d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 50
-  currentHp: 50
-  targetRadius: 1
-  targetRange: 2
+  maxHp: 1000
+  currentHp: 1000
+  targetRadius: 2
+  targetRange: 3
   target: {fileID: 0}
   meleeArea: {fileID: 80380514}
   hpBar: {fileID: 1474547514}

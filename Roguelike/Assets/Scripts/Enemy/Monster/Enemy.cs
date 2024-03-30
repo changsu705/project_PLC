@@ -138,6 +138,7 @@ public abstract class Enemy : MonoBehaviour
 
             if (rayHits.Length > 0 && !isAttack)
             {
+                isChase = false;
                 StartCoroutine(Attack());
             }
         }
@@ -147,6 +148,8 @@ public abstract class Enemy : MonoBehaviour
     {
         if (!isDead && other.CompareTag("Weapon")) 
         {
+            
+            
             currentHp -= 10;
             
             hpBar.rectTransform.localScale= new Vector3((float)currentHp / (float)maxHp, 1, 1);
@@ -185,7 +188,13 @@ public abstract class Enemy : MonoBehaviour
             {
                 pair.Key.material.color = pair.Value;
             }
+            
+            yield return new WaitForSeconds(0.5f);
+            isChase = true;
+            anim.SetBool("isRun", true);
+            
         }
+        
         
         else
         {
