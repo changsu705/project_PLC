@@ -13,7 +13,7 @@ public class Goblin : Enemy
         isAttack = true;
         anim.SetBool("isAttack", true);
         
-        yield return new WaitForSeconds(0.12f); // 공격 로직 시작
+        yield return new WaitForSeconds(0.2f); // 공격 로직 시작
         meleeArea.enabled = true;
 
         yield return new WaitForSeconds(0.5f); // 공격 로직 끝

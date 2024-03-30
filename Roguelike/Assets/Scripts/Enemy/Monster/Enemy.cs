@@ -1,52 +1,75 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
+using UnityEngine.UI;
 
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
 public abstract class Enemy : MonoBehaviour 
 {
+    [Header("Enemy Stats")]
     public int maxHp;
     public int currentHp;
-
+    
+    
     public float targetRadius;
     public float targetRange;
     
+    [Space(10)]
     
-
+    [Header("Enemy Components")]
     public Transform target;
     public BoxCollider meleeArea;
+    public Image hpBar;
+    public GameObject hudDamageText;
+    public Transform hudPos;
+    
+    [Space(10)]
 
+    [Header("Enemy Flags")]
     public bool isChase;
     public bool isAttack;
     public bool isDead;
     public bool isMino;
     
-    protected Dictionary<MeshRenderer,Color> originalColors = new Dictionary<MeshRenderer, Color>();
+    
 
-
+    [Space(10)]
+    
     protected Rigidbody rb;
     protected NavMeshAgent nav;
     protected Animator anim;
-    public MeshRenderer[] renderers;
     
+    [Header("Enemy Renderers")]
+    public SkinnedMeshRenderer[] renderers;
+    protected Dictionary<SkinnedMeshRenderer,Color> originalColors = new Dictionary<SkinnedMeshRenderer, Color>();
 
 
     private void Awake()
     {
+        GameObject targetObject = GameObject.FindWithTag("Player");
+        if (targetObject != null)
+        {
+            target = targetObject.transform;
+        }
+        else
+        {
+            Debug.LogError("플레이어 미아");
+        }
+        
         rb = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        renderers = GetComponentsInChildren<MeshRenderer>();
+        renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         
-        foreach (MeshRenderer mesh in renderers)
+        foreach (SkinnedMeshRenderer mesh in renderers)
         {
             originalColors[mesh] = mesh.material.color;
         }
+
+        InitBarSize();
 
     }
 
@@ -63,7 +86,6 @@ public abstract class Enemy : MonoBehaviour
 
         if (!isMino && nav.enabled)
         {
-
             nav.SetDestination(target.position);
             nav.isStopped = !isChase;
         }
@@ -73,6 +95,13 @@ public abstract class Enemy : MonoBehaviour
     {
         Targeting();
         FreezeVelocity();
+    }
+
+    private void InitBarSize()
+    {
+        hpBar.rectTransform.localScale = new Vector3(1, 1, 1);
+        
+        
     }
 
 
@@ -110,7 +139,6 @@ public abstract class Enemy : MonoBehaviour
             if (rayHits.Length > 0 && !isAttack)
             {
                 StartCoroutine(Attack());
-
             }
         }
     }
@@ -120,21 +148,30 @@ public abstract class Enemy : MonoBehaviour
         if (!isDead && other.CompareTag("Weapon")) 
         {
             currentHp -= 10;
+            
+            hpBar.rectTransform.localScale= new Vector3((float)currentHp / (float)maxHp, 1, 1);
             SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, transform.position, Quaternion.identity);
             Vector3 reactVec = transform.position - other.transform.position;
-            StartCoroutine(OnDamage(reactVec));
             
-            // 주인공의 공격을 맞았을 때 애니메이션
-            // (애니메이션 넣을 예정)
+            GameObject hudText = Instantiate(hudDamageText);    
+            hudText.transform.position = hudPos.position;
+            hudText.GetComponent<DamageText>().damage = 10;
+            // 함수로 다시 만들어서 데미지를 받아오는 코드로 변경할 예정
+            
+            StartCoroutine(OnDamage(reactVec));
         }
     }
 
     private IEnumerator OnDamage(Vector3 reactVec)
     {
-        foreach (MeshRenderer mesh in renderers)
+        anim.SetTrigger("doHit");
+        foreach (SkinnedMeshRenderer mesh in renderers)
         {
             mesh.material.color = Color.red;
         }
+
+        
+        
         
         yield return new WaitForSeconds(0.1f);
 
@@ -152,7 +189,8 @@ public abstract class Enemy : MonoBehaviour
         
         else
         {
-            foreach (MeshRenderer mesh in renderers)
+            StopAllCoroutines();
+            foreach (SkinnedMeshRenderer mesh in renderers)
             {
                 mesh.material.color = Color.gray;
             }
