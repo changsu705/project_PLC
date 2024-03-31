@@ -9,13 +9,16 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource BGMPlayer;
     public AudioSource SFXPlayer;
+    public AudioSource FootstepPlayer;
     public AudioClip[] BGMList;
     public AudioClip[] SFXList;
+    public AudioClip[] FootstepList;
 
     private void Awake()
     {
         BGMPlayer = GameObject.Find("BGMPlayer").GetComponent<AudioSource>();
         SFXPlayer = GameObject.Find("SFXPlayer").GetComponent<AudioSource>();
+        FootstepPlayer = GameObject.Find("FootstepPlayer").GetComponent<AudioSource>();
 
         if (instance == null)
         {
@@ -37,17 +40,17 @@ public class AudioManager : MonoBehaviour
         {
             if (Scene2.name == BGMList[i].name)
             {
-                BGMPlay(BGMList[i]);
+                PlayBGM(BGMList[i]);
             }
 
         }
     }
 
-    public void BGMPlay(AudioClip clip)
+    public void PlayBGM(AudioClip clip)
     {
         BGMPlayer.clip = clip;
         BGMPlayer.loop = true;
-        BGMPlayer.volume = 0.1f;
+        BGMPlayer.volume = 0.3f;
         BGMPlayer.Play();
     }
 
@@ -64,8 +67,27 @@ public class AudioManager : MonoBehaviour
         }
 
         SFXPlayer.clip = SFXList[index];
-        SFXPlayer.volume = 0.1f;
+        SFXPlayer.volume = 0.5f;
         SFXPlayer.Play();
+    }
+    public void PlayFootstep(string type)
+    {
+        int index = 0;
+        switch (type)
+        {
+            case "Footstep1": index = 0; break;
+            case "Footstep2": index = 1; break;
+            case "Footstep3": index = 2; break;
+        }
+
+        FootstepPlayer.clip = FootstepList[index];
+        FootstepPlayer.volume = 0.5f;
+        FootstepPlayer.Play();
+    }
+
+    public void StopFootstep()
+    {
+        FootstepPlayer.Stop();
     }
 
     private void Update()   //테스트용

@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     /// <summary> 45도 돌아간 움직임 </summary>
     private readonly Quaternion quaterView = Quaternion.Euler(0f, 45f, 0f);
 
+    private AudioManager audioManager;          //발소리 코드 추가
+
     private void Start()
     {
         Vector3 camAngle = Camera.main.transform.eulerAngles;
@@ -42,6 +44,16 @@ public class PlayerController : MonoBehaviour
         sin = Mathf.Sin(camAngle.y * Mathf.Deg2Rad);
         cos = Mathf.Cos(camAngle.y * Mathf.Deg2Rad);
         tan = Mathf.Tan(camAngle.x * Mathf.Deg2Rad);
+
+        audioManager = AudioManager.instance;
+    }
+
+    private bool isMoving = false; // 플레이어의 움직임 상태를 추적하는 변수
+
+    private IEnumerator DelayedFootstep()         //발소리 코드 추가
+    {
+        yield return new WaitForSeconds(0.1f);
+        AudioManager.instance.PlayFootstep("Footstep1");
     }
 
     private void Update()
@@ -63,14 +75,20 @@ public class PlayerController : MonoBehaviour
             float totalSpeed = speed * (3f + Vector3.Dot((screen2world - transform.position).normalized, movement)) / 2f;
 
             transform.position += Time.deltaTime * totalSpeed * movement;
+
+            if (!isMoving)          //발소리 코드 추가
+            {
+                isMoving = true;
+                StartCoroutine(DelayedFootstep());
+            }
+        }
+        else
+        {
+            AudioManager.instance.StopFootstep();
+            isMoving = false;
         }
 
-        if (Input.GetButton("Jump"))
-            {
-            Debug.Log("1");
-            AudioManager.instance.PlaySFX("SFX0");
-        }
-    }
+     }
 
     #region InputSystem
     public void OnMove(InputAction.CallbackContext context)
