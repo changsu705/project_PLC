@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.PlayerSettings;
 
 public class PlayerController : MonoBehaviour
 {
@@ -125,7 +127,7 @@ public class PlayerController : MonoBehaviour
                         skillColliders[0].SetActive(true);
 
                         StartCoroutine(AttackHitBoxDisable(0));
-                        StartCoroutine(AttackCoolTime(0));
+                        StartCoroutine(SkillCoolTime(0));
                     }
                     break;
 
@@ -140,14 +142,43 @@ public class PlayerController : MonoBehaviour
                         skillColliders[1].SetActive(true);
 
                         StartCoroutine(AttackHitBoxDisable(1));
-                        StartCoroutine(AttackCoolTime(1));
+                        StartCoroutine(SkillCoolTime(1));
                     }
                     break;
 
                 case 2f:    //flash
                     if (!doingSkills[2])
                     {
-                        
+                        // 가장 가까운 적에게 돌진 후 대미지
+                        float sqrtMin = float.MaxValue;
+                        Enemy target = null;
+                        foreach (var enemy in FindObjectsByType<Enemy>(FindObjectsSortMode.None))
+                        {
+                            float sqrtDistance = (enemy.transform.position - transform.position).sqrMagnitude;
+                            if (sqrtMin > sqrtDistance)
+                            {
+                                sqrtMin = sqrtDistance;
+                                target = enemy;
+                            }
+                        }
+
+                        if (target != null)
+                        {
+                            transform.position = Vector3.Lerp(transform.position, target.transform.position, 0.8f);
+
+                            skillColliders[2].transform.SetPositionAndRotation(transform.position, transform.rotation);
+                            skillColliders[2].SetActive(true);
+
+                            StartCoroutine(AttackHitBoxDisable(2));
+                            StartCoroutine(SkillCoolTime(2));
+                        }
+                    }
+                    break;
+
+                case 3f:
+                    if (!doingSkills[3])
+                    {
+                        Debug.LogWarning("Burst skill is not implemented");
                     }
                     break;
 
@@ -163,7 +194,7 @@ public class PlayerController : MonoBehaviour
         skillColliders[attackIdx].SetActive(false);
     }
 
-    private IEnumerator AttackCoolTime(int attackIdx)
+    private IEnumerator SkillCoolTime(int attackIdx)
     {
         doingSkills[attackIdx] = true;
         yield return new WaitForSeconds(skillCoolTimes[attackIdx]);
