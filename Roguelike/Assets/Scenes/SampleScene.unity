@@ -1343,7 +1343,7 @@ Transform:
   m_GameObject: {fileID: 1009462397}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.24, y: 1, z: 4.63}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2069,6 +2069,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 374427622}
     m_Modifications:
+    - target: {fileID: 282486850097080496, guid: dff653b61231ac74f93689dbe223f018,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4254794688768676548, guid: dff653b61231ac74f93689dbe223f018,
         type: 3}
       propertyPath: m_Name
@@ -2123,6 +2128,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993421932917580705, guid: dff653b61231ac74f93689dbe223f018,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993421932917580705, guid: dff653b61231ac74f93689dbe223f018,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
