@@ -1,52 +1,75 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
+using UnityEngine.UI;
 
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
 public abstract class Enemy : MonoBehaviour 
 {
+    [Header("Enemy Stats")]
     public int maxHp;
     public int currentHp;
-
+    
+    
     public float targetRadius;
     public float targetRange;
     
+    [Space(10)]
     
-
+    [Header("Enemy Components")]
     public Transform target;
     public BoxCollider meleeArea;
+    public Image hpBar;
+    public GameObject hudDamageText;
+    public Transform hudPos;
+    
+    [Space(10)]
 
+    [Header("Enemy Flags")]
     public bool isChase;
     public bool isAttack;
     public bool isDead;
     public bool isMino;
     
-    protected Dictionary<MeshRenderer,Color> originalColors = new Dictionary<MeshRenderer, Color>();
+    
 
-
+    [Space(10)]
+    
     protected Rigidbody rb;
     protected NavMeshAgent nav;
     protected Animator anim;
-    public MeshRenderer[] renderers;
     
+    [Header("Enemy Renderers")]
+    public SkinnedMeshRenderer[] renderers;
+    protected Dictionary<SkinnedMeshRenderer,Color> originalColors = new Dictionary<SkinnedMeshRenderer, Color>();
 
 
     private void Awake()
     {
+        GameObject targetObject = GameObject.FindWithTag("Player");
+        if (targetObject != null)
+        {
+            target = targetObject.transform;
+        }
+        else
+        {
+            Debug.LogError("플레이어 미아");
+        }
+        
         rb = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        renderers = GetComponentsInChildren<MeshRenderer>();
+        renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         
-        foreach (MeshRenderer mesh in renderers)
+        foreach (SkinnedMeshRenderer mesh in renderers)
         {
             originalColors[mesh] = mesh.material.color;
         }
+
+        InitBarSize();
 
     }
 
@@ -63,7 +86,6 @@ public abstract class Enemy : MonoBehaviour
 
         if (!isMino && nav.enabled)
         {
-
             nav.SetDestination(target.position);
             nav.isStopped = !isChase;
         }
@@ -75,13 +97,20 @@ public abstract class Enemy : MonoBehaviour
         FreezeVelocity();
     }
 
+    private void InitBarSize()
+    {
+        hpBar.rectTransform.localScale = new Vector3(1, 1, 1);
+        
+        
+    }
+
 
     /// <summary>
     /// 추적을 시작하는 로직
     /// </summary>
     private void ChaseStart()
     {
-        // anim.SetBool("isWalk", true);
+        anim.SetBool("isRun", true);
         isChase = true;
 
     }
@@ -109,75 +138,87 @@ public abstract class Enemy : MonoBehaviour
 
             if (rayHits.Length > 0 && !isAttack)
             {
+                isChase = false;
                 StartCoroutine(Attack());
-
             }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Weapon"))
+        if (!isDead && other.CompareTag("Weapon")) 
         {
-            SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, transform.position, Quaternion.identity);
-            StartCoroutine(OnDamage());
+            
+            
             currentHp -= 10;
-            // 일단 비어 둠
-            // (애니메이션 넣을 예정)
+            
+            hpBar.rectTransform.localScale= new Vector3((float)currentHp / (float)maxHp, 1, 1);
+            SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, transform.position, Quaternion.identity);
+            Vector3 reactVec = transform.position - other.transform.position;
+            
+            GameObject hudText = Instantiate(hudDamageText);    
+            hudText.transform.position = hudPos.position;
+            hudText.GetComponent<DamageText>().damage = 10;
+            // 함수로 다시 만들어서 데미지를 받아오는 코드로 변경할 예정
+            
+            StartCoroutine(OnDamage(reactVec));
         }
     }
 
-    private IEnumerator OnDamage()
+    private IEnumerator OnDamage(Vector3 reactVec)
     {
-       
-    
-        foreach (MeshRenderer mesh in renderers)
+        anim.SetTrigger("doHit");
+        foreach (SkinnedMeshRenderer mesh in renderers)
         {
             mesh.material.color = Color.red;
         }
 
-
-        if (!isMino)
-        {
-            nav.enabled = false;
-            Vector3 backVec = -transform.forward * 20f;
-            rb.AddForce(backVec, ForceMode.Impulse);
-            yield return new WaitForSeconds(0.2f);
-            nav.enabled = true;
-            print("넉백");
-        }
         
-
-        if (currentHp <= 0)
-        {
-            isDead = true;
-            isChase = true;
-            nav.enabled = false;
-            gameObject.layer = 0;
-            //anim.SetTrigger("doDie");
-
-            yield return new WaitForSeconds(0.1f);
-
-            foreach (MeshRenderer mesh in renderers)
-            {
-                mesh.material.color = Color.gray;
-            }
-        }
-        else
-        {
-            yield return new WaitForSeconds(0.1f);
         
-            // foreach(MeshRenderer mesh in renderers)
-            // {
-            //     mesh.material.color = Color.white;
-            // }
+        
+        yield return new WaitForSeconds(0.1f);
+
+        if (currentHp > 0)
+        {
+            reactVec = reactVec.normalized;
+            reactVec+= Vector3.up;
+            rb.AddForce(reactVec * 5, ForceMode.Impulse);
             
             foreach (var pair in originalColors)
             {
-                 pair.Key.material.color = pair.Value;
+                pair.Key.material.color = pair.Value;
             }
+            
+            yield return new WaitForSeconds(0.5f);
+            isChase = true;
+            anim.SetBool("isRun", true);
+            
+        }
+        
+        
+        else
+        {
+            StopAllCoroutines();
+            foreach (SkinnedMeshRenderer mesh in renderers)
+            {
+                mesh.material.color = Color.gray;
+            }
+            
+            gameObject.layer = 0;
+            isDead = true;
+            isChase = false;
+            nav.enabled = false;
+            anim.SetTrigger("doDie");
+
+            reactVec = reactVec.normalized;
+            reactVec+= Vector3.up;
+            rb.AddForce(reactVec * 5, ForceMode.Impulse);
+            Destroy(gameObject,2f);
+
         }
     }
+
+    
 
     /// <summary>
     /// 플레이어를 공격하는 로직

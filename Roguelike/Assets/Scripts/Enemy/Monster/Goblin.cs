@@ -6,14 +6,14 @@ public class Goblin : Enemy
 {
 
 
-    
-
     public override IEnumerator Attack()
     {
+        
         isChase = false;
         isAttack = true;
-        // 애니메이션
-
+        anim.SetBool("isRun", false);
+        anim.SetBool("isAttack", true);
+        
         yield return new WaitForSeconds(0.2f); // 공격 로직 시작
         meleeArea.enabled = true;
 
@@ -21,12 +21,13 @@ public class Goblin : Enemy
         meleeArea.enabled = false;
 
 
-        yield return new WaitForSeconds(1f); // 1초간 대기
+        yield return new WaitForSeconds(0.5f); 
 
 
         isChase = true;
         isAttack = false;
-        // 애니메이션 끝
+        anim.SetBool("isAttack", false);
+        anim.SetBool("isRun", true);
 
     }
 

@@ -13,9 +13,9 @@ public class Mino : Enemy
         rb = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        renderers = GetComponentsInChildren<MeshRenderer>();
+        renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         
-        foreach (MeshRenderer mesh in renderers)
+        foreach (SkinnedMeshRenderer mesh in renderers)
         {
             originalColors[mesh] = mesh.material.color;
         }
