@@ -99,7 +99,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void InitBarSize()
     {
-        hpBar.rectTransform.localScale = new Vector3(1, 1, 1);
+        //hpBar.rectTransform.localScale = new Vector3(1, 1, 1);
         
         
     }
@@ -144,7 +144,7 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (!isDead && other.CompareTag("Weapon")) 
         {
@@ -163,7 +163,7 @@ public abstract class Enemy : MonoBehaviour
             
             StartCoroutine(OnDamage(reactVec));
         }
-    }
+    }*/
 
     private IEnumerator OnDamage(Vector3 reactVec)
     {
