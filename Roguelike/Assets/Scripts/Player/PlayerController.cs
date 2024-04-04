@@ -1,14 +1,20 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Player Stats")]
+    [SerializeField] private float maxHp;
+    [SerializeField] private float currentHp;
+    
     [SerializeField] private float speed;
     [SerializeField] private float dodgeForce = 5f;
     [SerializeField] private float dodgeCoolTime = 1f;
     private bool isDodge = false;
     private bool isDodgeCoolDown = true;
+    private bool isDamage;
 
     [SerializeField] private SkillContainer[] skills;
 
@@ -28,7 +34,13 @@ public class PlayerController : MonoBehaviour
     public static readonly Quaternion quaterView = Quaternion.Euler(0f, 45f, 0f);
 
     private AudioManager audioManager;          //발소리 코드 추가
+    private Rigidbody rb;
 
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
     private void Start()
     {
         Vector3 camAngle = Camera.main.transform.eulerAngles;
@@ -80,7 +92,33 @@ public class PlayerController : MonoBehaviour
             isMoving = false;
         }
 
-     }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!isDamage)
+        {
+            if (other.CompareTag("EnemyBullet"))
+            {
+                Bullet enemyBullet = other.GetComponent<Bullet>();
+                StartCoroutine(OnDamage(enemyBullet.damage));
+            }
+        }
+    }
+    
+    private IEnumerator OnDamage(float damage)
+    {
+        // isDamage 을 이용하여 중복 데미지를 방지
+        isDamage = true;
+        currentHp -= damage;
+        if (currentHp <= 0)
+        {
+            currentHp = 0;
+            
+        }
+        yield return new WaitForSeconds(1f);
+        isDamage = false;
+    }
 
     #region InputSystem
     public void OnMove(InputAction.CallbackContext context)

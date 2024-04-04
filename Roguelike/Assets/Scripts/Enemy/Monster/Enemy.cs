@@ -144,26 +144,25 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    /*private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
+        // 태그는 뭘 넣어야 하는 지 미정 임시로 Weapon으로 설정
         if (!isDead && other.CompareTag("Weapon")) 
         {
-            
-            
-            currentHp -= 10;
-            
+            SkillContainer container = other.GetComponent<SkillContainer>();
+            currentHp -= container.ATK;
             hpBar.rectTransform.localScale= new Vector3((float)currentHp / (float)maxHp, 1, 1);
             SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, transform.position, Quaternion.identity);
             Vector3 reactVec = transform.position - other.transform.position;
             
             GameObject hudText = Instantiate(hudDamageText);    
             hudText.transform.position = hudPos.position;
-            hudText.GetComponent<DamageText>().damage = 10;
-            // 함수로 다시 만들어서 데미지를 받아오는 코드로 변경할 예정
+            hudText.GetComponent<DamageText>().damage = container.ATK;
+            
             
             StartCoroutine(OnDamage(reactVec));
         }
-    }*/
+    }
 
     private IEnumerator OnDamage(Vector3 reactVec)
     {
