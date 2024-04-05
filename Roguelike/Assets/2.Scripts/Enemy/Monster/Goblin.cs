@@ -11,23 +11,23 @@ public class Goblin : Enemy
         
         isChase = false;
         isAttack = true;
-        anim.SetBool("isRun", false);
+        anim.SetBool("isWalk", false);
         anim.SetBool("isAttack", true);
         
-        yield return new WaitForSeconds(0.2f); // 공격 로직 시작
+        yield return new WaitForSeconds(0.9f); 
         meleeArea.enabled = true;
 
-        yield return new WaitForSeconds(0.5f); // 공격 로직 끝
+        yield return new WaitForSeconds(0.3f); 
         meleeArea.enabled = false;
 
 
-        yield return new WaitForSeconds(0.5f); 
+        yield return new WaitForSeconds(1f); 
 
 
         isChase = true;
         isAttack = false;
         anim.SetBool("isAttack", false);
-        anim.SetBool("isRun", true);
+        anim.SetBool("isWalk", true);
 
     }
 

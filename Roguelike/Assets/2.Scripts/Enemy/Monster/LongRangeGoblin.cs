@@ -14,7 +14,6 @@ public class LongRangeGoblin : Enemy
     {
         isChase = false;
         isAttack = true;
-        // 애니메이션 시작
 
         yield return new WaitForSeconds(0.5f);
         GameObject instanceBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
@@ -25,7 +24,6 @@ public class LongRangeGoblin : Enemy
 
         isChase = true;
         isAttack = false;
-        // 애니메이션 끝
 
     }
 }

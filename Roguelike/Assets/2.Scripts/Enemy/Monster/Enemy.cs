@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using DG.Tweening;
 
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -33,6 +34,11 @@ public abstract class Enemy : MonoBehaviour
     public bool isAttack;
     public bool isDead;
     public bool isMino;
+
+    [Space(10)] 
+    [Header("DissolvingController")]
+    
+    
     
     
 
@@ -43,8 +49,10 @@ public abstract class Enemy : MonoBehaviour
     protected Animator anim;
     
     [Header("Enemy Renderers")]
+    public Material dissolveMaterial;
     public SkinnedMeshRenderer[] renderers;
     protected Dictionary<SkinnedMeshRenderer,Color> originalColors = new Dictionary<SkinnedMeshRenderer, Color>();
+    
 
 
     private void Awake()
@@ -63,6 +71,7 @@ public abstract class Enemy : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+        dissolveMaterial = new Material(dissolveMaterial);
         
         foreach (SkinnedMeshRenderer mesh in renderers)
         {
@@ -99,9 +108,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void InitBarSize()
     {
-        //hpBar.rectTransform.localScale = new Vector3(1, 1, 1);
-        
-        
+        hpBar.rectTransform.localScale = new Vector3(1, 1, 1);
     }
 
 
@@ -110,7 +117,7 @@ public abstract class Enemy : MonoBehaviour
     /// </summary>
     private void ChaseStart()
     {
-        anim.SetBool("isRun", true);
+        anim.SetBool("isWalk", true);
         isChase = true;
 
     }
@@ -147,26 +154,60 @@ public abstract class Enemy : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // 태그는 뭘 넣어야 하는 지 미정 임시로 Weapon으로 설정
-        if (!isDead && other.CompareTag("Weapon")) 
+        // if (!isDead && other.CompareTag("Skill")) 
+        // {
+        //     var container = other.GetComponent<SkillControl>();
+        //     currentHp -= container.Container.ATK;
+        //     if (currentHp < 0)
+        //     {
+        //         currentHp = 0;
+        //     }
+        //     
+        //     UpdateHpBar();
+        //     
+        //     SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, transform.position, Quaternion.identity);
+        //     Vector3 reactVec = transform.position - other.transform.position;
+        //     
+        //     GameObject hudText = Instantiate(hudDamageText);    
+        //     hudText.transform.position = hudPos.position;
+        //     hudText.GetComponent<DamageText>().damage = container.Container.ATK;
+        //
+        //
+        //     StartCoroutine(OnDamage(reactVec));
+        // }
+        
+        if (!isDead && other.CompareTag("Skill")) 
         {
-            var container = other.GetComponent<SkillControl>();
-            currentHp -= container.Container.ATK;
-            hpBar.rectTransform.localScale= new Vector3(currentHp / (float)maxHp, 1, 1);
+            // var container = other.GetComponent<SkillControl>();
+             currentHp -= 10;
+            if (currentHp < 0)
+            {
+                currentHp = 0;
+            }
+            
+            UpdateHpBar();
+            
             SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, transform.position, Quaternion.identity);
             Vector3 reactVec = transform.position - other.transform.position;
             
             GameObject hudText = Instantiate(hudDamageText);    
             hudText.transform.position = hudPos.position;
-            hudText.GetComponent<DamageText>().damage = container.Container.ATK;
+            hudText.GetComponent<DamageText>().damage = -10;
 
 
             StartCoroutine(OnDamage(reactVec));
         }
     }
 
+    private void UpdateHpBar()
+    {
+        float hpRatio = Mathf.Clamp01(currentHp / (float)maxHp);
+        hpBar.rectTransform.localScale= new Vector3(currentHp / (float)maxHp, 1, 1);
+    }
+
     private IEnumerator OnDamage(Vector3 reactVec)
     {
-        anim.SetTrigger("doHit");
+        anim.SetTrigger("doDamage");
         foreach (SkinnedMeshRenderer mesh in renderers)
         {
             mesh.material.color = Color.red;
@@ -190,7 +231,7 @@ public abstract class Enemy : MonoBehaviour
             
             yield return new WaitForSeconds(0.5f);
             isChase = true;
-            anim.SetBool("isRun", true);
+            anim.SetBool("isWalk", true);
             
         }
         
@@ -198,10 +239,7 @@ public abstract class Enemy : MonoBehaviour
         else
         {
             StopAllCoroutines();
-            foreach (SkinnedMeshRenderer mesh in renderers)
-            {
-                mesh.material.color = Color.gray;
-            }
+            StartCoroutine(Dissolve());
             
             gameObject.layer = 0;
             isDead = true;
@@ -217,7 +255,27 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    public IEnumerator Dissolve()
+    {
+        foreach (SkinnedMeshRenderer meshRenderer in renderers)
+        {
+            Material[] materials = meshRenderer.materials;
+        
+            for(int index = 0; index < materials.Length; index++)
+            {
+                materials[index] = dissolveMaterial;
+            }
+        
+            meshRenderer.materials = materials;
+        }
     
+        dissolveMaterial.DOFloat(1, "_DissolveAmount", 2);
+    
+        yield return null;
+    }
+
+
+
 
     /// <summary>
     /// 플레이어를 공격하는 로직
