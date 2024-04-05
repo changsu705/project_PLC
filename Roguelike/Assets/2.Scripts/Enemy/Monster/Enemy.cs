@@ -269,7 +269,7 @@ public abstract class Enemy : MonoBehaviour
             meshRenderer.materials = materials;
         }
     
-        dissolveMaterial.DOFloat(1, "_DissolveAmount", 2);
+        dissolveMaterial.DOFloat(1, "_Float", 2);
     
         yield return null;
     }

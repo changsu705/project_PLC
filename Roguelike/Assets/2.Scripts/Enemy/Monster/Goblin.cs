@@ -14,15 +14,14 @@ public class Goblin : Enemy
         anim.SetBool("isWalk", false);
         anim.SetBool("isAttack", true);
         
-        yield return new WaitForSeconds(0.9f); 
+        yield return new WaitForSeconds(0.14f); 
         meleeArea.enabled = true;
 
-        yield return new WaitForSeconds(0.3f); 
+        yield return new WaitForSeconds(0.02f); 
         meleeArea.enabled = false;
 
 
-        yield return new WaitForSeconds(1f); 
-
+        yield return new WaitForSeconds(1.1f); 
 
         isChase = true;
         isAttack = false;
