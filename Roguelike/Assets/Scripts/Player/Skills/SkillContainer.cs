@@ -108,6 +108,11 @@ public class SkillContainer : ScriptableObject
         attackCoolDown = true;
     }
 
+    public void Init()
+    {
+        attackCoolDown = true;
+    }
+
     /// <summary>
     /// 공격 콜라이더가 특정 액션에 비활성화 되게 하는 모드
     /// </summary>

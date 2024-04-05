@@ -4,9 +4,12 @@ public class SkillControl : MonoBehaviour
 {
     [SerializeField] private SkillContainer container;
 
+    public SkillContainer Container => container;
+
     private void Awake()
     {
         container.SetTrigger(gameObject);
+        container.Init();
         gameObject.SetActive(false);
     }
 
@@ -17,6 +20,10 @@ public class SkillControl : MonoBehaviour
             if (other.TryGetComponent(out Enemy enemy))
             {
                 Debug.Log(other.name);
+                if (container.Mode == SkillContainer.DisableMode.CollisionOrLifeTime)
+                {
+                    gameObject.SetActive(false);
+                }
                 //enemy.OnDamage(container.ATK);
             }
             else

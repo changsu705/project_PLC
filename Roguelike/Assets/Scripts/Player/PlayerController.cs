@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
         tan = Mathf.Tan(camAngle.x * Mathf.Deg2Rad);
 
         audioManager = AudioManager.instance;
+
+        print(skills.Length);
     }
 
     private bool isMoving = false; // 플레이어의 움직임 상태를 추적하는 변수
@@ -167,9 +169,15 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Started)
         {
             int idx = (int)context.ReadValue<float>();
+            Debug.Log(idx < skills.Length);
+            Debug.Log(skills[idx].AttackCoolDown);
             if (idx < skills.Length && skills[idx].AttackCoolDown)
             {
-                StartCoroutine(skills[idx].PlaySkill(this));
+                IEnumerator routine = skills[idx].PlaySkill(this);
+                if (routine != null)
+                {
+                    StartCoroutine(routine);
+                }
             }
         }
     }

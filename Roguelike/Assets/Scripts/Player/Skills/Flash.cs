@@ -9,16 +9,23 @@ public class Flash : SkillContainer
 
     public override IEnumerator PlaySkill(PlayerController player)
     {
-        if (player.Horizontal != 0f || player.Vertical != 0f)
+        float sqrtMin = float.MaxValue;
+        Enemy target = null;
+        foreach (var enemy in FindObjectsOfType<Enemy>())
         {
-            player.transform.position +=
-                PlayerController.quaterView *
-                new Vector3(player.Horizontal, 0f, player.Vertical) *
-                flashForce;
-
-            player.StartCoroutine(base.PlaySkill(player));
+            float sqrtDistance = (enemy.transform.position - player.transform.position).sqrMagnitude;
+            if (sqrtMin > sqrtDistance)
+            {
+                sqrtMin = sqrtDistance;
+            }
         }
 
-        yield return null;
+        if (target != null)
+        {
+            player.transform.position = Vector3.Lerp(player.transform.position, target.transform.position, 0.8f);
+            return base.PlaySkill(player);
+        }
+
+        return null;
     }
 }

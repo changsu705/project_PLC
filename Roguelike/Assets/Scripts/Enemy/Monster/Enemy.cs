@@ -149,17 +149,17 @@ public abstract class Enemy : MonoBehaviour
         // 태그는 뭘 넣어야 하는 지 미정 임시로 Weapon으로 설정
         if (!isDead && other.CompareTag("Weapon")) 
         {
-            SkillContainer container = other.GetComponent<SkillContainer>();
-            currentHp -= container.ATK;
-            hpBar.rectTransform.localScale= new Vector3((float)currentHp / (float)maxHp, 1, 1);
+            var container = other.GetComponent<SkillControl>();
+            currentHp -= container.Container.ATK;
+            hpBar.rectTransform.localScale= new Vector3(currentHp / (float)maxHp, 1, 1);
             SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, transform.position, Quaternion.identity);
             Vector3 reactVec = transform.position - other.transform.position;
             
             GameObject hudText = Instantiate(hudDamageText);    
             hudText.transform.position = hudPos.position;
-            hudText.GetComponent<DamageText>().damage = container.ATK;
-            
-            
+            hudText.GetComponent<DamageText>().damage = container.Container.ATK;
+
+
             StartCoroutine(OnDamage(reactVec));
         }
     }
