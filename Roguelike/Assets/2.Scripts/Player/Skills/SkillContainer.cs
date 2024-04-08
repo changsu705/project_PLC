@@ -28,6 +28,9 @@ public class SkillContainerEditor : Editor
 [CreateAssetMenu(menuName = "Skill Container/Default")]
 public class SkillContainer : ScriptableObject
 {
+    [Header("FX")]
+    [SerializeField] protected SkillEffects.FX fx;
+    
     [Header("Stat")]
     [SerializeField] private int atk = 10;
     [SerializeField] private float coolTime = 1f;
@@ -39,7 +42,7 @@ public class SkillContainer : ScriptableObject
     [SerializeField] private DisableMode disableMode;
     [HideInInspector, SerializeField] private float disableTime;
 
-    private GameObject trigger;
+    protected GameObject trigger;
 
     /// <summary>
     /// 공격력
@@ -77,13 +80,14 @@ public class SkillContainer : ScriptableObject
     }
 
     /// <summary>
-    /// 플레이어 스킬 시작<br/>
+    /// 플레이어 스킬 시작
     /// </summary>
     /// <param name="player">코루틴 돌리거나 기타 행동을 시킬 플레이어</param>
     public virtual IEnumerator PlaySkill(PlayerController player)
     {
         player.StartCoroutine(CoolDown());
         trigger.transform.SetPositionAndRotation(player.transform.position, player.transform.rotation);
+        SkillEffects.Instance.PlayEffect(fx, player.transform.position, player.transform.rotation);
         trigger.SetActive(true);
 
         switch (disableMode)
@@ -101,7 +105,7 @@ public class SkillContainer : ScriptableObject
         trigger.SetActive(false);
     }
 
-    private IEnumerator CoolDown()
+    protected IEnumerator CoolDown()
     {
         attackCoolDown = false;
         yield return new WaitForSeconds(coolTime);
