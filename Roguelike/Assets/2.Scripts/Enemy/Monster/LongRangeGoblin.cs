@@ -16,7 +16,6 @@ public class LongRangeGoblin : Enemy
         isAttack = true;
         anim.SetBool("isWalk", false);
         anim.SetBool("isCharge",true);
-        SoundManager.instance.PlaySfx(SoundManager.ESfx.Ball);
         
         yield return new WaitForSeconds(1f);
         
@@ -28,7 +27,7 @@ public class LongRangeGoblin : Enemy
         bulletRb.velocity = transform.forward * bulletSpeed;
         
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.7f);
 
         isChase = true;
         isAttack = false;

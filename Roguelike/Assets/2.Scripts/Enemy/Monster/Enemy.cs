@@ -22,7 +22,7 @@ public abstract class Enemy : MonoBehaviour
     
     [Header("Enemy Components")]
     public Transform target;
-    public BoxCollider meleeArea;
+    public MeshCollider meleeArea;
     public Image hpBar;
     public GameObject hudDamageText;
     public Transform hudPos;
@@ -153,7 +153,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // 태그는 뭘 넣어야 하는 지 미정 임시로 Weapon으로 설정
+        
         // if (!isDead && other.CompareTag("Skill")) 
         // {
         //     var container = other.GetComponent<SkillControl>();
@@ -193,8 +193,8 @@ public abstract class Enemy : MonoBehaviour
             GameObject hudText = Instantiate(hudDamageText);    
             hudText.transform.position = hudPos.position;
             hudText.GetComponent<DamageText>().damage = -10;
-
-
+        
+        
             StartCoroutine(OnDamage(reactVec));
         }
     }
