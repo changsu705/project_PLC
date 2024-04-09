@@ -1,10 +1,11 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    private new PlayerAnimation animation;
+
     [Header("Player Stats")]
     [SerializeField] private float maxHp;
     [SerializeField] private float currentHp;
@@ -18,8 +19,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private SkillContainer[] skills;
 
-    public float Horizontal { get; private set; }
-    public float Vertical { get; private set; }
+    private float horizontal;
+    private float vertical;
 
     /// <summary> base : 카메라 오일러 각 y </summary>
     private float sin;
@@ -36,11 +37,11 @@ public class PlayerController : MonoBehaviour
     private AudioManager audioManager;          //발소리 코드 추가
     private Rigidbody rb;
 
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
+
     private void Start()
     {
         Vector3 camAngle = Camera.main.transform.eulerAngles;
@@ -50,6 +51,8 @@ public class PlayerController : MonoBehaviour
         tan = Mathf.Tan(camAngle.x * Mathf.Deg2Rad);
 
         audioManager = AudioManager.instance;
+
+        animation = GetComponent<PlayerAnimation>();
     }
 
     private bool isMoving = false; // 플레이어의 움직임 상태를 추적하는 변수
@@ -72,13 +75,17 @@ public class PlayerController : MonoBehaviour
 
         transform.LookAt(screen2world, Vector3.up);
 
-        if (!isDodge && (Horizontal != 0f || Vertical != 0f))
+        if (!isDodge && (horizontal != 0f || vertical != 0f))
         {
-            Vector3 movement = quaterView * new Vector3(Horizontal, 0f, Vertical);
+            Vector3 lookNormal = (screen2world - transform.position).normalized;
 
-            float totalSpeed = speed * (3f + Vector3.Dot((screen2world - transform.position).normalized, movement)) / 2f;
+            Vector3 movement = quaterView * new Vector3(horizontal, 0f, vertical);
+            float dot = Vector3.Dot(lookNormal, movement);
 
+            float totalSpeed = speed * (3f + dot) / 2f;
             transform.position += Time.deltaTime * totalSpeed * movement;
+
+            animation.SetMovementValue(Vector3.Cross(lookNormal, movement).y, dot);
 
             if (!isMoving)          //발소리 코드 추가
             {
@@ -90,6 +97,7 @@ public class PlayerController : MonoBehaviour
         {
             //AudioManager.instance.StopFootstep();
             isMoving = false;
+
         }
 
     }
@@ -125,17 +133,22 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 v = context.ReadValue<Vector2>();
 
-        Horizontal = v.x;
-        Vertical = v.y;
+        horizontal = v.x;
+        vertical = v.y;
+
+        if (horizontal == 0f && vertical == 0f)
+        {
+            animation.SetMovementValue(0f, 0f);
+        }
     }
 
     public void OnDodge(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && isDodgeCoolDown && (Horizontal != 0f || Vertical != 0f))
+        if (context.phase == InputActionPhase.Started && isDodgeCoolDown && (horizontal != 0f || vertical != 0f))
         {
             isDodge = true;
             isDodgeCoolDown = false;
-            StartCoroutine(Dodge(transform.position + (quaterView * new Vector3(Horizontal, 0f, Vertical) * dodgeForce), 0.2f));
+            StartCoroutine(Dodge(transform.position + (quaterView * new Vector3(horizontal, 0f, vertical) * dodgeForce), 0.2f));
             StartCoroutine(DodgeCoolTime());
         }
     }

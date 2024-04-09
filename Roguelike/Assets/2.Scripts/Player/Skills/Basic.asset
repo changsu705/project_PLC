@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896c88ac569d82e4c936deb41966bc8a, type: 3}
   m_Name: Basic
   m_EditorClassIdentifier: 
+  fx: 0
   atk: 10
   coolTime: 0.5
   offset: {x: 0, y: 0, z: 1.5}
