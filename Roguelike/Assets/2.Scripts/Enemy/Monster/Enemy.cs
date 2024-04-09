@@ -34,6 +34,7 @@ public abstract class Enemy : MonoBehaviour
     public bool isAttack;
     public bool isDead;
     public bool isMino;
+    public bool isDamage;
 
     [Space(10)] 
     [Header("DissolvingController")]
@@ -136,7 +137,7 @@ public abstract class Enemy : MonoBehaviour
     /// </summary>
     private void Targeting()
     {
-        if (!isMino && !isDead)
+        if (!isMino && !isDead && isDamage)
         {
 
             RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward,
@@ -153,33 +154,11 @@ public abstract class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        // if (!isDead && other.CompareTag("Skill")) 
-        // {
-        //     var container = other.GetComponent<SkillControl>();
-        //     currentHp -= container.Container.ATK;
-        //     if (currentHp < 0)
-        //     {
-        //         currentHp = 0;
-        //     }
-        //     
-        //     UpdateHpBar();
-        //     
-        //     SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, transform.position, Quaternion.identity);
-        //     Vector3 reactVec = transform.position - other.transform.position;
-        //     
-        //     GameObject hudText = Instantiate(hudDamageText);    
-        //     hudText.transform.position = hudPos.position;
-        //     hudText.GetComponent<DamageText>().damage = container.Container.ATK;
-        //
-        //
-        //     StartCoroutine(OnDamage(reactVec));
-        // }
-        
-        if (!isDead && other.CompareTag("Skill")) 
+
+        if (!isDead && other.CompareTag("Skill") && !isDamage)  
         {
-            // var container = other.GetComponent<SkillControl>();
-             currentHp -= 10;
+            var container = other.GetComponent<SkillControl>();
+            currentHp -= container.Container.ATK;
             if (currentHp < 0)
             {
                 currentHp = 0;
@@ -192,11 +171,13 @@ public abstract class Enemy : MonoBehaviour
             
             GameObject hudText = Instantiate(hudDamageText);    
             hudText.transform.position = hudPos.position;
-            hudText.GetComponent<DamageText>().damage = -10;
+            hudText.GetComponent<DamageText>().damage = container.Container.ATK;
         
         
             StartCoroutine(OnDamage(reactVec));
         }
+        
+        
     }
 
     private void UpdateHpBar()
@@ -207,29 +188,39 @@ public abstract class Enemy : MonoBehaviour
 
     private IEnumerator OnDamage(Vector3 reactVec)
     {
-        anim.SetTrigger("doDamage");
-        foreach (SkinnedMeshRenderer mesh in renderers)
-        {
-            mesh.material.color = Color.red;
-        }
 
-        
-        
-        
-        yield return new WaitForSeconds(0.1f);
 
-        if (currentHp > 0)
+        if (currentHp > 0 ) 
         {
-            reactVec = reactVec.normalized;
-            reactVec+= Vector3.up;
-            rb.AddForce(reactVec * 5, ForceMode.Impulse);
+            
+            isDamage= true;
+            isChase= false;
+            anim.SetTrigger("doDamage");
+            
+            foreach (SkinnedMeshRenderer mesh in renderers)
+            {
+                mesh.material.color = Color.red;
+            }
+            
+            yield return new WaitForSeconds(0.1f);
             
             foreach (var pair in originalColors)
             {
                 pair.Key.material.color = pair.Value;
             }
             
-            yield return new WaitForSeconds(0.5f);
+            
+            
+            
+            
+            reactVec = reactVec.normalized;
+            reactVec+= Vector3.up;
+            rb.AddForce(reactVec * 5, ForceMode.Impulse);
+            
+            
+            
+            yield return new WaitForSeconds(0.9f);
+            isDamage= false;
             isChase = true;
             anim.SetBool("isWalk", true);
             
@@ -250,7 +241,7 @@ public abstract class Enemy : MonoBehaviour
             reactVec = reactVec.normalized;
             reactVec+= Vector3.up;
             rb.AddForce(reactVec * 5, ForceMode.Impulse);
-            Destroy(gameObject,2f);
+            Destroy(gameObject,1f);
 
         }
     }
