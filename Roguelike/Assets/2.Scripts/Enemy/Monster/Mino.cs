@@ -4,9 +4,12 @@ using UnityEngine.AI;
 
 public class Mino : Enemy
 {
+    
+    
     public bool isLook;
 
     private Vector3 lookVec;
+    private Vector3 tauntVec;
 
     private void Awake()
     {
@@ -19,6 +22,8 @@ public class Mino : Enemy
         {
             originalColors[mesh] = mesh.material.color;
         }
+        
+        nav.isStopped = true;
     }
 
     private void Start()
@@ -40,6 +45,15 @@ public class Mino : Enemy
             float v = Input.GetAxisRaw("Vertical");
             lookVec = new Vector3(h, 0, v);
             transform.LookAt(target.position + lookVec);
+            
+                anim.SetBool("isLeft", true);
+            
+            
+            
+        }
+        else
+        {
+            nav.SetDestination(tauntVec);
         }
 
 
@@ -51,7 +65,7 @@ public class Mino : Enemy
     {
         yield return new WaitForSeconds(0.1f);
 
-        int ranAction = Random.Range(1, 1);
+        int ranAction = Random.Range(0, 3);
 
         switch (ranAction)
         {
@@ -65,7 +79,7 @@ public class Mino : Enemy
                 break;
             case 2:
                 // 충격파
-                StartCoroutine(ShockWave());
+                StartCoroutine(Taunt());
                 break;
         }
 
@@ -76,18 +90,18 @@ public class Mino : Enemy
     private IEnumerator Charging()
     {
         print("Charging");
-        // 애니메이션 시작
+        anim.SetTrigger("doCharge");
 
         yield return new WaitForSeconds(0.1f);
         rb.AddForce(transform.forward * 20, ForceMode.Impulse);
         
-        meleeArea.enabled = true;
+        //meleeArea.enabled = true;
         
 
         yield return new WaitForSeconds(0.5f);
         
         rb.velocity = Vector3.zero;
-        meleeArea.enabled = false;
+        //meleeArea.enabled = false;
 
         yield return new WaitForSeconds(2f);
         
@@ -96,9 +110,21 @@ public class Mino : Enemy
         StartCoroutine(Think());
     }
 
-    private IEnumerator ShockWave() // 기획 미정
+    private IEnumerator Taunt() 
     {
-        yield return new WaitForSeconds(0.1f);
+        anim.SetTrigger("doTaunt");
+        print("Taunt");
+        tauntVec = target.position + lookVec;
+        isLook = false;
+        nav.isStopped = false;
+        anim.SetTrigger("doTaunt");
+        yield return new WaitForSeconds(1.5f);
+        
+        yield return new WaitForSeconds(0.5f);
+        
+        isLook = true;
+        nav.isStopped = true;
+       
 
         StartCoroutine(Think());
     }
@@ -107,20 +133,21 @@ public class Mino : Enemy
 
     public override IEnumerator Attack()
     {
-
-        // 애니메이션
+        anim.SetTrigger("doAttack");
+        print("Attack");
+        
 
         yield return new WaitForSeconds(0.2f); // 공격 로직 시작
-        meleeArea.enabled = true;
+        //meleeArea.enabled = true;
 
         yield return new WaitForSeconds(0.5f); // 공격 로직 끝
-        meleeArea.enabled = false;
+        //meleeArea.enabled = false;
 
 
         yield return new WaitForSeconds(1f); // 1초간 대기
 
 
-        // 애니메이션 끝
+        
         StartCoroutine(Think());
     }
 }
