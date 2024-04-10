@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,5 +38,6 @@ public class SkillEffects : MonoBehaviour
         BasicSmash,
         BasicHit,
         FireBall,
+        Flash,
     }
 }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb76e3f2d59fe1f48b42f5654711faca, type: 3}
   m_Name: Flash
   m_EditorClassIdentifier: 
+  fx: 3
   atk: 15
   coolTime: 5
   offset: {x: 0, y: 0, z: 0}
