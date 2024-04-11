@@ -29,6 +29,6 @@ public class MainMenuManager : MonoBehaviour
             yield return null;
         }
 
-        SceneManager.LoadScene("Scene2");
+        SceneManager.LoadScene("Stage1");
     }
 }

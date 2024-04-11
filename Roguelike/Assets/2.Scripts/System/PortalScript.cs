@@ -20,6 +20,7 @@ public class PortalScript : MonoBehaviour
     {
         if (other.CompareTag("Player")) // 플레이어와 충돌했을 때
         {
+            Debug.Log("player");
             canLoadScene = true; // 씬을 로드할 수 있도록 플래그 설정
         }
     }
@@ -45,6 +46,7 @@ public class PortalScript : MonoBehaviour
             yield return null;
         }
 
+        Debug.Log(nowScene.buildIndex);
         switch (nowScene.buildIndex)
         {
             case 1:
@@ -55,7 +57,7 @@ public class PortalScript : MonoBehaviour
                 SceneManager.LoadScene(3);
                 break;
             case 3:
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(4);
                 break;
         }
     }
