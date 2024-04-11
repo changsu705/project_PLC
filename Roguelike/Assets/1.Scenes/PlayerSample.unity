@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -274,7 +274,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 100
+  far clip plane: 50
   field of view: 60.000004
   orthographic: 1
   orthographic size: 5
@@ -302,7 +302,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -10, y: 11, z: -10}
+  m_LocalPosition: {x: -10, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -396,6 +396,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.16
       objectReference: {fileID: 0}
@@ -444,6 +459,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
         type: 3}
       propertyPath: m_Name
@@ -490,17 +510,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: adf235dc00e074741b667e2e4c6f0bf2,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.75
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: adf235dc00e074741b667e2e4c6f0bf2,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.75
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: adf235dc00e074741b667e2e4c6f0bf2,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.75
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: adf235dc00e074741b667e2e4c6f0bf2,
         type: 3}
@@ -1917,7 +1937,7 @@ MonoBehaviour:
     FieldOfView: 60.000004
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 100
+    FarClipPlane: 50
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -1941,7 +1961,7 @@ Transform:
   m_GameObject: {fileID: 1336798269}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -10, y: 11, z: -10}
+  m_LocalPosition: {x: -10, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2118,7 +2138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: -10, y: 11, z: -10}
+  m_FollowOffset: {x: -10, y: 10, z: -10}
   m_XDamping: 0.5
   m_YDamping: 0.5
   m_ZDamping: 0.5
@@ -2273,8 +2293,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 15, y: 10, z: 10.5}
-  m_Center: {x: 0, y: 5, z: -8.5}
+  m_Size: {x: 15, y: 10, z: 10}
+  m_Center: {x: 0, y: 5, z: -8}
 --- !u!4 &1903285783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3751481818595054343, guid: dff653b61231ac74f93689dbe223f018,
