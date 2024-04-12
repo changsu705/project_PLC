@@ -308,7 +308,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cefab1ec995a4cb49b7957bf7618e7b6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.0816364
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cefab1ec995a4cb49b7957bf7618e7b6,
         type: 3}
@@ -318,7 +318,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cefab1ec995a4cb49b7957bf7618e7b6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -4.1996646
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cefab1ec995a4cb49b7957bf7618e7b6,
         type: 3}
@@ -489,7 +489,7 @@ MonoBehaviour:
   maxHp: 100
   currentHp: 100
   targetRadius: 1.5
-  targetRange: 3
+  targetRange: 1.5
   target: {fileID: 0}
   meleeArea: {fileID: 3419192665499382650}
   hpBar: {fileID: 601327131213739985}
@@ -500,6 +500,7 @@ MonoBehaviour:
   isAttack: 0
   isDead: 0
   isMino: 0
+  isDamage: 0
   dissolveMaterial: {fileID: 2100000, guid: 4d68af65b28157f4d94296f94e8f2e73, type: 2}
   renderers: []
 --- !u!65 &5220454638596061832

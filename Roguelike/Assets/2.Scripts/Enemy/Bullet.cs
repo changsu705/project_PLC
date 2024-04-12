@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -10,12 +11,21 @@ public class Bullet : MonoBehaviour
     {
         if (!isMelee && other.CompareTag("Player"))
         {
-            print("초아아랄");
             Destroy(gameObject);
         }
-        else if(!isMelee)
+        
+    }
+
+    private void Update()
+    {
+        DestroyBullet();
+    }
+
+    private void DestroyBullet()
+    {
+        if (!isMelee)
         {
-            Destroy(gameObject, 3f);
+            Destroy(gameObject, 2f);
         }
     }
 }
