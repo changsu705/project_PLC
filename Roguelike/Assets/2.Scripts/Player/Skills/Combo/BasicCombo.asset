@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f5b8459daaab44ebcd4b341de10de2, type: 3}
+  m_Name: BasicCombo
+  m_EditorClassIdentifier: 
+  comboSkills:
+  - {fileID: 11400000, guid: 3dc51f2f229113044acc7575e5958fe4, type: 2}
+  - {fileID: 11400000, guid: f54f136e533ea754587076f3a4e799e1, type: 2}
+  - {fileID: 11400000, guid: 184b6ea45ad4ea54a9a0d90c105f1b4e, type: 2}
+  comboEndTime: 0.5

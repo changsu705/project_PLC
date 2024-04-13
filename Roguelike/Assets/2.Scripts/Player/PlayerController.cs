@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool isDodgeCoolDown = true;
     private bool isDamage;
 
-    [SerializeField] private SkillContainer[] skills;
+    [SerializeField] private SkillObject[] skills;
 
     private float horizontal;
     private float vertical;
@@ -50,17 +50,9 @@ public class PlayerController : MonoBehaviour
         cos = Mathf.Cos(camAngle.y * Mathf.Deg2Rad);
         tan = Mathf.Tan(camAngle.x * Mathf.Deg2Rad);
 
-        audioManager = AudioManager.instance;
+        audioManager = AudioManager.Instance;
 
         animation = GetComponent<PlayerAnimation>();
-    }
-
-    private bool isMoving = false; // 플레이어의 움직임 상태를 추적하는 변수
-
-    private IEnumerator DelayedFootstep()         //발소리 코드 추가
-    {
-        yield return new WaitForSeconds(0.1f);
-        //AudioManager.instance.PlayFootstep("Footstep1");
     }
 
     private void Update()
@@ -87,19 +79,12 @@ public class PlayerController : MonoBehaviour
 
             animation.SetMovementValue(Vector3.Cross(lookNormal, movement).y, dot);
 
-            if (!isMoving)          //발소리 코드 추가
-            {
-                isMoving = true;
-                StartCoroutine(DelayedFootstep());
-            }
+            audioManager.Footstep(true);
         }
         else
         {
-            //AudioManager.instance.StopFootstep();
-            isMoving = false;
-
+            audioManager.Footstep(false);
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -182,11 +167,8 @@ public class PlayerController : MonoBehaviour
             int idx = (int)context.ReadValue<float>();
             if (idx < skills.Length && skills[idx].AttackCoolDown)
             {
-                IEnumerator routine = skills[idx].PlaySkill(this);
-                if (routine != null)
-                {
-                    StartCoroutine(routine);
-                }
+                StartCoroutine(skills[idx].PlaySkill(this));
+                animation.PlaySkillAnimation(skills[idx].CurrentContainer.AnimationKey);
             }
         }
     }

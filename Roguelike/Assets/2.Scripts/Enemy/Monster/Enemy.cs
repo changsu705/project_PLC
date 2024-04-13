@@ -93,6 +93,14 @@ public abstract class Enemy : MonoBehaviour
 
     private void Update()
     {
+        Debug.DrawRay(transform.position, transform.forward * targetRange, Color.red);
+        
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
+
+        foreach (RaycastHit hit in hits)
+        {
+            Debug.Log("Hit: " + hit.collider.gameObject.name);
+        }
 
         if (!isMino && nav.enabled)
         {
@@ -137,16 +145,19 @@ public abstract class Enemy : MonoBehaviour
     /// </summary>
     private void Targeting()
     {
-        if (!isMino && !isDead && isDamage)
+        if (!isMino && !isDead && !isDamage)
         {
 
             RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward,
                 targetRange,
                 LayerMask.GetMask("Player"));
 
+           
             if (rayHits.Length > 0 && !isAttack)
             {
+                
                 isChase = false;
+                isAttack = true;
                 StartCoroutine(Attack());
             }
         }
@@ -166,7 +177,7 @@ public abstract class Enemy : MonoBehaviour
             
             UpdateHpBar();
             
-            SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, transform.position, Quaternion.identity);
+            //SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, transform.position, Quaternion.identity);
             Vector3 reactVec = transform.position - other.transform.position;
             
             GameObject hudText = Instantiate(hudDamageText);    
@@ -222,6 +233,7 @@ public abstract class Enemy : MonoBehaviour
             yield return new WaitForSeconds(0.9f);
             isDamage= false;
             isChase = true;
+            isAttack = false;
             anim.SetBool("isWalk", true);
             
         }

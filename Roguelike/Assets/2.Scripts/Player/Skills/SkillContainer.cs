@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(SkillContainer), true)]
-public class SkillContainerEditor : Editor
+class SkillContainerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -26,23 +26,21 @@ public class SkillContainerEditor : Editor
 #endif
 
 [CreateAssetMenu(menuName = "Skill Container/Default")]
-public class SkillContainer : ScriptableObject
+public class SkillContainer : SkillObject
 {
-    [Header("FX")]
+    [Space]
     [SerializeField] protected SkillEffects.FX fx;
+    [SerializeField] private int animationKey;
     
     [Header("Stat")]
     [SerializeField] private int atk = 10;
     [SerializeField] private float coolTime = 1f;
-    private bool attackCoolDown = true;
 
     [Header("Trigger")]
     [SerializeField] private Vector3 offset;
     [SerializeField] private float radius;
     [SerializeField] private DisableMode disableMode;
     [HideInInspector, SerializeField] private float disableTime;
-
-    protected GameObject trigger;
 
     /// <summary>
     /// 공격력
@@ -55,11 +53,6 @@ public class SkillContainer : ScriptableObject
     public float CoolTime => coolTime;
 
     /// <summary>
-    /// 쿨타임 체크
-    /// </summary>
-    public bool AttackCoolDown => attackCoolDown;
-
-    /// <summary>
     /// 오브젝트 비활성화 방식
     /// </summary>
     public DisableMode Mode => disableMode;
@@ -68,6 +61,13 @@ public class SkillContainer : ScriptableObject
     /// 활성화 시간
     /// </summary>
     public float DisableTime => disableTime;
+
+    /// <summary>
+    /// 실행시킬 애니메이션 키
+    /// </summary>
+    public int AnimationKey => animationKey;
+
+    public override SkillContainer CurrentContainer => this;
 
     public void SetTrigger(GameObject skillObject)
     {
@@ -79,11 +79,7 @@ public class SkillContainer : ScriptableObject
         collider.radius = radius;
     }
 
-    /// <summary>
-    /// 플레이어 스킬 시작
-    /// </summary>
-    /// <param name="player">코루틴 돌리거나 기타 행동을 시킬 플레이어</param>
-    public virtual IEnumerator PlaySkill(PlayerController player)
+    public override IEnumerator PlaySkill(PlayerController player)
     {
         player.StartCoroutine(CoolDown());
         trigger.transform.SetPositionAndRotation(player.transform.position, player.transform.rotation);
@@ -112,7 +108,7 @@ public class SkillContainer : ScriptableObject
         attackCoolDown = true;
     }
 
-    public void Init()
+    public override void Init()
     {
         attackCoolDown = true;
     }
