@@ -695,6 +695,7 @@ MonoBehaviour:
   isAttack: 0
   isDead: 0
   isMino: 0
+  isDamage: 0
   dissolveMaterial: {fileID: 2100000, guid: 4d68af65b28157f4d94296f94e8f2e73, type: 2}
   renderers: []
 --- !u!65 &6776333978285558073

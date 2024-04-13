@@ -215,6 +215,7 @@ public abstract class Enemy : MonoBehaviour
             
             yield return new WaitForSeconds(0.1f);
             
+            isDamage= false;
             foreach (var pair in originalColors)
             {
                 pair.Key.material.color = pair.Value;
@@ -224,14 +225,14 @@ public abstract class Enemy : MonoBehaviour
             
             
             
-            reactVec = reactVec.normalized;
-            reactVec+= Vector3.up;
-            rb.AddForce(reactVec * 5, ForceMode.Impulse);
+            // reactVec = reactVec.normalized;
+            // reactVec+= Vector3.up;
+            // rb.AddForce(reactVec * 5, ForceMode.Impulse);
             
             
             
-            yield return new WaitForSeconds(0.9f);
-            isDamage= false;
+            yield return new WaitForSeconds(1.1f);
+            
             isChase = true;
             isAttack = false;
             anim.SetBool("isWalk", true);
