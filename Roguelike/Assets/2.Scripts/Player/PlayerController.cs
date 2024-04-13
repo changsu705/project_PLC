@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool isDodgeCoolDown = true;
     private bool isDamage;
 
-    [SerializeField] private SkillContainer[] skills;
+    [SerializeField] private SkillObject[] skills;
 
     private float horizontal;
     private float vertical;
@@ -167,11 +167,8 @@ public class PlayerController : MonoBehaviour
             int idx = (int)context.ReadValue<float>();
             if (idx < skills.Length && skills[idx].AttackCoolDown)
             {
-                IEnumerator routine = skills[idx].PlaySkill(this);
-                if (routine != null)
-                {
-                    StartCoroutine(routine);
-                }
+                StartCoroutine(skills[idx].PlaySkill(this));
+                animation.PlaySkillAnimation(skills[idx].CurrentContainer.AnimationKey);
             }
         }
     }

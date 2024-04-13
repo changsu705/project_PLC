@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -633,7 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 628ebeb4fa33af34ebd67f061a373e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 11400000, guid: 3dc51f2f229113044acc7575e5958fe4, type: 2}
+  container: {fileID: 11400000, guid: 8572c5e7a30814e4fbe27354d80a6989, type: 2}
 --- !u!1 &374427621
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,7 +860,7 @@ MonoBehaviour:
   dodgeForce: 5
   dodgeCoolTime: 3
   skills:
-  - {fileID: 11400000, guid: 3dc51f2f229113044acc7575e5958fe4, type: 2}
+  - {fileID: 11400000, guid: 8572c5e7a30814e4fbe27354d80a6989, type: 2}
   - {fileID: 11400000, guid: 461e9d6cbe4fe014a85af53f52d02b2c, type: 2}
   - {fileID: 11400000, guid: aff7441bf68519f4d87b91fcff50cd0f, type: 2}
 --- !u!114 &474477508

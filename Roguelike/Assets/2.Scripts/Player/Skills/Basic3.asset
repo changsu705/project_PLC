@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 896c88ac569d82e4c936deb41966bc8a, type: 3}
-  m_Name: FireBall
+  m_Name: Basic3
   m_EditorClassIdentifier: 
-  fx: 2
-  animationKey: 0
+  fx: 0
+  animationKey: 3
   atk: 20
-  coolTime: 5
-  offset: {x: 0, y: 1.5, z: 0}
-  radius: 0.5
-  disableMode: 2
-  disableTime: 2
+  coolTime: 0.5
+  offset: {x: 0, y: 0, z: 1.5}
+  radius: 2
+  disableMode: 0
+  disableTime: 0

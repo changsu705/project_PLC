@@ -2,13 +2,25 @@ using UnityEngine;
 
 public class SkillControl : MonoBehaviour
 {
-    [SerializeField] private SkillContainer container;
+    [SerializeField] private SkillObject container;
 
-    public SkillContainer Container => container;
+    public SkillContainer Container => container.CurrentContainer;
 
     private void Awake()
     {
-        container.SetTrigger(gameObject);
+        if (container is SkillContainer skill)
+        {
+            skill.SetTrigger(gameObject);
+        }
+        else if (container is ComboContainer combo)
+        {
+            foreach (var item in combo.SkillContainers)
+            {
+                item.Init();
+                item.SetTrigger(gameObject);
+            }
+        }
+        
         container.Init();
         gameObject.SetActive(false);
     }
@@ -21,7 +33,7 @@ public class SkillControl : MonoBehaviour
             {
                 Debug.Log(other.name);
                 SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, other.transform.position, Quaternion.identity);
-                if (container.Mode == SkillContainer.DisableMode.CollisionOrLifeTime)
+                if (container.CurrentContainer.Mode == SkillContainer.DisableMode.CollisionOrLifeTime)
                 {
                     gameObject.SetActive(false);
                 }
