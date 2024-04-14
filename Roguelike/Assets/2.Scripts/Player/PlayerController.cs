@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -85,6 +86,17 @@ public class PlayerController : MonoBehaviour
         {
             audioManager.Footstep(false);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        FreezeVelocity();
+    }
+
+    private void FreezeVelocity()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
     private void OnTriggerEnter(Collider other)

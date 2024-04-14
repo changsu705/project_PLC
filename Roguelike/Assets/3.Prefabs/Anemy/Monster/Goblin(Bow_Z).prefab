@@ -653,7 +653,7 @@ MonoBehaviour:
   isDamage: 0
   dissolveMaterial: {fileID: 2100000, guid: 4d68af65b28157f4d94296f94e8f2e73, type: 2}
   renderers: []
-  bulletSpeed: 20
+  bulletSpeed: 15
   bullet: {fileID: 4069827209370673416, guid: ee67d3628ac7b451c9e7c677f369f9db, type: 3}
   bulletPos: {fileID: 1147898507549559665}
 --- !u!65 &4095371179802799611
