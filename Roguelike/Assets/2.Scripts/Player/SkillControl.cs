@@ -1,10 +1,14 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class SkillControl : MonoBehaviour
 {
     [SerializeField] private SkillObject container;
 
     public SkillContainer Container => container.CurrentContainer;
+    
 
     private void Awake()
     {
@@ -24,6 +28,8 @@ public class SkillControl : MonoBehaviour
         container.Init();
         gameObject.SetActive(false);
     }
+
+   
 
     private void OnTriggerEnter(Collider other)
     {
