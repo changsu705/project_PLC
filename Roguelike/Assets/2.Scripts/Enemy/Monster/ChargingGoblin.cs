@@ -12,7 +12,6 @@ public class ChargingGoblin : Enemy
     {
         isChase = false;
         isAttack = true;
-        anim.SetBool("isWalk", false);
         anim.SetBool("isAttack", true);
         
 
@@ -29,7 +28,6 @@ public class ChargingGoblin : Enemy
         isChase = true;
         isAttack = false;
         
-        anim.SetBool("isWalk", true);
         anim.SetBool("isAttack", false);
 
     }

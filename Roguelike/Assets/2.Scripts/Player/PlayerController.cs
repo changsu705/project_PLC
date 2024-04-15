@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,9 +15,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float dodgeForce = 5f;
     [SerializeField] private float dodgeCoolTime = 1f;
+    
     private bool isDodge = false;
     private bool isDodgeCoolDown = true;
     private bool isDamage;
+    
+    public Image hpBar;
 
     [SerializeField] private SkillObject[] skills;
 
@@ -41,6 +45,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        InitBarSize();
     }
 
     private void Start()
@@ -98,6 +103,17 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
+    
+    private void InitBarSize()
+    {
+        hpBar.rectTransform.localScale = new Vector3(1, 1, 1);
+    }
+    
+    private void UpdateHpBar()
+    {
+        float hpRatio = Mathf.Clamp01(currentHp / (float)maxHp);
+        hpBar.rectTransform.localScale= new Vector3(currentHp / (float)maxHp, 1, 1);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -107,6 +123,7 @@ public class PlayerController : MonoBehaviour
             {
                 Bullet enemyBullet = other.GetComponent<Bullet>();
                 StartCoroutine(OnDamage(enemyBullet.damage));
+                
             }
         }
     }
@@ -116,11 +133,13 @@ public class PlayerController : MonoBehaviour
         // isDamage 을 이용하여 중복 데미지를 방지
         isDamage = true;
         currentHp -= damage;
+        
         if (currentHp <= 0)
         {
             currentHp = 0;
             
         }
+        UpdateHpBar();
         yield return new WaitForSeconds(1f);
         isDamage = false;
     }

@@ -11,7 +11,6 @@ public class Goblin : Enemy
         
         isChase = false;
         isAttack = true;
-        anim.SetBool("isWalk", false);
         anim.SetBool("isAttack", true);
         
         yield return new WaitForSeconds(1f); 
@@ -25,7 +24,6 @@ public class Goblin : Enemy
         isChase = true;
         isAttack = false;
         anim.SetBool("isAttack", false);
-        anim.SetBool("isWalk", true);
 
     }
 

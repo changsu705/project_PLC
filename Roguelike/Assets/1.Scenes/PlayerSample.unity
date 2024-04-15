@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -925,7 +925,7 @@ PrefabInstance:
     - target: {fileID: 63836004780338305, guid: 9a65d7a87b2654874b5da2928d158077,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.1996646
+      value: -6.46
       objectReference: {fileID: 0}
     - target: {fileID: 63836004780338305, guid: 9a65d7a87b2654874b5da2928d158077,
         type: 3}
@@ -966,6 +966,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Goblin(Sword_Z)
+      objectReference: {fileID: 0}
+    - target: {fileID: 840231592742860347, guid: 9a65d7a87b2654874b5da2928d158077,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555915012054271018, guid: 9a65d7a87b2654874b5da2928d158077,
+        type: 3}
+      propertyPath: targetRange
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1283,6 +1293,79 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 11400000, guid: 8572c5e7a30814e4fbe27354d80a6989, type: 2}
+--- !u!1001 &362808753
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.4558053
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.9555297
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
+      propertyPath: m_Name
+      value: Minotauros
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2c36e05eec7884ab28a8003d8ac3c2e7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2c36e05eec7884ab28a8003d8ac3c2e7, type: 3}
 --- !u!1 &374427621
 GameObject:
   m_ObjectHideFlags: 0
@@ -1769,11 +1852,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8dfade1bae48ef4abb816d547f21bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 0
-  currentHp: 0
+  maxHp: 100
+  currentHp: 100
   speed: 2
   dodgeForce: 5
   dodgeCoolTime: 3
+  hpBar: {fileID: 1328150924}
   skills:
   - {fileID: 11400000, guid: 8572c5e7a30814e4fbe27354d80a6989, type: 2}
   - {fileID: 11400000, guid: 461e9d6cbe4fe014a85af53f52d02b2c, type: 2}
@@ -2056,7 +2140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5071,7 +5155,7 @@ PrefabInstance:
     - target: {fileID: 7281828602019884101, guid: 89670a26390284e61be79b55911b7392,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -4.55
       objectReference: {fileID: 0}
     - target: {fileID: 7281828602019884101, guid: 89670a26390284e61be79b55911b7392,
         type: 3}
@@ -5081,7 +5165,7 @@ PrefabInstance:
     - target: {fileID: 7281828602019884101, guid: 89670a26390284e61be79b55911b7392,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5.32
       objectReference: {fileID: 0}
     - target: {fileID: 7281828602019884101, guid: 89670a26390284e61be79b55911b7392,
         type: 3}
@@ -5482,13 +5566,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1972973268}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0.6532815, y: 0.27059805, z: -0.27059805, w: 0.6532815}
   m_LocalPosition: {x: 0, y: 30, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 45, z: 0}
 --- !u!114 &1972973273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5764,6 +5848,7 @@ SceneRoots:
   - {fileID: 640329198}
   - {fileID: 343261349}
   - {fileID: 1884517289}
+  - {fileID: 362808753}
   - {fileID: 149679286}
   - {fileID: 1307635852}
   - {fileID: 825348993}
