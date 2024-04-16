@@ -8,6 +8,7 @@ public class PlayerAnimation : MonoBehaviour
     private readonly int yHash = Animator.StringToHash("Y");
     private readonly int aniValueHash = Animator.StringToHash("AniValue");
     private readonly int playHash = Animator.StringToHash("PlayAni");
+    private readonly int dodgeHash = Animator.StringToHash("Dodge");
 
     private void Start()
     {
@@ -24,5 +25,10 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator.SetInteger(aniValueHash, value);
         animator.SetTrigger(playHash);
+    }
+
+    public void Dodge()
+    {
+        animator.SetTrigger(dodgeHash);
     }
 }

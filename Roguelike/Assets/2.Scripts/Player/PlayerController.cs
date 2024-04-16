@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,9 +12,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float currentHp;
     
     [SerializeField] private float speed;
-    [SerializeField] private float dodgeForce = 5f;
-    [SerializeField] private float dodgeCoolTime = 1f;
-    
+    [SerializeField] private float dodgeForce;
+    [SerializeField] private float dodgeCoolTime;
+
+    private float rotationScale = 1f;
     private bool isDodge = false;
     private bool isDodgeCoolDown = true;
     private bool isDamage;
@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
     private AudioManager audioManager;          //발소리 코드 추가
     private Rigidbody rb;
 
+    private new CapsuleCollider collider;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -58,38 +60,45 @@ public class PlayerController : MonoBehaviour
 
         audioManager = AudioManager.Instance;
 
+        collider = GetComponent<CapsuleCollider>();
         animation = GetComponent<PlayerAnimation>();
     }
 
     private void Update()
     {
-        Vector3 screen2world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float y = screen2world.y - 1.5f;    //발이 아닌 눈이 마우스 바라보기
-        float x = y / tan;
-
-        screen2world.x += sin * x;
-        screen2world.y = transform.position.y;
-        screen2world.z += cos * x;
-
-        transform.LookAt(screen2world, Vector3.up);
-
-        if (!isDodge && (horizontal != 0f || vertical != 0f))
+        if (!isDodge)
         {
-            Vector3 lookNormal = (screen2world - transform.position).normalized;
+            Vector3 screen2world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float y = screen2world.y - 1.5f;    //발이 아닌 눈이 마우스 바라보기
+            float x = y / tan;
 
-            Vector3 movement = quaterView * new Vector3(horizontal, 0f, vertical);
-            float dot = Vector3.Dot(lookNormal, movement);
+            screen2world.x += sin * x;
+            screen2world.y = transform.position.y;
+            screen2world.z += cos * x;
 
-            float totalSpeed = speed * (3f + dot) / 2f;
-            transform.position += Time.deltaTime * totalSpeed * movement;
+            transform.rotation = Quaternion.Lerp(
+                transform.rotation,
+                Quaternion.LookRotation(screen2world - transform.position),
+                rotationScale);
 
-            animation.SetMovementValue(Vector3.Cross(lookNormal, movement).y, dot);
+            if (!isDodge && (horizontal != 0f || vertical != 0f))
+            {
+                Vector3 lookNormal = (screen2world - transform.position).normalized;
 
-            audioManager.Footstep(true);
-        }
-        else
-        {
-            audioManager.Footstep(false);
+                Vector3 movement = quaterView * new Vector3(horizontal, 0f, vertical);
+                float dot = Vector3.Dot(lookNormal, movement);
+
+                float totalSpeed = speed * (3f + dot) / 2f;
+                transform.position += Time.deltaTime * totalSpeed * movement;
+
+                animation.SetMovementValue(Vector3.Cross(lookNormal, movement).y, dot);
+
+                audioManager.Footstep(true);
+            }
+            else
+            {
+                audioManager.Footstep(false);
+            }
         }
     }
 
@@ -162,27 +171,57 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && isDodgeCoolDown && (horizontal != 0f || vertical != 0f))
         {
+            rotationScale = 0f;
             isDodge = true;
             isDodgeCoolDown = false;
+
+            collider.enabled = false;
+
+            animation.Dodge();
+            audioManager.Footstep(false);
+
             StartCoroutine(Dodge(transform.position + (quaterView * new Vector3(horizontal, 0f, vertical) * dodgeForce), 0.2f));
             StartCoroutine(DodgeCoolTime());
         }
     }
 
-    private IEnumerator Dodge(Vector3 diredtion, float time)
+    private IEnumerator Dodge(Vector3 endPos, float time)
     {
+        transform.LookAt(endPos);
         Vector3 startPos = transform.position;
 
+        //dodge
         float currentTime = 0f;
         while (currentTime < time)
         {
-            transform.position = Vector3.Lerp(startPos, diredtion, currentTime / time);
+            transform.position = Vector3.Lerp(startPos, endPos, currentTime / time);
+            currentTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        var (newStartPos, newEndPos) = (endPos, (endPos - startPos).normalized * 1.5f + endPos);
+
+        //roll
+        currentTime = 0f;
+        while (currentTime < 0.5f)
+        {
+            transform.position = Vector3.Lerp(newStartPos, newEndPos, currentTime / 0.5f);
             currentTime += Time.deltaTime;
 
             yield return null;
         }
 
         isDodge = false;
+        collider.enabled = true;
+        
+        //구르기 끝났을 때 마우스 부드럽게 바라보기
+        while (rotationScale < 1f)
+        {
+            rotationScale += Time.deltaTime * 3f;
+
+            yield return null;
+        }
     }
 
     private IEnumerator DodgeCoolTime()
