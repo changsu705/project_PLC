@@ -232,11 +232,14 @@ public abstract class Enemy : MonoBehaviour
             
             
             yield return new WaitForSeconds(1.1f);
-            
-            isChase = true;
-            isAttack = false;
-            anim.SetBool("isWalk", true);
-            
+
+            if (!isMino)
+            {
+                isChase = true;
+                isAttack = false;
+                anim.SetBool("isWalk", true);
+            }
+
         }
         
         

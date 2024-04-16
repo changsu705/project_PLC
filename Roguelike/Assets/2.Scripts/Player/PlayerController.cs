@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        FreezeVelocity();
+        //FreezeVelocity();
     }
 
     private void FreezeVelocity()

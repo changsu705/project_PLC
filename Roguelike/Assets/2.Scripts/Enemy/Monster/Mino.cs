@@ -45,11 +45,6 @@ public class Mino : Enemy
             float v = Input.GetAxisRaw("Vertical");
             lookVec = new Vector3(h, 0, v);
             transform.LookAt(target.position + lookVec);
-            
-                anim.SetBool("isLeft", true);
-            
-            
-            
         }
         else
         {
@@ -65,21 +60,25 @@ public class Mino : Enemy
     {
         yield return new WaitForSeconds(0.1f);
 
-        int ranAction = Random.Range(0, 3);
+        int ranAction = Random.Range(0, 0);
 
         switch (ranAction)
         {
             case 0:
+               
+                // 충격파
+                StartCoroutine(Taunt());
+                
+                break;
+            case 1:
                 // 휘두르다
                 StartCoroutine(Attack());
                 break;
-            case 1:
+            case 2:
+               
+                
                 // 돌진
                 StartCoroutine(Charging());
-                break;
-            case 2:
-                // 충격파
-                StartCoroutine(Taunt());
                 break;
         }
 
@@ -89,11 +88,10 @@ public class Mino : Enemy
 
     private IEnumerator Charging()
     {
-        print("Charging");
         anim.SetTrigger("doCharge");
 
         yield return new WaitForSeconds(0.1f);
-        rb.AddForce(transform.forward * 20, ForceMode.Impulse);
+        rb.AddForce(transform.forward * 50, ForceMode.Impulse);
         
         //meleeArea.enabled = true;
         
@@ -110,20 +108,28 @@ public class Mino : Enemy
         StartCoroutine(Think());
     }
 
-    private IEnumerator Taunt() 
+    private IEnumerator Taunt()
     {
-        anim.SetTrigger("doTaunt");
-        print("Taunt");
-        tauntVec = target.position + lookVec;
-        isLook = false;
-        nav.isStopped = false;
-        anim.SetTrigger("doTaunt");
-        yield return new WaitForSeconds(1.5f);
+
+        anim.SetTrigger("doSound");
+        yield return new WaitForSeconds(2.1f);
         
-        yield return new WaitForSeconds(0.5f);
+        tauntVec = target.position + lookVec;
+        // isLook = false;
+        // nav.isStopped = false;
+        anim.SetTrigger("doTaunt");
+        
+       
+        
+        
+       
+        yield return new WaitForSeconds(3f);
         
         isLook = true;
         nav.isStopped = true;
+        
+        anim.SetTrigger("doAttack");
+        yield return new WaitForSeconds(2f);
        
 
         StartCoroutine(Think());
