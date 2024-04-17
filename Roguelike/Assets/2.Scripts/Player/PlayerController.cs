@@ -194,7 +194,7 @@ public class PlayerController : MonoBehaviour
         float currentTime = 0f;
         while (currentTime < time)
         {
-            transform.position = Vector3.Lerp(startPos, endPos, currentTime / time);
+            transform.position += (endPos - startPos) * Time.deltaTime / time;
             currentTime += Time.deltaTime;
 
             yield return null;
@@ -206,7 +206,7 @@ public class PlayerController : MonoBehaviour
         currentTime = 0f;
         while (currentTime < 0.5f)
         {
-            transform.position = Vector3.Lerp(newStartPos, newEndPos, currentTime / 0.5f);
+            transform.position += (newEndPos - newStartPos) * Time.deltaTime * 2f;
             currentTime += Time.deltaTime;
 
             yield return null;
