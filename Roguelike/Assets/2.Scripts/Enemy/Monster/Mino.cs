@@ -92,14 +92,16 @@ public class Mino : Enemy
         yield return new WaitForSeconds(0.5f);
         // rb.AddForce(transform.forward * 10, ForceMode.Impulse);
         
-        //meleeArea.enabled = true;
         
         
-        //meleeArea.enabled = false;
-        anim.SetTrigger("doAttack2");
+        
+        
+        anim.SetTrigger("doAttack");
+        meleeArea.enabled = true;
         
 
         yield return new WaitForSeconds(2.1f);
+        meleeArea.enabled = false;
        
 
         StartCoroutine(Think());
@@ -109,9 +111,9 @@ public class Mino : Enemy
     {
 
         anim.SetTrigger("doSound");
-        yield return new WaitForSeconds(2.1f);
+        yield return new WaitForSeconds(2.5f);
         
-        tauntVec = target.position + lookVec;
+        // tauntVec = target.position + lookVec;
         // isLook = false;
         // nav.isStopped = false;
         anim.SetTrigger("doTaunt");
@@ -120,13 +122,15 @@ public class Mino : Enemy
         
         
        
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3.1f);
         
         //isLook = true;
         //nav.isStopped = true;
         
         anim.SetTrigger("doAttack");
-        yield return new WaitForSeconds(2f);
+        meleeArea.enabled = true;
+        yield return new WaitForSeconds(2.1f);
+        meleeArea.enabled = false;
        
 
         StartCoroutine(Think());
