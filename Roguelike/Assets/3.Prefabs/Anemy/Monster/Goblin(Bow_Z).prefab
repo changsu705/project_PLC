@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &653393548747466086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6894623658105217956}
+  m_Layer: 7
+  m_Name: firePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6894623658105217956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653393548747466086}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.2, y: 1.5, z: 1.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7318576857315129339}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1674037517076571120
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,6 +653,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 683203061803757278}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2cc9b245f68399d43b74737cf9a25f30,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6894623658105217956}
     - targetCorrespondingSourceObject: {fileID: -1300326425237808287, guid: 2cc9b245f68399d43b74737cf9a25f30,
         type: 3}
       insertIndex: -1
@@ -741,8 +776,8 @@ MonoBehaviour:
   dissolveMaterial: {fileID: 2100000, guid: 4d68af65b28157f4d94296f94e8f2e73, type: 2}
   renderers: []
   bulletSpeed: 15
-  bullet: {fileID: 4069827209370673416, guid: ee67d3628ac7b451c9e7c677f369f9db, type: 3}
-  bulletPos: {fileID: 1147898507549559665}
+  bullet: {fileID: 5464787963403865147, guid: 52e5802d2b04f4e5d9c4c0c2f99c4682, type: 3}
+  bulletPos: {fileID: 6894623658105217956}
 --- !u!65 &4095371179802799611
 BoxCollider:
   m_ObjectHideFlags: 0

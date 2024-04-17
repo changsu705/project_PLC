@@ -50,9 +50,7 @@ public class Mino : Enemy
         {
             nav.SetDestination(tauntVec);
         }
-
-
-
+        
 
     }
 
@@ -60,7 +58,7 @@ public class Mino : Enemy
     {
         yield return new WaitForSeconds(0.1f);
 
-        int ranAction = Random.Range(0, 0);
+        int ranAction = Random.Range(0, 2);
 
         switch (ranAction)
         {
@@ -71,14 +69,15 @@ public class Mino : Enemy
                 
                 break;
             case 1:
-                // 휘두르다
-                StartCoroutine(Attack());
-                break;
-            case 2:
-               
-                
                 // 돌진
                 StartCoroutine(Charging());
+                
+                break;
+            case 2:
+                // 휘두르다
+                StartCoroutine(Attack());
+                
+                
                 break;
         }
 
@@ -90,21 +89,19 @@ public class Mino : Enemy
     {
         anim.SetTrigger("doCharge");
 
-        yield return new WaitForSeconds(0.1f);
-        rb.AddForce(transform.forward * 50, ForceMode.Impulse);
+        yield return new WaitForSeconds(0.5f);
+        // rb.AddForce(transform.forward * 10, ForceMode.Impulse);
         
         //meleeArea.enabled = true;
         
-
-        yield return new WaitForSeconds(0.5f);
         
-        rb.velocity = Vector3.zero;
         //meleeArea.enabled = false;
-
-        yield return new WaitForSeconds(2f);
+        anim.SetTrigger("doAttack2");
         
 
-        // 애니메이션 끝
+        yield return new WaitForSeconds(2.1f);
+       
+
         StartCoroutine(Think());
     }
 
@@ -125,8 +122,8 @@ public class Mino : Enemy
        
         yield return new WaitForSeconds(3f);
         
-        isLook = true;
-        nav.isStopped = true;
+        //isLook = true;
+        //nav.isStopped = true;
         
         anim.SetTrigger("doAttack");
         yield return new WaitForSeconds(2f);
