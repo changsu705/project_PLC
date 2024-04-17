@@ -3,23 +3,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.Serialization;
 
 public class SkillTimer : MonoBehaviour
 {
-    public static SkillTimer instance; 
     
     public GameObject[] hideSkillButtons;
     public GameObject[] textPros;
     public TextMeshProUGUI[] hideSkillTimeTexts;
     public Image[] hideSkillmages;
     private bool[] isHideSkills= {false,false,false,false,false,false,false,false,false,false};
-    public float[] skiiTimes = {10,10};
+    [FormerlySerializedAs("skiiTimes")] public float[] skillTimes = {10,10};
     private float[] getSkillTimes = {0,0,0,0,0,0,0,0,0,0};
     
 
     void Start()
     {
-        instance=this;
         for (int i = 0; i < textPros.Length; i++)
         {
           
@@ -38,6 +37,11 @@ public class SkillTimer : MonoBehaviour
             HideSkillSetting(0);
         }
         
+        if (Input.GetKeyDown(KeyCode.Space)&& !isHideSkills[1])
+        {
+            HideSkillSetting(1);
+        }
+        
         HideSkillChk();
     }
 
@@ -46,7 +50,7 @@ public class SkillTimer : MonoBehaviour
     public void HideSkillSetting(int skillNum)
     {
         hideSkillButtons[skillNum].SetActive(true);
-        getSkillTimes[skillNum] = skiiTimes[skillNum];
+        getSkillTimes[skillNum] = skillTimes[skillNum];
         isHideSkills[skillNum] = true;
     }
 
@@ -97,7 +101,7 @@ public class SkillTimer : MonoBehaviour
             hideSkillTimeTexts[skillNum].text = getSkillTimes[skillNum].ToString("00");
 
 
-            float time = getSkillTimes[skillNum] / skiiTimes[skillNum];
+            float time = getSkillTimes[skillNum] / skillTimes[skillNum];
             hideSkillmages[skillNum].fillAmount = time;
             
 
