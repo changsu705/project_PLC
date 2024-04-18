@@ -1798,10 +1798,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a7ee1e53e6321489d96eb6551c5006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portalObject: {fileID: 2095676454}
   escButton: {fileID: 2095676454}
   backToGameButton: {fileID: 0}
   onClickOptionButton: {fileID: 0}
   backToTownButton: {fileID: 0}
+  swordGoblinPrefab: {fileID: 0}
+  bowGoblinPrefab: {fileID: 0}
+  shieldGoblinPrefab: {fileID: 0}
+  swordGoblinSpawnPoints: []
+  bowGoblinSpawnPoints: []
+  shieldGoblinSpawnPoints: []
 --- !u!4 &295489586
 Transform:
   m_ObjectHideFlags: 0
