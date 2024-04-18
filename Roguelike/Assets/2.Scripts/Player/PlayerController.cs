@@ -27,14 +27,9 @@ public class PlayerController : MonoBehaviour
     private float horizontal;
     private float vertical;
 
-    /// <summary> base : 카메라 오일러 각 y </summary>
-    private float sin;
-
-    /// <summary> base : 카메라 오일러 각 y </summary>
-    private float cos;
-
-    /// <summary> base : 카메라 오일러 각 x </summary>
-    private float tan;
+    /// <summary> 돌아간 카메라에 따른 움직임 </summary>
+    public static Quaternion QuaterView => Quaternion.Euler(0f, Camera.main.transform.eulerAngles.y, 0f);
+    private Plane plane;
 
     private AudioManager audioManager;          //발소리 코드 추가
     private Rigidbody rb;
@@ -49,11 +44,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        Vector3 camAngle = Camera.main.transform.eulerAngles;
-
-        sin = Mathf.Sin(camAngle.y * Mathf.Deg2Rad);
-        cos = Mathf.Cos(camAngle.y * Mathf.Deg2Rad);
-        tan = Mathf.Tan(camAngle.x * Mathf.Deg2Rad);
+        plane = new Plane(transform.up, transform.position);
 
         audioManager = AudioManager.Instance;
 
@@ -65,24 +56,21 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDodge)
         {
-            Vector3 screen2world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            float y = screen2world.y - 1.5f;    //발이 아닌 눈이 마우스 바라보기
-            float x = y / tan;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            screen2world.x += sin * x;
-            screen2world.y = transform.position.y;
-            screen2world.z += cos * x;
+            plane.Raycast(ray, out float enter);
 
-            transform.rotation = Quaternion.Lerp(
-                transform.rotation,
-                Quaternion.LookRotation(screen2world - transform.position),
-                rotationScale);
+            Vector3 hitPoint = ray.GetPoint(enter);
+            hitPoint.y = transform.position.y;
 
+            transform.LookAt(hitPoint);
+
+            //이동 벡터와 시선 벡터의 각에 따라 다른 모션과 속도
             if (!isDodge && (horizontal != 0f || vertical != 0f))
             {
-                Vector3 lookNormal = (screen2world - transform.position).normalized;
+                Vector3 lookNormal = (hitPoint - transform.position).normalized;
 
-                Vector3 movement = new Vector3(horizontal, 0f, vertical);
+                Vector3 movement = QuaterView * new Vector3(horizontal, 0f, vertical);
                 float dot = Vector3.Dot(lookNormal, movement);
 
                 float totalSpeed = speed * (3f + dot) / 2f;
@@ -177,7 +165,7 @@ public class PlayerController : MonoBehaviour
             animation.Dodge();
             audioManager.Footstep(false);
 
-            StartCoroutine(Dodge(transform.position + (new Vector3(horizontal, 0f, vertical) * dodgeForce), 0.2f));
+            StartCoroutine(Dodge(transform.position + (QuaterView * new Vector3(horizontal, 0f, vertical) * dodgeForce), 0.2f));
             StartCoroutine(DodgeCoolTime());
         }
     }
