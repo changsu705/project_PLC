@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 05b1ccee6654f6a4491ea979a6e2ed08
+guid: 76e81124788b5a24797d5ed0c762c9e6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,13 +7,48 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: 01 - Default
-    second: {fileID: 2100000, guid: 85db29aef0296464982e355209dfd249, type: 2}
+      name: aiStandardSurface1
+    second: {fileID: 2100000, guid: b32b6adeee5e2d947a09a219bd41f239, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: 02 - Default
-    second: {fileID: 2100000, guid: 027e02b1f84302f4e971db2a97441f9e, type: 2}
+      name: aiStandardSurface10
+    second: {fileID: 2100000, guid: a88cccbcb9f78724087ded33dd2b1fa2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: aiStandardSurface11
+    second: {fileID: 2100000, guid: 012913f24f24dff488102bafce024c8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: aiStandardSurface2
+    second: {fileID: 2100000, guid: 212707481eb124d4bae4c16e40b1f03e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: aiStandardSurface5
+    second: {fileID: 2100000, guid: 675ee5a3165b0834ea17e6aa4489af79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: aiStandardSurface6
+    second: {fileID: 2100000, guid: 35162ece0697baf44985f5e527397834, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: aiStandardSurface7
+    second: {fileID: 2100000, guid: c3919e4c2006f9e40be27bf1fe942086, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: aiStandardSurface8
+    second: {fileID: 2100000, guid: c90bcda4d02973843864e88536248141, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: aiStandardSurface9
+    second: {fileID: 2100000, guid: ace45faef878a6347a69df9d43b3265f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
