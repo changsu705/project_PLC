@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         if (noEnemy.Length == 0)
         {
             portalEffect.SetActive(true);
-            vine.transform.DOLocalMoveY(-6f, 1f);
+            vine.transform.DOLocalMoveY(-8f, 2f);
         }
         else
         {
