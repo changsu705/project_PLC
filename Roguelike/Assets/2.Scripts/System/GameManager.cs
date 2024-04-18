@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     {
         onKeyESC();
 
-        if (SceneManager.GetActiveScene().name != "HouseScene")
+        if (SceneManager.GetActiveScene().name != "HouseScene" && SceneManager.GetActiveScene().name != "Village")
         {
             CheckEnemy();
         }
