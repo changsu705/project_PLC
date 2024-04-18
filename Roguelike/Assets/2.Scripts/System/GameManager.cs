@@ -45,20 +45,25 @@ public class GameManager : MonoBehaviour
     {
         onKeyESC();
 
-        GameObject[] noEnemy = GameObject.FindGameObjectsWithTag("Enemy");
+        if (SceneManager.GetActiveScene().name != "HouseScene")
+        {
+            CheckEnemy();
+        }
+    }
 
+    private void CheckEnemy()
+    {
+        GameObject[] noEnemy = GameObject.FindGameObjectsWithTag("Enemy");
+        
         if (noEnemy.Length == 0)
         {
             portalEffect.SetActive(true);
-            vine.SetActive(false);
-
+            vine.transform.DOLocalMoveY(-6f, 1f);
         }
         else
         {
             portalEffect.SetActive(false);
             vine.SetActive(true);
-
-
         }
     }
 
