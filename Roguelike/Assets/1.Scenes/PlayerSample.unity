@@ -1033,8 +1033,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -25
-  far clip plane: 25
+  near clip plane: -50
+  far clip plane: 50
   field of view: 60.000004
   orthographic: 1
   orthographic size: 5
@@ -1067,7 +1067,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 44.6, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4166,8 +4166,8 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 60.000004
     OrthographicSize: 5
-    NearClipPlane: -25
-    FarClipPlane: 25
+    NearClipPlane: -50
+    FarClipPlane: 50
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
