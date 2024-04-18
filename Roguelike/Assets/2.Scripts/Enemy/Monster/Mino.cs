@@ -7,6 +7,7 @@ public class Mino : Enemy
     
     
     public bool isLook;
+    public GameObject ShorkWave;
 
     private Vector3 lookVec;
     private Vector3 tauntVec;
@@ -113,16 +114,21 @@ public class Mino : Enemy
         anim.SetTrigger("doSound");
         yield return new WaitForSeconds(2.5f);
         
+        
         // tauntVec = target.position + lookVec;
         // isLook = false;
         // nav.isStopped = false;
         anim.SetTrigger("doTaunt");
         
+        yield return new WaitForSeconds(1.7f);
+        ShorkWave.SetActive(true);
+        
        
         
         
        
-        yield return new WaitForSeconds(3.1f);
+        yield return new WaitForSeconds(1.4f);
+        ShorkWave.SetActive(false);
         
         //isLook = true;
         //nav.isStopped = true;
