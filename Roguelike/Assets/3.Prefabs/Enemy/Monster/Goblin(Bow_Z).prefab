@@ -411,6 +411,80 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7318576857315129339}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1158644429170858261
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7318576857315129339}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 95658be1794ab4e43803e3f2e65aacd4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.439362
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 95658be1794ab4e43803e3f2e65aacd4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 95658be1794ab4e43803e3f2e65aacd4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -31.170542
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 95658be1794ab4e43803e3f2e65aacd4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 95658be1794ab4e43803e3f2e65aacd4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 95658be1794ab4e43803e3f2e65aacd4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 95658be1794ab4e43803e3f2e65aacd4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 95658be1794ab4e43803e3f2e65aacd4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 95658be1794ab4e43803e3f2e65aacd4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 95658be1794ab4e43803e3f2e65aacd4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 95658be1794ab4e43803e3f2e65aacd4,
+        type: 3}
+      propertyPath: m_Name
+      value: Kronii
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 95658be1794ab4e43803e3f2e65aacd4, type: 3}
+--- !u!4 &1702058865938120446 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 95658be1794ab4e43803e3f2e65aacd4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1158644429170858261}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2752694639643691792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -509,7 +583,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3094783152524670529}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -633,6 +707,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1630794972795428178, guid: 2cc9b245f68399d43b74737cf9a25f30,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 2cc9b245f68399d43b74737cf9a25f30,
         type: 3}
       propertyPath: m_Controller
@@ -657,6 +736,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6894623658105217956}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2cc9b245f68399d43b74737cf9a25f30,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1702058865938120446}
     - targetCorrespondingSourceObject: {fileID: -1300326425237808287, guid: 2cc9b245f68399d43b74737cf9a25f30,
         type: 3}
       insertIndex: -1
