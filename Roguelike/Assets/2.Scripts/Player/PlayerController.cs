@@ -36,9 +36,6 @@ public class PlayerController : MonoBehaviour
     /// <summary> base : 카메라 오일러 각 x </summary>
     private float tan;
 
-    /// <summary> 45도 돌아간 움직임 </summary>
-    public static readonly Quaternion quaterView = Quaternion.Euler(0f, 45f, 0f);
-
     private AudioManager audioManager;          //발소리 코드 추가
     private Rigidbody rb;
 
@@ -85,7 +82,7 @@ public class PlayerController : MonoBehaviour
             {
                 Vector3 lookNormal = (screen2world - transform.position).normalized;
 
-                Vector3 movement = quaterView * new Vector3(horizontal, 0f, vertical);
+                Vector3 movement = new Vector3(horizontal, 0f, vertical);
                 float dot = Vector3.Dot(lookNormal, movement);
 
                 float totalSpeed = speed * (3f + dot) / 2f;
@@ -180,7 +177,7 @@ public class PlayerController : MonoBehaviour
             animation.Dodge();
             audioManager.Footstep(false);
 
-            StartCoroutine(Dodge(transform.position + (quaterView * new Vector3(horizontal, 0f, vertical) * dodgeForce), 0.2f));
+            StartCoroutine(Dodge(transform.position + (new Vector3(horizontal, 0f, vertical) * dodgeForce), 0.2f));
             StartCoroutine(DodgeCoolTime());
         }
     }

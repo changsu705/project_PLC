@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject portalObject;
+    public GameObject portalEffect;
+    public GameObject vine;
 
     public GameObject escButton;
     public GameObject backToGameButton;
@@ -47,10 +49,17 @@ public class GameManager : MonoBehaviour
 
         if (noEnemy.Length == 0)
         {
-            portalObject.SetActive(true);
+            portalEffect.SetActive(true);
+            vine.SetActive(false);
+
         }
         else
-            portalObject.SetActive(false);
+        {
+            portalEffect.SetActive(false);
+            vine.SetActive(true);
+
+
+        }
     }
 
     private void onKeyESC()
@@ -115,6 +124,11 @@ public class GameManager : MonoBehaviour
                 Instantiate(goblinPrefab, spawnPoint.position, Quaternion.identity);
             }
         }
+    }
+
+    IEnumerator noEnemy()
+    {
+        yield return null;
     }
 
 

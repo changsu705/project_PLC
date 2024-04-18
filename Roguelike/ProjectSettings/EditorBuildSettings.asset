@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/1.Scenes/PlayerSample.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/1.Scenes/HouseScene.unity
+    guid: 52d245f6ec1d1ab4a9b304e3296d1401
+  - enabled: 1
+    path: Assets/1.Scenes/Village.unity
+    guid: c4e066d66a98dd942b9ea2818b96d946
+  - enabled: 1
     path: Assets/1.Scenes/Tutorial.unity
     guid: bbc025484e998e14ca8a6e0d80b81df0
   - enabled: 1

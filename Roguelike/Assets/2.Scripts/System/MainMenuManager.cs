@@ -29,6 +29,6 @@ public class MainMenuManager : MonoBehaviour
             yield return null;
         }
 
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("HouseScene");
     }
 }
