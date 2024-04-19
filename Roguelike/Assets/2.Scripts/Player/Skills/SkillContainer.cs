@@ -30,8 +30,12 @@ public class SkillContainer : SkillObject
 {
     [Space]
     [SerializeField] protected SkillEffects.FX fx;
+    [Space]
+    [SerializeField] private AudioClip startClip;
+    [SerializeField] private AudioClip destroyClip;
+    [Space]
     [SerializeField] private int animationKey;
-    
+
     [Header("Stat")]
     [SerializeField] private int atk = 10;
     [SerializeField] private float coolTime = 1f;
@@ -66,6 +70,16 @@ public class SkillContainer : SkillObject
     /// 실행시킬 애니메이션 키
     /// </summary>
     public int AnimationKey => animationKey;
+
+    /// <summary>
+    /// 스킬 시작 오디오 클립
+    /// </summary>
+    public AudioClip StartClip => startClip;
+
+    /// <summary>
+    /// 스킬 소멸/파괴 오디오 클립
+    /// </summary>
+    public AudioClip EndClip => destroyClip;
 
     public override SkillContainer CurrentContainer => this;
 

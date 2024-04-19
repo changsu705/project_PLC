@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: FireBall
   m_EditorClassIdentifier: 
   fx: 2
+  startClip: {fileID: 8300000, guid: ee6c75e155fc3764da5c65210e09b07a, type: 3}
+  destroyClip: {fileID: 8300000, guid: 15fba756a8fd7c44ab08dd74b33b1fd3, type: 3}
   animationKey: 0
   atk: 20
   coolTime: 5

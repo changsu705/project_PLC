@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: be1a254f7e123f74abfabfcf9de637b6, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 77236f231b8169244bb18045cfc78cb8, type: 2}
 --- !u!1 &66667889
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,7 +1062,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -1.3045003, y: 1.9999933, z: -1.3045013}
+  m_LocalPosition: {x: -2.609, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1861,6 +1861,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8572c5e7a30814e4fbe27354d80a6989, type: 2}
   - {fileID: 11400000, guid: 461e9d6cbe4fe014a85af53f52d02b2c, type: 2}
   - {fileID: 11400000, guid: aff7441bf68519f4d87b91fcff50cd0f, type: 2}
+  footstepClips:
+  - {fileID: 8300000, guid: afe9e1b701bc27a429f25f97de9213d9, type: 3}
+  - {fileID: 8300000, guid: f4d71679522072b409c50a822bc602ac, type: 3}
+  - {fileID: 8300000, guid: e4efcdfbaae1c2941a3573cb7d0104b8, type: 3}
+  - {fileID: 8300000, guid: 7758b6568e6f28446a881c07f1bdfdd1, type: 3}
 --- !u!114 &474477508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3557,16 +3562,15 @@ MonoBehaviour:
   SFXPlayer: {fileID: 1438250221}
   FootstepPlayer: {fileID: 1858244388}
   BGMList:
-  - {fileID: 8300000, guid: 423fb3e4714ebcf43b3313c11aa26413, type: 3}
-  - {fileID: 8300000, guid: 53a126559f915714388640c48b0dd87e, type: 3}
-  - {fileID: 8300000, guid: e71704139edcece47843d65685b7fbe3, type: 3}
-  - {fileID: 8300000, guid: fdfa2a4cf1caba9458eaa3bc6f0a4e2b, type: 3}
-  SFXList:
-  - {fileID: 8300000, guid: 863e5a53c98283a40afe289cc4b8b2b1, type: 3}
-  - {fileID: 8300000, guid: f1c651d8fd972444f8516bcd3e87cf33, type: 3}
-  - {fileID: 8300000, guid: 2055ed5eabbc7f6488c21341553ad2c3, type: 3}
+  - {fileID: 8300000, guid: b219024eed54e074988ee2aa1ef7efb1, type: 3}
+  - {fileID: 8300000, guid: 22df8ca2e2d194b449afc5aa6da5537c, type: 3}
+  - {fileID: 8300000, guid: b4f6416f12cddfd479be5adf55c3e504, type: 3}
+  SFXList: []
   FootstepList:
-  - {fileID: 8300000, guid: e17e3e60b448c9a48be4ec6c8729124e, type: 3}
+  - {fileID: 8300000, guid: e4efcdfbaae1c2941a3573cb7d0104b8, type: 3}
+  - {fileID: 8300000, guid: 7758b6568e6f28446a881c07f1bdfdd1, type: 3}
+  - {fileID: 8300000, guid: f4d71679522072b409c50a822bc602ac, type: 3}
+  - {fileID: 8300000, guid: afe9e1b701bc27a429f25f97de9213d9, type: 3}
 --- !u!4 &1172305465
 Transform:
   m_ObjectHideFlags: 0
@@ -4231,7 +4235,7 @@ GameObject:
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 7
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &1426468653
@@ -4512,7 +4516,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a7ee1e53e6321489d96eb6551c5006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalObject: {fileID: 1949242034}
+  portalEffect: {fileID: 0}
+  vine: {fileID: 0}
   escButton: {fileID: 1244833995}
   backToGameButton: {fileID: 0}
   onClickOptionButton: {fileID: 0}
@@ -5399,7 +5404,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 2825048494080875824, guid: 9d0c5266d3ce55342823c5e15f7045d2,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: e17e3e60b448c9a48be4ec6c8729124e, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5532,7 +5537,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -6348,6 +6353,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1807215707406025901, guid: a97e302f5eb854b9886b40638805dd22,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6894569613394502416, guid: a97e302f5eb854b9886b40638805dd22,
         type: 3}
       propertyPath: hpBar
@@ -6358,6 +6368,16 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 474477506}
+    - target: {fileID: 7449937698672187426, guid: a97e302f5eb854b9886b40638805dd22,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8139109995962228345, guid: a97e302f5eb854b9886b40638805dd22,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8205117048344328255, guid: a97e302f5eb854b9886b40638805dd22,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -49,9 +49,14 @@ public class AudioManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene Scene2, LoadSceneMode Scene3)
     {
-        if (clips.ContainsKey(Scene2.name))
+        if (Scene2.name == "Village")
         {
-            BGMPlayer.clip = clips[Scene2.name];
+            BGMPlayer.clip = clips["town"];
+            BGMPlayer.Play();
+        }
+        else
+        {
+            BGMPlayer.clip = clips["chap1"];
             BGMPlayer.Play();
         }
     }
@@ -59,6 +64,11 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(string name)
     {
         SFXPlayer.PlayOneShot(clips[name]);
+    }
+
+    public void PlaySFX(AudioClip clip)
+    {
+        SFXPlayer.PlayOneShot(clip);
     }
     
     public void Footstep(bool play)

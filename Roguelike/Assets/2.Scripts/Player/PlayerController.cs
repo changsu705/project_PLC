@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -35,6 +36,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
 
     private new CapsuleCollider collider;
+    private NavMeshAgent navMeshAgent;
+
+    [Header("Audios")]
+    [SerializeField] private AudioClip[] footstepClips;
+    private const int Grass = 1 << 4;
+    private const int Stone = 1 << 7;
 
     private void Awake()
     {
@@ -50,6 +57,7 @@ public class PlayerController : MonoBehaviour
 
         collider = GetComponent<CapsuleCollider>();
         animation = GetComponent<PlayerAnimation>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
@@ -77,6 +85,23 @@ public class PlayerController : MonoBehaviour
                 transform.position += Time.deltaTime * totalSpeed * movement;
 
                 animation.SetMovementValue(Vector3.Cross(lookNormal, movement).y, dot);
+
+                if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 1f, NavMesh.AllAreas))
+                {
+                    switch (hit.mask)
+                    {
+                        case Grass:
+                            audioManager.FootstepPlayer.clip = footstepClips[0];
+                            break;
+
+                        case Stone:
+                            audioManager.FootstepPlayer.clip = footstepClips[1];
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
 
                 audioManager.Footstep(true);
             }
@@ -224,6 +249,7 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(skills[idx].PlaySkill(this));
                 animation.PlaySkillAnimation(skills[idx].CurrentContainer.AnimationKey);
+                audioManager.PlaySFX(skills[idx].CurrentContainer.StartClip);
             }
         }
     }

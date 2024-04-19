@@ -41,6 +41,7 @@ public class SkillControl : MonoBehaviour
                 SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, other.transform.position, Quaternion.identity);
                 if (container.CurrentContainer.Mode == SkillContainer.DisableMode.CollisionOrLifeTime)
                 {
+                    AudioManager.Instance.PlaySFX(container.CurrentContainer.EndClip);
                     gameObject.SetActive(false);
                 }
             }

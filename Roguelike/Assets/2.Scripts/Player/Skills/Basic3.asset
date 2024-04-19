@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Basic3
   m_EditorClassIdentifier: 
   fx: 0
+  startClip: {fileID: 8300000, guid: fd61d47c2e0e1504cb7ba90ffef90c8c, type: 3}
+  destroyClip: {fileID: 0}
   animationKey: 3
   atk: 20
   coolTime: 0.5
