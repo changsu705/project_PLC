@@ -4014,6 +4014,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DecoPortal
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 05b1ccee6654f6a4491ea979a6e2ed08,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -6703,7 +6708,7 @@ MonoBehaviour:
   m_Follow: {fileID: 2014534831}
   m_Lens:
     FieldOfView: 60.000004
-    OrthographicSize: 5
+    OrthographicSize: 7
     NearClipPlane: -25
     FarClipPlane: 25
     Dutch: 0
@@ -7016,7 +7021,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.60784316, g: 1, b: 0.5529412, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -7041,7 +7046,7 @@ Camera:
   far clip plane: 25
   field of view: 60.000004
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9170,14 +9175,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portalEffect: {fileID: 0}
   vine: {fileID: 0}
+  dust: {fileID: 0}
   escButton: {fileID: 528992439}
   backToGameButton: {fileID: 0}
   onClickOptionButton: {fileID: 0}
   backToTownButton: {fileID: 0}
-  swordGoblinPrefab: {fileID: 0}
-  bowGoblinPrefab: {fileID: 0}
-  shieldGoblinPrefab: {fileID: 0}
-  swordGoblinSpawnPoints: []
+  swordGoblinPrefab: {fileID: 840231592742860347, guid: 9a65d7a87b2654874b5da2928d158077,
+    type: 3}
+  bowGoblinPrefab: {fileID: 7988011679245528385, guid: 9d1696751755d40168880100de2c3a8e,
+    type: 3}
+  shieldGoblinPrefab: {fileID: 7945915606020978431, guid: 89670a26390284e61be79b55911b7392,
+    type: 3}
+  swordGoblinSpawnPoints:
+  - {fileID: 872121194}
+  - {fileID: 30130198}
+  - {fileID: 1592864563}
   bowGoblinSpawnPoints: []
   shieldGoblinSpawnPoints: []
 --- !u!4 &1302356988
@@ -15023,7 +15035,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   currentHp: 100
-  speed: 3
+  speed: 5
   dodgeForce: 7
   dodgeCoolTime: 3
   hpBar: {fileID: 1879185968}
@@ -15031,6 +15043,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8572c5e7a30814e4fbe27354d80a6989, type: 2}
   - {fileID: 11400000, guid: 461e9d6cbe4fe014a85af53f52d02b2c, type: 2}
   - {fileID: 11400000, guid: aff7441bf68519f4d87b91fcff50cd0f, type: 2}
+  footstepClips: []
 --- !u!4 &2014534831
 Transform:
   m_ObjectHideFlags: 0
@@ -15105,7 +15118,7 @@ Terrain:
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
   m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
+  m_ShadowCastingMode: 0
   m_DrawHeightmap: 1
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
