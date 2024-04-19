@@ -1,12 +1,14 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class Mino : Enemy
 {
     
     
     public bool isLook;
+    public GameObject ShorkWave;
 
     private Vector3 lookVec;
     private Vector3 tauntVec;
@@ -88,9 +90,14 @@ public class Mino : Enemy
     private IEnumerator Charging()
     {
         anim.SetTrigger("doCharge");
-
+        isLook = false;
+        nav.isStopped = false;
+        
+        tauntVec = target.position + lookVec * 5f;
+        
         yield return new WaitForSeconds(0.5f);
-        // rb.AddForce(transform.forward * 10, ForceMode.Impulse);
+        isLook = true;
+        nav.isStopped = true;
         
         
         
@@ -112,25 +119,33 @@ public class Mino : Enemy
 
         anim.SetTrigger("doSound");
         yield return new WaitForSeconds(2.5f);
+      
         
-        // tauntVec = target.position + lookVec;
-        // isLook = false;
-        // nav.isStopped = false;
+        
+        
         anim.SetTrigger("doTaunt");
+        yield return new WaitForSeconds(1f);
+        tauntVec = target.position + lookVec;
+        isLook = false;
+        nav.isStopped = false;
+        
+        yield return new WaitForSeconds(1.3f);
+        ShorkWave.SetActive(true);
         
        
+        yield return new WaitForSeconds(1.4f);
+        ShorkWave.SetActive(false);
+        isLook = true;
+        nav.isStopped = true;
         
         
-       
-        yield return new WaitForSeconds(3.1f);
-        
-        //isLook = true;
-        //nav.isStopped = true;
         
         anim.SetTrigger("doAttack");
         meleeArea.enabled = true;
         yield return new WaitForSeconds(2.1f);
         meleeArea.enabled = false;
+        
+       
        
 
         StartCoroutine(Think());

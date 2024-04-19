@@ -57,6 +57,15 @@ public class PortalScript : MonoBehaviour
             case 3:
                 SceneManager.LoadScene(4);
                 break;
+            case 4:
+                SceneManager.LoadScene(5);
+                break;
+            case 5:
+                SceneManager.LoadScene(6);
+                break;
+            case 6:
+                SceneManager.LoadScene(7);
+                break;
         }
     }
 

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject portalEffect;
     public GameObject vine;
+    public GameObject dust;
 
     public GameObject escButton;
     public GameObject backToGameButton;
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
     {
         onKeyESC();
 
-        if (SceneManager.GetActiveScene().name != "HouseScene")
+        if (SceneManager.GetActiveScene().name != "HouseScene" && SceneManager.GetActiveScene().name != "Village")
         {
             CheckEnemy();
         }
@@ -58,11 +59,13 @@ public class GameManager : MonoBehaviour
         if (noEnemy.Length == 0)
         {
             portalEffect.SetActive(true);
-            vine.transform.DOLocalMoveY(-6f, 1f);
+            dust.SetActive(true);
+            vine.transform.DOLocalMoveY(-8f, 6f);
         }
         else
         {
             portalEffect.SetActive(false);
+            dust.SetActive(false);
             vine.SetActive(true);
         }
     }
