@@ -5,8 +5,7 @@ using DG.Tweening;
 
 public class Mino : Enemy
 {
-    
-    
+    [Header("Mino Stats")]
     public bool isLook;
     public GameObject ShorkWave;
 
@@ -58,26 +57,26 @@ public class Mino : Enemy
 
     private IEnumerator Think()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
 
-        int ranAction = Random.Range(0, 2);
+        int ranAction = Random.Range(0, 3);
 
         switch (ranAction)
         {
             case 0:
                
-                // 충격파
-                StartCoroutine(Taunt());
+                // 점프 공격
+                StartCoroutine(JumpAttack());
                 
                 break;
             case 1:
-                // 돌진
-                StartCoroutine(Charging());
+                // 달린 후 공격
+                StartCoroutine(RunAttack());
                 
                 break;
             case 2:
                 // 휘두르다
-                StartCoroutine(Attack());
+                StartCoroutine(Combo());
                 
                 
                 break;
@@ -87,90 +86,83 @@ public class Mino : Enemy
 
 
 
-    private IEnumerator Charging()
+    private IEnumerator JumpAttack()
     {
-        anim.SetTrigger("doCharge");
+        anim.SetTrigger("doShout");
+        yield return new WaitForSeconds(2.3f);
+        
+        anim.SetTrigger("doJumpAttack");
         isLook = false;
         nav.isStopped = false;
         
-        tauntVec = target.position + lookVec * 5f;
+        tauntVec = target.position + lookVec;
         
-        yield return new WaitForSeconds(0.5f);
+        
+        
+        yield return new WaitForSeconds(1.9f);
+        ShorkWave.SetActive(true);
+        
+        yield return new WaitForSeconds(1.9f);
+        ShorkWave.SetActive(false);
         isLook = true;
         nav.isStopped = true;
-        
-        
-        
-        
-        
-        anim.SetTrigger("doAttack");
-        meleeArea.enabled = true;
-        
-
-        yield return new WaitForSeconds(2.1f);
-        meleeArea.enabled = false;
-       
 
         StartCoroutine(Think());
     }
 
-    private IEnumerator Taunt()
+    private IEnumerator RunAttack()
     {
 
-        anim.SetTrigger("doSound");
-        yield return new WaitForSeconds(2.5f);
-      
-        
-        
-        
-        anim.SetTrigger("doTaunt");
-        yield return new WaitForSeconds(1f);
+        anim.SetTrigger("doRun");
         tauntVec = target.position + lookVec;
         isLook = false;
         nav.isStopped = false;
         
-        yield return new WaitForSeconds(1.3f);
-        ShorkWave.SetActive(true);
         
-       
-        yield return new WaitForSeconds(1.4f);
-        ShorkWave.SetActive(false);
-        isLook = true;
-        nav.isStopped = true;
-        
-        
+        yield return new WaitForSeconds(1f);
+      
         
         anim.SetTrigger("doAttack");
+        isLook = true;
+        nav.isStopped = true;
+        yield return new WaitForSeconds(0.8f);
         meleeArea.enabled = true;
-        yield return new WaitForSeconds(2.1f);
+        yield return new WaitForSeconds(0.8f);
         meleeArea.enabled = false;
+        yield return new WaitForSeconds(0.5f);
         
-       
-       
 
         StartCoroutine(Think());
     }
 
 
 
-    public override IEnumerator Attack()
+    
+    private IEnumerator Combo()
     {
-        anim.SetTrigger("doAttack");
-        print("Attack");
+        anim.SetTrigger("doWait");
+        yield return new WaitForSeconds(2.3f);
         
-
-        yield return new WaitForSeconds(0.2f); // 공격 로직 시작
-        //meleeArea.enabled = true;
-
-        yield return new WaitForSeconds(0.5f); // 공격 로직 끝
-        //meleeArea.enabled = false;
-
-
-        yield return new WaitForSeconds(1f); // 1초간 대기
-
-
+        anim.SetTrigger("doCombo");
+       
+        yield return new WaitForSeconds(0.7f);
+        
+        meleeArea.enabled = true;
+        yield return new WaitForSeconds(1f);
+        meleeArea.enabled = false;
+        
+        yield return new WaitForSeconds(1f);
+        ShorkWave.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        ShorkWave.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        
         
         StartCoroutine(Think());
+    }
+    public override IEnumerator Attack()
+    {
+       yield return null;
     }
 }
 

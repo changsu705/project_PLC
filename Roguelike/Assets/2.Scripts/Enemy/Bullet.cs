@@ -6,13 +6,14 @@ public class Bullet : MonoBehaviour
     public float damage;
     public bool isMelee;
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (!isMelee && other.CompareTag("Player"))
         {
             Destroy(gameObject);
         }
+        
+        
         
     }
 

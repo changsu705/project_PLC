@@ -1851,8 +1851,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8dfade1bae48ef4abb816d547f21bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
-  currentHp: 100
+  maxHp: 1000
+  currentHp: 1000
   speed: 5
   dodgeForce: 7
   dodgeCoolTime: 3
@@ -4518,6 +4518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portalEffect: {fileID: 0}
   vine: {fileID: 0}
+  dust: {fileID: 0}
   escButton: {fileID: 1244833995}
   backToGameButton: {fileID: 0}
   onClickOptionButton: {fileID: 0}
@@ -6322,11 +6323,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1807215707406025901, guid: a97e302f5eb854b9886b40638805dd22,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6894569613394502416, guid: a97e302f5eb854b9886b40638805dd22,
         type: 3}
       propertyPath: hpBar
@@ -6337,16 +6333,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 474477506}
-    - target: {fileID: 7449937698672187426, guid: a97e302f5eb854b9886b40638805dd22,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8139109995962228345, guid: a97e302f5eb854b9886b40638805dd22,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8205117048344328255, guid: a97e302f5eb854b9886b40638805dd22,
         type: 3}
       propertyPath: m_LocalPosition.x

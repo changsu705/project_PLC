@@ -22,7 +22,7 @@ public abstract class Enemy : MonoBehaviour
     
     [Header("Enemy Components")]
     public Transform target;
-    public MeshCollider meleeArea;
+    public Collider meleeArea;
     public Image hpBar;
     public GameObject hudDamageText;
     public Transform hudPos;
