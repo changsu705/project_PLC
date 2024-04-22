@@ -600,17 +600,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4926dab9eb6bfcf40859129c8eb49e3b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4926dab9eb6bfcf40859129c8eb49e3b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4926dab9eb6bfcf40859129c8eb49e3b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4926dab9eb6bfcf40859129c8eb49e3b,
         type: 3}
@@ -722,10 +722,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 6
+  m_Acceleration: 50
   avoidancePriority: 50
-  m_AngularSpeed: 200
+  m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -773,8 +773,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17f9a9523191a4f38830c6000ae68027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
-  currentHp: 100
+  maxHp: 200
+  currentHp: 200
   targetRadius: 1.5
   targetRange: 3
   target: {fileID: 0}

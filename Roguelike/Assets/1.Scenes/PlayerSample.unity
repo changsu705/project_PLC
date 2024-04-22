@@ -1214,11 +1214,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6555915012054271018, guid: 9a65d7a87b2654874b5da2928d158077,
-        type: 3}
-      propertyPath: targetRange
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5698,11 +5693,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin(Shield_Z)
       objectReference: {fileID: 0}
-    - target: {fileID: 7945915606020978431, guid: 89670a26390284e61be79b55911b7392,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6387,6 +6377,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minotauros
+      objectReference: {fileID: 0}
+    - target: {fileID: 8833176074878771845, guid: a97e302f5eb854b9886b40638805dd22,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

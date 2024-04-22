@@ -527,8 +527,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2.5
-  m_Acceleration: 50
+  m_Speed: 5
+  m_Acceleration: 30
   avoidancePriority: 50
   m_AngularSpeed: 360
   m_StoppingDistance: 0
@@ -578,10 +578,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dffbc30b15300432cbcf94df8d600d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
-  currentHp: 100
+  maxHp: 60
+  currentHp: 60
   targetRadius: 1.5
-  targetRange: 2
+  targetRange: 1.5
   target: {fileID: 0}
   meleeArea: {fileID: 3419192665499382650}
   hpBar: {fileID: 601327131213739985}
