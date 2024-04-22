@@ -37,6 +37,7 @@ public class Mino : Enemy
         if (isDead)
         {
             StopAllCoroutines();
+            ShorkWave.SetActive(false);
             return;
         }
 
