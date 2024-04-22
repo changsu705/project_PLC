@@ -246,18 +246,25 @@ public abstract class Enemy : MonoBehaviour
         else
         {
             StopAllCoroutines();
-            StartCoroutine(Dissolve());
-            
-            gameObject.layer = 0;
-            isDead = true;
-            isChase = false;
-            nav.enabled = false;
             anim.SetTrigger("doDie");
-
+            isDead = true;
+            nav.enabled = false;
             reactVec = reactVec.normalized;
-            reactVec+= Vector3.up;
+            reactVec += Vector3.up;
             rb.AddForce(reactVec * 5, ForceMode.Impulse);
-            Destroy(gameObject,1f);
+            gameObject.layer = 0;
+            rb.isKinematic = true;
+            
+            if (!isMino)
+            {
+                StartCoroutine(Dissolve());
+                isChase = false;
+                
+                Destroy(gameObject,1f);
+            }
+            
+
+            
 
         }
     }

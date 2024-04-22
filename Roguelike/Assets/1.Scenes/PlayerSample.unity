@@ -5693,6 +5693,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin(Shield_Z)
       objectReference: {fileID: 0}
+    - target: {fileID: 7945915606020978431, guid: 89670a26390284e61be79b55911b7392,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6313,6 +6318,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4831052984349671299, guid: a97e302f5eb854b9886b40638805dd22,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831052984349671299, guid: a97e302f5eb854b9886b40638805dd22,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6894569613394502416, guid: a97e302f5eb854b9886b40638805dd22,
         type: 3}
       propertyPath: hpBar
@@ -6323,6 +6338,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 474477506}
+    - target: {fileID: 6894569613394502416, guid: a97e302f5eb854b9886b40638805dd22,
+        type: 3}
+      propertyPath: currentHp
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8205117048344328255, guid: a97e302f5eb854b9886b40638805dd22,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6381,7 +6401,7 @@ PrefabInstance:
     - target: {fileID: 8833176074878771845, guid: a97e302f5eb854b9886b40638805dd22,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
