@@ -3,10 +3,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
+
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    private float fadeDuration = 3f;
+    public GameObject decoPortal;
+    public GameObject cutWeeds;
 
     public GameObject portalEffect;
     public GameObject vine;
@@ -59,8 +65,16 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (decoPortal != null)
+        {
+            Invoke("PortalOff", 1f);
+        }
+
         Time.timeScale = 1;
         escButton.SetActive(false);
+
+        Action<GameObject> destructionEventHandler = HandleObjectDestruction;
+        ObjectDestroyedEvent.OnObjectDestroyed += destructionEventHandler;
 
         StartWave(currentWaveIndex); // 시작할 웨이브 시작
     }
@@ -79,6 +93,38 @@ public class GameManager : MonoBehaviour
                 return;
             }
             CheckEnemy();
+        }
+    }
+
+    private void PortalOff()
+    {
+        decoPortal.transform.DOScale(0f, fadeDuration)
+     .OnComplete(() => Destroy(decoPortal));
+    }
+
+    void HandleObjectDestruction(GameObject destroyedObject)
+    {
+        if (destroyedObject.CompareTag("Weeds"))
+        {
+            // 파괴된 오브젝트의 위치 저장
+            Vector3 position = destroyedObject.transform.position;
+
+            // 새로운 오브젝트 생성 및 위치 조정
+            Instantiate(cutWeeds, position, Quaternion.identity);
+        }
+        if(destroyedObject.CompareTag("Totem"))
+        {
+            return;
+        }
+    }
+
+    public static class ObjectDestroyedEvent
+    {
+        public static event Action<GameObject> OnObjectDestroyed;
+
+        public static void InvokeObjectDestroyed(GameObject destroyedObject)
+        {
+            OnObjectDestroyed?.Invoke(destroyedObject);
         }
     }
 
