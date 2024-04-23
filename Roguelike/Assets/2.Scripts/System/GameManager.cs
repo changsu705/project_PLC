@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
     public GameObject portalEffect;
     public GameObject vine;
     public GameObject dust;
@@ -23,6 +25,15 @@ public class GameManager : MonoBehaviour
     public GameObject bowGoblinPrefab;
     public GameObject shieldGoblinPrefab;
 
+    /// <summary>
+    /// 회귀 시계
+    /// </summary>
+    private Timer timer;
+    /// <summary>
+    /// 타이머 이미지
+    /// </summary>
+    private GameObject renderImage;
+
     // 웨이브에 필요한 정보를 가지고 있는 클래스
     [System.Serializable]
     public class Wave
@@ -34,6 +45,25 @@ public class GameManager : MonoBehaviour
 
     public Wave[] waves; // 웨이브 배열
     private int currentWaveIndex = 0;
+
+    private void Awake()
+    {
+        Instance = this;
+
+        timer = GetComponentInChildren<Timer>();        //회귀 시계
+        if (timer == null)
+        {
+            timer = Instantiate(
+                Resources.Load<GameObject>("Timer"),    //object
+                new Vector3(0f, -10f, 0f),              //position
+                Quaternion.identity,                    //rotation
+                transform)                              //parent; this object
+                .GetComponentInChildren<Timer>();
+        }
+
+        renderImage = GameObject.Find("Reset Timer Image");
+        renderImage.SetActive(false);
+    }
 
     private void Start()
     {
@@ -52,7 +82,10 @@ public class GameManager : MonoBehaviour
             SceneManager.GetActiveScene().buildIndex != 1 &&
             SceneManager.GetActiveScene().buildIndex != 2)
         {
-
+            if (currentSceneName == "HouseScene" && currentSceneName == "Village")
+            {
+                return;
+            }
             CheckEnemy();
         }
     }
@@ -83,9 +116,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            portalEffect.SetActive(false);
+            /*portalEffect.SetActive(false);
             dust.SetActive(false);
-            vine.SetActive(true);
+            vine.SetActive(true);*/
         }
     }
 
@@ -185,5 +218,12 @@ public class GameManager : MonoBehaviour
     
     #endregion
 
+    public void GameEnd()
+    {
+        //시계 등장
+        timer.Playback();
+
+        renderImage.SetActive(true);
+    }
 }
 

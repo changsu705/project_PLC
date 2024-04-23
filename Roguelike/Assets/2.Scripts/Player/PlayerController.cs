@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private bool isDodge = false;
     private bool isDodgeCoolDown = true;
     private bool isDamage;
+    private bool isDie = false;
     
     public Image hpBar;
 
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (!isDodge)
+        if (!isDie && !isDodge)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -136,7 +137,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isDamage)
+        if (!isDie && !isDamage)
         {
             if (other.CompareTag("EnemyBullet"))
             {
@@ -156,7 +157,10 @@ public class PlayerController : MonoBehaviour
         if (currentHp <= 0)
         {
             currentHp = 0;
-            
+            isDie = true;
+
+            animation.PlayerDie();
+            GameManager.Instance.GameEnd();
         }
         UpdateHpBar();
         yield return new WaitForSeconds(1f);
