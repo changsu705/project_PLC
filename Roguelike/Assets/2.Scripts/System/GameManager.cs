@@ -50,18 +50,10 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
 
-        timer = GetComponentInChildren<Timer>();        //회귀 시계
-        if (timer == null)
-        {
-            timer = Instantiate(
-                Resources.Load<GameObject>("Timer"),    //object
-                new Vector3(0f, -10f, 0f),              //position
-                Quaternion.identity,                    //rotation
-                transform)                              //parent; this object
-                .GetComponentInChildren<Timer>();
-        }
+        var obj = Instantiate(Resources.Load<GameObject>("Timer"), new Vector3(0f, -10f, 0f), Quaternion.identity);
+        timer = obj.GetComponent<Timer>();
 
-        renderImage = GameObject.Find("Reset Timer Image");
+        renderImage = obj.transform.Find("RenderCanvas").gameObject;
         renderImage.SetActive(false);
     }
 
@@ -116,9 +108,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            /*portalEffect.SetActive(false);
+            portalEffect.SetActive(false);
             dust.SetActive(false);
-            vine.SetActive(true);*/
+            vine.SetActive(true);
         }
     }
 
