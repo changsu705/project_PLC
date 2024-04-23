@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    private float fadeDuration = 3f;
+    public GameObject decoPortal;
+    public GameObject cutWeeds;
     public GameObject portalEffect;
     public GameObject vine;
     public GameObject dust;
