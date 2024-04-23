@@ -10,9 +10,10 @@ public class MainMenuManager : MonoBehaviour
 
     private bool isFading = false;
 
-    public void StartGame()
+    // Update is called once per frame
+    void Update()
     {
-        if (!isFading)
+        if (Input.anyKeyDown && !isFading)
         {
             isFading = true;
             StartCoroutine(FadeIn());
