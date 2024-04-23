@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static GameManager;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float dodgeForce;
     [SerializeField] private float dodgeCoolTime;
+    [SerializeField] private float attackRange;     //오브젝트 파괴하는데 씀
+
 
     private float rotationScale = 1f;
     private bool isDodge = false;
@@ -59,6 +62,25 @@ public class PlayerController : MonoBehaviour
         collider = GetComponent<CapsuleCollider>();
         animation = GetComponent<PlayerAnimation>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        if (Input.GetMouseButtonDown(0))
+        {
+            Attack();
+        }
+    }
+
+    public void Attack()
+    {
+        // 플레이어 주변의 파괴 가능한 오브젝트를 찾아서 파괴
+        Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
+        foreach (Collider col in colliders)
+        {
+            if (col.CompareTag("Weeds") || col.CompareTag("Totem"))
+            {
+                GameObject destroyedObject = col.gameObject;
+                Destroy(destroyedObject);
+                ObjectDestroyedEvent.InvokeObjectDestroyed(destroyedObject);
+            }
+        }
     }
 
     private void Update()
