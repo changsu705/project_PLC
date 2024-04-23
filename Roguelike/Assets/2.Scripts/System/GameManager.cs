@@ -3,9 +3,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject cutWeeds;
+
     public GameObject portalEffect;
     public GameObject vine;
     public GameObject dust;
@@ -40,6 +43,9 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         escButton.SetActive(false);
 
+        Action<GameObject> destructionEventHandler = HandleObjectDestruction;
+        ObjectDestroyedEvent.OnObjectDestroyed += destructionEventHandler;
+
         StartWave(currentWaveIndex); // 시작할 웨이브 시작
     }
 
@@ -54,6 +60,32 @@ public class GameManager : MonoBehaviour
         {
 
             CheckEnemy();
+        }
+    }
+
+    void HandleObjectDestruction(GameObject destroyedObject)
+    {
+        if (destroyedObject.CompareTag("Weeds"))
+        {
+            // 파괴된 오브젝트의 위치 저장
+            Vector3 position = destroyedObject.transform.position;
+
+            // 새로운 오브젝트 생성 및 위치 조정
+            Instantiate(cutWeeds, position, Quaternion.identity);
+        }
+        if(destroyedObject.CompareTag("Totem"))
+        {
+            return;
+        }
+    }
+
+    public static class ObjectDestroyedEvent
+    {
+        public static event Action<GameObject> OnObjectDestroyed;
+
+        public static void InvokeObjectDestroyed(GameObject destroyedObject)
+        {
+            OnObjectDestroyed?.Invoke(destroyedObject);
         }
     }
 

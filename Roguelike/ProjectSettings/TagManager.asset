@@ -9,6 +9,8 @@ TagManager:
   - Ground
   - EnemyBullet
   - Skill
+  - Weeds
+  - Totem
   layers:
   - Default
   - TransparentFX

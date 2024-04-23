@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static GameManager;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float dodgeForce;
     [SerializeField] private float dodgeCoolTime;
+    [SerializeField] private float attackRange;     //오브젝트 파괴하는데 씀
+    private float weedSpeed;
+    private float currentSpeed;
 
     private float rotationScale = 1f;
     private bool isDodge = false;
@@ -43,6 +47,7 @@ public class PlayerController : MonoBehaviour
     private const int Grass = 1 << 4;
     private const int Stone = 1 << 7;
 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -51,6 +56,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        weedSpeed = speed * 0.5f;
+
         plane = new Plane(transform.up, transform.position);
 
         audioManager = AudioManager.Instance;
@@ -110,6 +117,26 @@ public class PlayerController : MonoBehaviour
                 audioManager.Footstep(false);
             }
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Attack();
+        }
+    }
+
+    public void Attack()
+    {
+        // 플레이어 주변의 파괴 가능한 오브젝트를 찾아서 파괴
+        Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
+        foreach (Collider col in colliders)
+        {
+            if (col.CompareTag("Weeds") || col.CompareTag("Totem"))
+            {
+                GameObject destroyedObject = col.gameObject;
+                Destroy(destroyedObject);
+                ObjectDestroyedEvent.InvokeObjectDestroyed(destroyedObject);
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -136,6 +163,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Weeds")) // 잡초 오브젝트와 충돌 시
+        {
+            currentSpeed = weedSpeed;
+        }
+
         if (!isDamage)
         {
             if (other.CompareTag("EnemyBullet"))
@@ -146,7 +178,15 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Weeds")) // 잡초 오브젝트와 충돌 종료 시
+        {
+            currentSpeed = speed;
+        }
+    }
+
     private IEnumerator OnDamage(float damage)
     {
         // isDamage 을 이용하여 중복 데미지를 방지
