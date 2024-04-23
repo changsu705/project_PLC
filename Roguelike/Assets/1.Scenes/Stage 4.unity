@@ -1466,12 +1466,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0401437, y: 1.0140653, z: 0.0965057}
-  m_Center: {x: -0.00000044703484, y: 0.0000009536743, z: 0.04825285}
+  m_Size: {x: 1.0401437, y: 1.0140653, z: 0.039717328}
+  m_Center: {x: -0.00000044277738, y: 0.0000009536743, z: 0.019858638}
 --- !u!1 &318989996
 GameObject:
   m_ObjectHideFlags: 0
@@ -8572,14 +8572,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MasterPlayer: {fileID: 1808385119}
+  masterVolume: 0
   BGMPlayer: {fileID: 1250325465}
-  SFXPlayer: {fileID: 35703132}
-  FootstepPlayer: {fileID: 1490354381}
   BGMList:
   - {fileID: 8300000, guid: 22df8ca2e2d194b449afc5aa6da5537c, type: 3}
   - {fileID: 8300000, guid: b219024eed54e074988ee2aa1ef7efb1, type: 3}
   - {fileID: 8300000, guid: b4f6416f12cddfd479be5adf55c3e504, type: 3}
+  bgmVolume: 0
+  SFXPlayer: {fileID: 35703132}
   SFXList: []
+  sfxVolume: 0
+  FootstepPlayer: {fileID: 1490354381}
   FootstepList: []
 --- !u!4 &1808385121
 Transform:
