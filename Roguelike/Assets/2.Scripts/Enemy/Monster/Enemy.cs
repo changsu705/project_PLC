@@ -11,9 +11,8 @@ using DG.Tweening;
 public abstract class Enemy : MonoBehaviour 
 {
     [Header("Enemy Stats")]
-    public int maxHp;
-    public int currentHp;
-    
+    public float maxHp;
+    public float currentHp;
     
     public float targetRadius;
     public float targetRange;
@@ -36,6 +35,7 @@ public abstract class Enemy : MonoBehaviour
     public bool isMino;
     public bool isDamage;
     public bool isStart;
+    public bool isUpgraded;
 
     [Space(10)] 
     [Header("DissolvingController")]
@@ -94,11 +94,10 @@ public abstract class Enemy : MonoBehaviour
 
     private void Update()
     {
+        CheckMaxHp();
         
-        // 플레이어와 적 사이의 거리 계산
         float distanceToPlayer = Vector3.Distance(transform.position, target.position);
     
-        // 일정 거리 이하일 때 추적 시작
         if (distanceToPlayer < 10 && !isMino && !isStart) 
         {
             ChaseStart();
@@ -153,6 +152,17 @@ public abstract class Enemy : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
+    }
+
+    private void CheckMaxHp()
+    {
+        if (currentHp > maxHp)
+        {
+            currentHp = maxHp;
+        }
+
+        UpdateHpBar();
+
     }
 
     /// <summary>
