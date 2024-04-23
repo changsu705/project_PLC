@@ -52,10 +52,7 @@ public class GameManager : MonoBehaviour
             SceneManager.GetActiveScene().buildIndex != 1 &&
             SceneManager.GetActiveScene().buildIndex != 2)
         {
-            if (currentSceneName == "HouseScene" && currentSceneName == "Village")
-            {
-                return;
-            }
+
             CheckEnemy();
         }
     }
