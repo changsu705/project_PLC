@@ -2443,9 +2443,10 @@ MonoBehaviour:
   swordGoblinPrefab: {fileID: 0}
   bowGoblinPrefab: {fileID: 0}
   shieldGoblinPrefab: {fileID: 0}
-  swordGoblinSpawnPoints: []
-  bowGoblinSpawnPoints: []
-  shieldGoblinSpawnPoints: []
+  waves:
+  - swordGoblinSpawnPoints: []
+    bowGoblinSpawnPoints: []
+    shieldGoblinSpawnPoints: []
 --- !u!4 &401175512
 Transform:
   m_ObjectHideFlags: 0
@@ -5040,14 +5041,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MasterPlayer: {fileID: 859298672}
+  masterVolume: 0
   BGMPlayer: {fileID: 281345951}
-  SFXPlayer: {fileID: 1270699665}
-  FootstepPlayer: {fileID: 2110292937}
   BGMList:
   - {fileID: 8300000, guid: 22df8ca2e2d194b449afc5aa6da5537c, type: 3}
   - {fileID: 8300000, guid: b219024eed54e074988ee2aa1ef7efb1, type: 3}
   - {fileID: 8300000, guid: b4f6416f12cddfd479be5adf55c3e504, type: 3}
+  bgmVolume: 0
+  SFXPlayer: {fileID: 1270699665}
   SFXList: []
+  sfxVolume: 0
+  FootstepPlayer: {fileID: 2110292937}
   FootstepList: []
 --- !u!4 &859298674
 Transform:

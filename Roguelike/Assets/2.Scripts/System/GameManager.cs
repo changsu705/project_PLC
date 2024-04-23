@@ -45,12 +45,17 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        string currentSceneName = SceneManager.GetActiveScene().name;
         onKeyESC();
 
-        if (SceneManager.GetActiveScene().buildIndex!=0 &&
-            SceneManager.GetActiveScene().buildIndex!=1 &&
-            SceneManager.GetActiveScene().buildIndex!=2)
+        if (SceneManager.GetActiveScene().buildIndex != 0 &&
+            SceneManager.GetActiveScene().buildIndex != 1 &&
+            SceneManager.GetActiveScene().buildIndex != 2)
         {
+            if (currentSceneName == "HouseScene" && currentSceneName == "Village")
+            {
+                return;
+            }
             CheckEnemy();
         }
     }
