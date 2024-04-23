@@ -111,7 +111,7 @@ public class SkillContainer : SkillObject
                 yield return new WaitForSeconds(disableTime);
                 break;
         }
-
+        player.Attack();
         trigger.SetActive(false);
     }
 
