@@ -4404,8 +4404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a7ee1e53e6321489d96eb6551c5006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weedsafter: {fileID: 919132149155446097, guid: 4f544f4c2e636614795ed623386db3bf,
-    type: 3}
+  cutWeeds: {fileID: 919132149155446097, guid: 4f544f4c2e636614795ed623386db3bf, type: 3}
   portalEffect: {fileID: 457827124}
   vine: {fileID: 1562834369}
   dust: {fileID: 508710496}

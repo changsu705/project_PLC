@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dodgeForce;
     [SerializeField] private float dodgeCoolTime;
     [SerializeField] private float attackRange;     //오브젝트 파괴하는데 씀
-    private float weedSpeed;
-    private float currentSpeed;
 
     private float rotationScale = 1f;
     private bool isDodge = false;
@@ -56,8 +54,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        weedSpeed = speed * 0.5f;
-
         plane = new Plane(transform.up, transform.position);
 
         audioManager = AudioManager.Instance;
@@ -163,10 +159,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Weeds")) // 잡초 오브젝트와 충돌 시
-        {
-            currentSpeed = weedSpeed;
-        }
 
         if (!isDamage)
         {
@@ -179,13 +171,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Weeds")) // 잡초 오브젝트와 충돌 종료 시
-        {
-            currentSpeed = speed;
-        }
-    }
 
     private IEnumerator OnDamage(float damage)
     {
