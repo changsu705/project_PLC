@@ -1157,7 +1157,7 @@ PrefabInstance:
     - target: {fileID: 63836004780338305, guid: 9a65d7a87b2654874b5da2928d158077,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.0816364
+      value: 9.13
       objectReference: {fileID: 0}
     - target: {fileID: 63836004780338305, guid: 9a65d7a87b2654874b5da2928d158077,
         type: 3}
@@ -1167,7 +1167,7 @@ PrefabInstance:
     - target: {fileID: 63836004780338305, guid: 9a65d7a87b2654874b5da2928d158077,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.46
+      value: -9.15
       objectReference: {fileID: 0}
     - target: {fileID: 63836004780338305, guid: 9a65d7a87b2654874b5da2928d158077,
         type: 3}
@@ -1212,7 +1212,12 @@ PrefabInstance:
     - target: {fileID: 840231592742860347, guid: 9a65d7a87b2654874b5da2928d158077,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555915012054271018, guid: 9a65d7a87b2654874b5da2928d158077,
+        type: 3}
+      propertyPath: targetRange
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3553,14 +3558,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MasterPlayer: {fileID: 1172305463}
+  masterVolume: 0
   BGMPlayer: {fileID: 1879622499}
-  SFXPlayer: {fileID: 1438250221}
-  FootstepPlayer: {fileID: 1858244388}
   BGMList:
   - {fileID: 8300000, guid: b219024eed54e074988ee2aa1ef7efb1, type: 3}
   - {fileID: 8300000, guid: 22df8ca2e2d194b449afc5aa6da5537c, type: 3}
   - {fileID: 8300000, guid: b4f6416f12cddfd479be5adf55c3e504, type: 3}
+  bgmVolume: 0
+  SFXPlayer: {fileID: 1438250221}
   SFXList: []
+  sfxVolume: 0
+  FootstepPlayer: {fileID: 1858244388}
   FootstepList:
   - {fileID: 8300000, guid: e4efcdfbaae1c2941a3573cb7d0104b8, type: 3}
   - {fileID: 8300000, guid: 7758b6568e6f28446a881c07f1bdfdd1, type: 3}
@@ -4521,9 +4529,7 @@ MonoBehaviour:
   swordGoblinPrefab: {fileID: 0}
   bowGoblinPrefab: {fileID: 0}
   shieldGoblinPrefab: {fileID: 0}
-  swordGoblinSpawnPoints: []
-  bowGoblinSpawnPoints: []
-  shieldGoblinSpawnPoints: []
+  waves: []
 --- !u!4 &1496696299
 Transform:
   m_ObjectHideFlags: 0
@@ -6401,7 +6407,7 @@ PrefabInstance:
     - target: {fileID: 8833176074878771845, guid: a97e302f5eb854b9886b40638805dd22,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

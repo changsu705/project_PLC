@@ -35,6 +35,7 @@ public abstract class Enemy : MonoBehaviour
     public bool isDead;
     public bool isMino;
     public bool isDamage;
+    public bool isStart;
 
     [Space(10)] 
     [Header("DissolvingController")]
@@ -85,14 +86,27 @@ public abstract class Enemy : MonoBehaviour
 
     private void Start()
     {
-        if (!isMino)
-        {
-            Invoke(nameof(ChaseStart), 2f);
-        }
+        // if (!isMino)
+        // {
+        //     Invoke(nameof(ChaseStart), 2f);
+        // }
     }
 
     private void Update()
     {
+        
+        // 플레이어와 적 사이의 거리 계산
+        float distanceToPlayer = Vector3.Distance(transform.position, target.position);
+    
+        // 일정 거리 이하일 때 추적 시작
+        if (distanceToPlayer < 10 && !isMino && !isStart) 
+        {
+            ChaseStart();
+            isStart = true;
+        }
+        
+        
+        
         Debug.DrawRay(transform.position, transform.forward * targetRange, Color.red);
         
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
@@ -111,8 +125,9 @@ public abstract class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Targeting();
-        FreezeVelocity();
+            Targeting();
+            FreezeVelocity();
+        
     }
 
     private void InitBarSize()
