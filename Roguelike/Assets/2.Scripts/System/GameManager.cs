@@ -5,10 +5,12 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 
+
 public class GameManager : MonoBehaviour
 {
+    private float fadeDuration = 3f;
+    public GameObject decoPortal;
     public GameObject cutWeeds;
-
     public GameObject portalEffect;
     public GameObject vine;
     public GameObject dust;
@@ -40,6 +42,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (decoPortal != null)
+        {
+            Invoke("PortalOff", 1f);
+        }
+
         Time.timeScale = 1;
         escButton.SetActive(false);
 
@@ -61,6 +68,12 @@ public class GameManager : MonoBehaviour
 
             CheckEnemy();
         }
+    }
+
+    private void PortalOff()
+    {
+        decoPortal.transform.DOScale(0f, fadeDuration)
+     .OnComplete(() => Destroy(decoPortal));
     }
 
     void HandleObjectDestruction(GameObject destroyedObject)

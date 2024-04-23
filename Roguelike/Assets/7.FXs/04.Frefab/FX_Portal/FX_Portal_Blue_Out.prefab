@@ -4843,7 +4843,7 @@ GameObject:
   - component: {fileID: 1666909522012666158}
   - component: {fileID: 1234013354308838369}
   m_Layer: 0
-  m_Name: FX_Porta_Bluel_Out
+  m_Name: FX_Portal_Blue_Out
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
