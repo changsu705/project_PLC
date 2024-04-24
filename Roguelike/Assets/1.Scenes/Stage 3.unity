@@ -3218,6 +3218,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 620025272}
     m_Modifications:
+    - target: {fileID: 836681846618426072, guid: 100cc787b17cc24458ff0cd0162e06ad,
+        type: 3}
+      propertyPath: explosionFlowerPrefab
+      value: 
+      objectReference: {fileID: 7679451888943716262, guid: 398096032e52f5f48a42595b8efd6d78,
+        type: 3}
     - target: {fileID: 7957977963993876004, guid: 100cc787b17cc24458ff0cd0162e06ad,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -3562,7 +3568,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b4f6416f12cddfd479be5adf55c3e504, type: 3}
   bgmVolume: 0
   SFXPlayer: {fileID: 2079413832}
-  SFXList: []
+  SFXList:
+  - {fileID: 8300000, guid: 15fba756a8fd7c44ab08dd74b33b1fd3, type: 3}
   sfxVolume: 0
   FootstepPlayer: {fileID: 1283858026}
   FootstepList: []

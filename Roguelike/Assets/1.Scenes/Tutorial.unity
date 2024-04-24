@@ -7164,7 +7164,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b4f6416f12cddfd479be5adf55c3e504, type: 3}
   bgmVolume: 0
   SFXPlayer: {fileID: 1969708060}
-  SFXList: []
+  SFXList:
+  - {fileID: 8300000, guid: 15fba756a8fd7c44ab08dd74b33b1fd3, type: 3}
   sfxVolume: 0
   FootstepPlayer: {fileID: 957073499}
   FootstepList: []
