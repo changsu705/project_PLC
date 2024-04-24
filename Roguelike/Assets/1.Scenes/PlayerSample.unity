@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1306,7 +1306,7 @@ PrefabInstance:
     - target: {fileID: 840231592742860347, guid: 9a65d7a87b2654874b5da2928d158077,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6555915012054271018, guid: 9a65d7a87b2654874b5da2928d158077,
         type: 3}
@@ -1956,6 +1956,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8572c5e7a30814e4fbe27354d80a6989, type: 2}
   - {fileID: 11400000, guid: 461e9d6cbe4fe014a85af53f52d02b2c, type: 2}
   - {fileID: 11400000, guid: aff7441bf68519f4d87b91fcff50cd0f, type: 2}
+  renderers: []
   footstepClips:
   - {fileID: 8300000, guid: afe9e1b701bc27a429f25f97de9213d9, type: 3}
   - {fileID: 8300000, guid: f4d71679522072b409c50a822bc602ac, type: 3}
@@ -2629,6 +2630,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3237659955289418083, guid: 9d1696751755d40168880100de2c3a8e,
+        type: 3}
+      propertyPath: isBow
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7318576857315129339, guid: 9d1696751755d40168880100de2c3a8e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5830,7 +5836,7 @@ PrefabInstance:
     - target: {fileID: 7945915606020978431, guid: 89670a26390284e61be79b55911b7392,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
