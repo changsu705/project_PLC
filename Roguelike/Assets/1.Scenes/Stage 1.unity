@@ -1327,14 +1327,16 @@ MonoBehaviour:
   BGMPlayer: {fileID: 1220116514}
   BGMList:
   - {fileID: 8300000, guid: 22df8ca2e2d194b449afc5aa6da5537c, type: 3}
-  - {fileID: 8300000, guid: a8b47a22363ee9d45baa465ebc04bd72, type: 3}
+  - {fileID: 8300000, guid: 0139f35cbb280074f9e64531538178a3, type: 3}
+  - {fileID: 8300000, guid: 741da67197fbdf04ab72f63f737294ee, type: 3}
   - {fileID: 8300000, guid: b4f6416f12cddfd479be5adf55c3e504, type: 3}
   bgmVolume: 0
   SFXPlayer: {fileID: 707335693}
   SFXList: []
   sfxVolume: 0
   FootstepPlayer: {fileID: 2038661537}
-  FootstepList: []
+  FootstepList:
+  - {fileID: 8300000, guid: e9e15ee3daf5ed24884caa96552a3baa, type: 3}
 --- !u!4 &221294118
 Transform:
   m_ObjectHideFlags: 0
@@ -6199,7 +6201,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -25
+  near clip plane: -20
   far clip plane: 25
   field of view: 60.000004
   orthographic: 1
@@ -6479,7 +6481,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 60.000004
     OrthographicSize: 8.5
-    NearClipPlane: -25
+    NearClipPlane: -20
     FarClipPlane: 25
     Dutch: 0
     ModeOverride: 0
