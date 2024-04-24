@@ -125,7 +125,12 @@ public class AudioManager : MonoBehaviour
     {
         string bgmName;
 
-        if (scene.name == "Village" || scene.name == "HouseScene")
+        if (scene.name == "MainScene")
+        {
+            bgmName = "main";
+        }
+
+        else if (scene.name == "Village" || scene.name == "HouseScene")
         {
             bgmName = "town";
         }
