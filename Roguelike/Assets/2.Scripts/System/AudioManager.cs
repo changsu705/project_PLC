@@ -67,7 +67,16 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void Init()
+    private void Update()
+    {
+        // BGM이 끝났을 때 재생을 반복하도록 처리
+        if (!BGMPlayer.isPlaying && isBGMPlaying)
+        {
+            PlayBGM();
+        }
+    }
+
+        private void Init()
     {
         BGMPlayer.volume = 0.3f;
         
@@ -107,20 +116,37 @@ public class AudioManager : MonoBehaviour
     {
         return sfxVolume;
     }
-    
 
-    private void OnSceneLoaded(Scene Scene2, LoadSceneMode Scene3)
+    private string currentBGMName;
+    private AudioClip currentBGM;
+    private bool isBGMPlaying = false;
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (Scene2.name == "Village")
+        string bgmName;
+
+        if (scene.name == "Village" || scene.name == "HouseScene")
         {
-            BGMPlayer.clip = clips["town"];
-            BGMPlayer.Play();
+            bgmName = "town";
         }
         else
         {
-            BGMPlayer.clip = clips["chap1"];
-            BGMPlayer.Play();
+            bgmName = "chap1-1";
         }
+
+        if (currentBGMName != bgmName)
+        {
+            currentBGMName = bgmName;
+            currentBGM = clips[bgmName];
+            PlayBGM();
+        }
+    }
+
+    private void PlayBGM()
+    {
+        BGMPlayer.clip = currentBGM;
+        BGMPlayer.Play();
+        isBGMPlaying = true;
     }
 
     public void PlaySFX(string name)

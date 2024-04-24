@@ -76,7 +76,13 @@ public class GameManager : MonoBehaviour
         Action<GameObject> destructionEventHandler = HandleObjectDestruction;
         ObjectDestroyedEvent.OnObjectDestroyed += destructionEventHandler;
 
-        StartWave(currentWaveIndex); // 시작할 웨이브 시작
+        if (SceneManager.GetActiveScene().buildIndex != 0 &&
+            SceneManager.GetActiveScene().buildIndex != 1 &&
+            SceneManager.GetActiveScene().buildIndex != 2)
+        {
+            StartWave(currentWaveIndex); 
+        }
+
     }
 
     private void Update()
@@ -88,10 +94,6 @@ public class GameManager : MonoBehaviour
             SceneManager.GetActiveScene().buildIndex != 1 &&
             SceneManager.GetActiveScene().buildIndex != 2)
         {
-            if (currentSceneName == "HouseScene" && currentSceneName == "Village")
-            {
-                return;
-            }
             CheckEnemy();
         }
     }
