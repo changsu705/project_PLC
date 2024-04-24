@@ -1696,6 +1696,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8572c5e7a30814e4fbe27354d80a6989, type: 2}
   - {fileID: 11400000, guid: 461e9d6cbe4fe014a85af53f52d02b2c, type: 2}
   - {fileID: 11400000, guid: aff7441bf68519f4d87b91fcff50cd0f, type: 2}
+  renderers: []
   footstepClips: []
 --- !u!4 &807207493
 Transform:
@@ -3757,6 +3758,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 11400000, guid: 461e9d6cbe4fe014a85af53f52d02b2c, type: 2}
+--- !u!1 &2033868626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2033868627}
+  m_Layer: 0
+  m_Name: ==========================
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2033868627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033868626}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2036378440
 GameObject:
   m_ObjectHideFlags: 0
@@ -4092,23 +4124,24 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 241827545}
+  - {fileID: 403264997}
+  - {fileID: 662536179}
+  - {fileID: 2033868627}
+  - {fileID: 710840921}
+  - {fileID: 131203748}
+  - {fileID: 1462680255}
+  - {fileID: 807207493}
+  - {fileID: 1304822004}
   - {fileID: 1871513554}
   - {fileID: 688824863}
-  - {fileID: 131203748}
-  - {fileID: 403264997}
-  - {fileID: 807207493}
   - {fileID: 1445766073}
-  - {fileID: 1462680255}
-  - {fileID: 1304822004}
-  - {fileID: 874582681}
-  - {fileID: 258453010}
-  - {fileID: 864637680}
-  - {fileID: 2146996396}
-  - {fileID: 1012846859}
   - {fileID: 885541264}
-  - {fileID: 1234094235}
-  - {fileID: 2088225432}
-  - {fileID: 662536179}
-  - {fileID: 1446692322}
-  - {fileID: 710840921}
   - {fileID: 1969661456}
+  - {fileID: 864637680}
+  - {fileID: 874582681}
+  - {fileID: 1012846859}
+  - {fileID: 2146996396}
+  - {fileID: 1446692322}
+  - {fileID: 2088225432}
+  - {fileID: 1234094235}
+  - {fileID: 258453010}
