@@ -14,10 +14,14 @@ class SkillContainerEditor : Editor
         serializedObject.Update();
 
         var mode = (SkillContainer.DisableMode)serializedObject.FindProperty("disableMode").intValue;
-        if (mode == SkillContainer.DisableMode.LifeTime ||
-            mode == SkillContainer.DisableMode.CollisionOrLifeTime)
+        if (mode == SkillContainer.DisableMode.LifeTime)
         {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("disableTime"));
+        }
+        else if (mode == SkillContainer.DisableMode.CollisionOrLifeTime)
+        {
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("disableTime"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("destroyFx"));
         }
 
         serializedObject.ApplyModifiedProperties();
@@ -42,9 +46,10 @@ public class SkillContainer : SkillObject
 
     [Header("Trigger")]
     [SerializeField] private Vector3 offset;
-    [SerializeField] private float radius;
+    [SerializeField] private float radius = 0.5f;
     [SerializeField] private DisableMode disableMode;
     [HideInInspector, SerializeField] private float disableTime;
+    [HideInInspector, SerializeField] private SkillEffects.FX destroyFx;
 
     /// <summary>
     /// 공격력
@@ -81,13 +86,18 @@ public class SkillContainer : SkillObject
     /// </summary>
     public AudioClip EndClip => destroyClip;
 
+    /// <summary>
+    /// 소멸 이펙트
+    /// </summary>
+    public SkillEffects.FX DestroyFx => destroyFx;
+
     public override SkillContainer CurrentContainer => this;
 
     public void SetTrigger(GameObject skillObject)
     {
         trigger = skillObject;
 
-        SphereCollider collider = skillObject.GetComponentInChildren<SphereCollider>();
+        collider = skillObject.GetComponentInChildren<SphereCollider>();
         collider.isTrigger = true;
         collider.center = offset;
         collider.radius = radius;
@@ -120,11 +130,6 @@ public class SkillContainer : SkillObject
     {
         attackCoolDown = false;
         yield return new WaitForSeconds(coolTime);
-        attackCoolDown = true;
-    }
-
-    public override void Init()
-    {
         attackCoolDown = true;
     }
 

@@ -28,6 +28,11 @@ public class SkillEffects : MonoBehaviour
     /// <param name="rotation"> 이펙트 플레이 방향 </param>
     public void PlayEffect(FX fx, Vector3 position, Quaternion rotation)
     {
+        if (fx == FX.None)
+        {
+            return;
+        }
+
         (Transform tr, ParticleSystem effect) = effects[fx];
         tr.SetPositionAndRotation(position, rotation);
         effect.Play(true);
@@ -39,5 +44,7 @@ public class SkillEffects : MonoBehaviour
         BasicHit,
         FireBall,
         Flash,
+        MeteoImpact,
+        None
     }
 }

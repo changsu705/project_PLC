@@ -6,6 +6,7 @@ public abstract class SkillObject : ScriptableObject
     protected bool attackCoolDown = true;
 
     protected GameObject trigger;
+    protected SphereCollider collider;
     
     /// <summary>
     /// 현재 실행중인 스킬
@@ -20,7 +21,10 @@ public abstract class SkillObject : ScriptableObject
     /// <summary>
     /// 데이터 초기화
     /// </summary>
-    public abstract void Init();
+    public virtual void Init()
+    {
+        attackCoolDown = true;
+    }
     
     /// <summary>
     /// 플레이어 스킬 시작

@@ -22,3 +22,4 @@ MonoBehaviour:
   radius: 0.5
   disableMode: 2
   disableTime: 2
+  destroyFx: 1

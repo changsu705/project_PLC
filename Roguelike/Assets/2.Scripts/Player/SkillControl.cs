@@ -1,11 +1,9 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class SkillControl : MonoBehaviour
 {
     [SerializeField] private SkillObject container;
+    private new SphereCollider collider;
 
     public SkillContainer Container => container.CurrentContainer;
     
@@ -29,25 +27,26 @@ public class SkillControl : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-   
+    private void Start()
+    {
+        collider = GetComponentInChildren<SphereCollider>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other);
+
         if (other.CompareTag("Enemy"))
         {
-            if (other.TryGetComponent(out Enemy enemy))
-            {
-                SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, other.transform.position, Quaternion.identity);
-                if (container.CurrentContainer.Mode == SkillContainer.DisableMode.CollisionOrLifeTime)
-                {
-                    AudioManager.Instance.PlaySFX(container.CurrentContainer.EndClip);
-                    gameObject.SetActive(false);
-                }
-            }
-            else
-            {
-                Debug.LogError($"{other.name} have 'Enemy' tag. But it don't have Enemy Component");
-            }
+            SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, other.transform.position, Quaternion.identity);
+        }
+
+        if (container.CurrentContainer.Mode == SkillContainer.DisableMode.CollisionOrLifeTime)
+        {
+            SkillEffects.Instance.PlayEffect(container.CurrentContainer.DestroyFx, collider.transform.position, Quaternion.identity);
+
+            AudioManager.Instance.PlaySFX(container.CurrentContainer.EndClip);
+            gameObject.SetActive(false);
         }
     }
 }

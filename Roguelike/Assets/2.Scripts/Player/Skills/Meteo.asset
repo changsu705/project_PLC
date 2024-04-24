@@ -9,18 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb76e3f2d59fe1f48b42f5654711faca, type: 3}
-  m_Name: Flash
+  m_Script: {fileID: 11500000, guid: a3a73ba428e99204a988297b1ea5a07f, type: 3}
+  m_Name: Meteo
   m_EditorClassIdentifier: 
-  fx: 3
+  fx: 5
   startClip: {fileID: 0}
   destroyClip: {fileID: 0}
   animationKey: 0
-  atk: 15
-  coolTime: 5
+  atk: 100
+  coolTime: 20
   offset: {x: 0, y: 0, z: 0}
-  radius: 2
-  disableMode: 0
-  disableTime: 0
-  destroyFx: 0
-  flashForce: 5
+  radius: 0.5
+  disableMode: 2
+  disableTime: 100
+  destroyFx: 4
+  meteoOffset: {x: 0, y: 100, z: 5}
