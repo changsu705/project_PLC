@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -895,7 +895,11 @@ MonoBehaviour:
   SFXList: []
   sfxVolume: 0
   FootstepPlayer: {fileID: 1897573734}
-  FootstepList: []
+  FootstepList:
+  - {fileID: 8300000, guid: e4efcdfbaae1c2941a3573cb7d0104b8, type: 3}
+  - {fileID: 8300000, guid: 7758b6568e6f28446a881c07f1bdfdd1, type: 3}
+  - {fileID: 8300000, guid: f4d71679522072b409c50a822bc602ac, type: 3}
+  - {fileID: 8300000, guid: e9e15ee3daf5ed24884caa96552a3baa, type: 3}
 --- !u!4 &1558416667
 Transform:
   m_ObjectHideFlags: 0

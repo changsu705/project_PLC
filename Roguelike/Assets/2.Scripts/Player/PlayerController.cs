@@ -4,6 +4,7 @@ using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static GameManager;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
@@ -43,6 +44,9 @@ public class PlayerController : MonoBehaviour
 
     private new CapsuleCollider collider;
     private NavMeshAgent navMeshAgent;
+    
+    public SkinnedMeshRenderer[] renderers;
+    private Dictionary<SkinnedMeshRenderer,Color> originalColors = new Dictionary<SkinnedMeshRenderer, Color>();
 
     [Header("Audios")]
     [SerializeField] private AudioClip[] footstepClips;
@@ -52,6 +56,13 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+
+        foreach (SkinnedMeshRenderer mesh in renderers)
+        {
+            originalColors[mesh]= mesh.material.color;
+        }
+        
         InitBarSize();
     }
 
@@ -167,7 +178,6 @@ public class PlayerController : MonoBehaviour
             {
                 Bullet enemyBullet = other.GetComponent<Bullet>();
                 StartCoroutine(OnDamage(enemyBullet.damage));
-                
             }
         }
     }
@@ -175,7 +185,9 @@ public class PlayerController : MonoBehaviour
     private IEnumerator OnDamage(float damage)
     {
         // isDamage 을 이용하여 중복 데미지를 방지
+
         isDamage = true;
+
         currentHp -= damage;
         
         if (currentHp <= 0)
@@ -187,6 +199,20 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.GameEnd();
         }
         UpdateHpBar();
+        
+        foreach (SkinnedMeshRenderer mesh in renderers)
+        {
+            mesh.material.color = Color.red;
+        }
+        
+        yield return new WaitForSeconds(0.1f);
+        
+        foreach (var pair in originalColors)
+        {
+            pair.Key.material.color = pair.Value;
+        }
+        
+        
         yield return new WaitForSeconds(1f);
         isDamage = false;
     }

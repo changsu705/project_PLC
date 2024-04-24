@@ -3,11 +3,14 @@ using UnityEngine;
 public class BombFruit : MonoBehaviour
 {
     [SerializeField] private float force;
+    [SerializeField] private GameObject explosionFlowerPrefab;
     private Rigidbody rigid;
+    private AudioManager audioManager;
 
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        audioManager = AudioManager.Instance;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,6 +25,13 @@ public class BombFruit : MonoBehaviour
         else if (rigid.useGravity)
         {
             Debug.Log("BOOM!");
+            if (explosionFlowerPrefab != null)
+            {
+                GameObject explosionFlower = Instantiate(explosionFlowerPrefab, transform.position, Quaternion.identity);
+                audioManager.PlaySFX("explosion");
+                Destroy(explosionFlower, 0.5f);
+                Destroy(gameObject);
+            }
         }
     }
 }

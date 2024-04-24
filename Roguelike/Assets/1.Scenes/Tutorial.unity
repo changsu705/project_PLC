@@ -7164,7 +7164,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b4f6416f12cddfd479be5adf55c3e504, type: 3}
   bgmVolume: 0
   SFXPlayer: {fileID: 1969708060}
-  SFXList: []
+  SFXList:
+  - {fileID: 8300000, guid: 15fba756a8fd7c44ab08dd74b33b1fd3, type: 3}
   sfxVolume: 0
   FootstepPlayer: {fileID: 957073499}
   FootstepList: []
@@ -15294,6 +15295,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1853951248}
     m_Modifications:
+    - target: {fileID: 1353501730510078124, guid: 7277d35b0c7b0544f88a491aa293bd84,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1738763050124742119, guid: 7277d35b0c7b0544f88a491aa293bd84,
         type: 3}
       propertyPath: m_LocalScale.x
