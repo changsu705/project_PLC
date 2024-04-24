@@ -110,11 +110,6 @@ public abstract class Enemy : MonoBehaviour
         
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
 
-        foreach (RaycastHit hit in hits)
-        {
-            Debug.Log("Hit: " + hit.collider.gameObject.name);
-        }
-
         if (!isMino && nav.enabled)
         {
             nav.SetDestination(target.position);

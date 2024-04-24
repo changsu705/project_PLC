@@ -37,7 +37,6 @@ public class SkillControl : MonoBehaviour
         {
             if (other.TryGetComponent(out Enemy enemy))
             {
-                Debug.Log(other.name);
                 SkillEffects.Instance.PlayEffect(SkillEffects.FX.BasicHit, other.transform.position, Quaternion.identity);
                 if (container.CurrentContainer.Mode == SkillContainer.DisableMode.CollisionOrLifeTime)
                 {

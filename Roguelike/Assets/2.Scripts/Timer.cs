@@ -64,8 +64,6 @@ public class Timer : MonoBehaviour
         float currentTime = 0f;
         while (currentTime <= time)
         {
-            Debug.Log(Time.timeScale);
-
             hourHand.localEulerAngles = new Vector3(0f, 0f, hour - 360f * curve.Evaluate(currentTime / time));
             minuteHand.localEulerAngles = new Vector3(0f, 0f, minute - 4320f * curve.Evaluate(currentTime / time));
             currentTime += Time.unscaledDeltaTime;

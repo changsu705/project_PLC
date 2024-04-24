@@ -103,7 +103,7 @@
                 {
                     "name": "",
                     "id": "b21b5897-8869-4c52-9fe0-676e66a760e3",
-                    "path": "<Keyboard>/e",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "Press",
                     "processors": "Scale",
                     "groups": "PC",
