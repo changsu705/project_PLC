@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         if (Input.GetMouseButtonDown(0))
         {
-            Attack();
+            Attack();           //오브젝트 파괴
         }
     }
 

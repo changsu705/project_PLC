@@ -8833,7 +8833,7 @@ MonoBehaviour:
   BGMPlayer: {fileID: 1250325465}
   BGMList:
   - {fileID: 8300000, guid: 22df8ca2e2d194b449afc5aa6da5537c, type: 3}
-  - {fileID: 8300000, guid: b219024eed54e074988ee2aa1ef7efb1, type: 3}
+  - {fileID: 8300000, guid: a8b47a22363ee9d45baa465ebc04bd72, type: 3}
   - {fileID: 8300000, guid: b4f6416f12cddfd479be5adf55c3e504, type: 3}
   bgmVolume: 0
   SFXPlayer: {fileID: 35703132}

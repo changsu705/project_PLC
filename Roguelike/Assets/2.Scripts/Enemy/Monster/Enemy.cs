@@ -98,7 +98,7 @@ public abstract class Enemy : MonoBehaviour
         
         float distanceToPlayer = Vector3.Distance(transform.position, target.position);
     
-        if (distanceToPlayer < 15 && !isMino && !isStart) 
+        if (distanceToPlayer < 12.5f && !isMino && !isStart) 
         {
             ChaseStart();
             isStart = true;

@@ -81,7 +81,7 @@ public class Totem : MonoBehaviour
     private void HealEnemies()
     {
         
-        Collider[] enemies = Physics.OverlapSphere(transform.position, 5f, LayerMask.GetMask("Enemy"));
+        Collider[] enemies = Physics.OverlapSphere(transform.position, 15f, LayerMask.GetMask("Enemy"));
         foreach (Collider collider in enemies)
         {
             if (collider.CompareTag("Enemy"))
