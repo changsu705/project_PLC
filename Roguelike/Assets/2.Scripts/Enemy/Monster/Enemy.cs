@@ -22,7 +22,8 @@ public abstract class Enemy : MonoBehaviour
     [Header("Enemy Components")]
     public Transform target;
     public Collider meleeArea;
-    public Image hpBar;
+    public GameObject MaxhpBar;
+    public Image CurhpBar;
     public GameObject hudDamageText;
     public Transform hudPos;
     
@@ -205,7 +206,7 @@ public abstract class Enemy : MonoBehaviour
     private void UpdateHpBar()
     {
         float hpRatio = Mathf.Clamp01(currentHp / (float)maxHp);
-        hpBar.rectTransform.localScale= new Vector3(currentHp / (float)maxHp, 1, 1);
+        CurhpBar.rectTransform.localScale= new Vector3(currentHp / (float)maxHp, 1, 1);
     }
 
     private IEnumerator OnDamage(Vector3 reactVec)
@@ -257,6 +258,7 @@ public abstract class Enemy : MonoBehaviour
             rb.AddForce(reactVec * 5, ForceMode.Impulse);
             gameObject.layer = 0;
             rb.isKinematic = true;
+            MaxhpBar.gameObject.SetActive(false);
             
             if (!isMino)
             {
