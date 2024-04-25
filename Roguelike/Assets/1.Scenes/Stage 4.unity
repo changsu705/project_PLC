@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3935,7 +3935,8 @@ MonoBehaviour:
     type: 3}
   shieldGoblinPrefab: {fileID: 7945915606020978431, guid: 89670a26390284e61be79b55911b7392,
     type: 3}
-  minoPrefab: {fileID: 0}
+  minoPrefab: {fileID: 8833176074878771845, guid: a97e302f5eb854b9886b40638805dd22,
+    type: 3}
   waves:
   - swordGoblinSpawnPoints:
     - {fileID: 444344853}
@@ -3946,12 +3947,12 @@ MonoBehaviour:
     shieldGoblinSpawnPoints: []
     minoSpawnPoints: []
   - swordGoblinSpawnPoints: []
-    bowGoblinSpawnPoints:
-    - {fileID: 1603443416}
+    bowGoblinSpawnPoints: []
     shieldGoblinSpawnPoints:
     - {fileID: 1677458840}
     - {fileID: 2065508545}
-    minoSpawnPoints: []
+    minoSpawnPoints:
+    - {fileID: 1603443416}
 --- !u!4 &1060856354
 Transform:
   m_ObjectHideFlags: 0
@@ -6561,7 +6562,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1603443416}
   m_Layer: 0
-  m_Name: bow 3
+  m_Name: mino
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6576,7 +6577,7 @@ Transform:
   m_GameObject: {fileID: 1603443415}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 84.6, y: 4.46, z: 32.7}
+  m_LocalPosition: {x: 90.2, y: 4.46, z: 35.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
