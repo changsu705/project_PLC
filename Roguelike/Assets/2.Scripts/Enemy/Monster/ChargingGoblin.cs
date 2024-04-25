@@ -15,16 +15,13 @@ public class ChargingGoblin : Enemy
         anim.SetBool("isAttack", true);
         
 
-        yield return new WaitForSeconds(0.1f);
         rb.AddForce(transform.forward * force, ForceMode.Impulse);
         meleeArea.enabled = true;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
         rb.velocity = Vector3.zero;
         meleeArea.enabled = false;
-
-        yield return new WaitForSeconds(0.1f);
-
+        
         isChase = true;
         isAttack = false;
         

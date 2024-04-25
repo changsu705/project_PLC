@@ -24,6 +24,16 @@ public class Mino : Enemy
             originalColors[mesh] = mesh.material.color;
         }
         
+        GameObject targetObject = GameObject.FindWithTag("Player");
+        if (targetObject != null)
+        {
+            target = targetObject.transform;
+        }
+        else
+        {
+            Debug.LogError("플레이어 미아");
+        }
+        
         nav.isStopped = true;
     }
 

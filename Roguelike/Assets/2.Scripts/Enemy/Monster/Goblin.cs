@@ -4,11 +4,8 @@ using UnityEngine.AI;
 
 public class Goblin : Enemy
 {
-
-
     public override IEnumerator Attack()
     {
-        
         isChase = false;
         isAttack = true;
         anim.SetBool("isAttack", true);
@@ -16,11 +13,10 @@ public class Goblin : Enemy
         yield return new WaitForSeconds(1f); 
         meleeArea.enabled = true;
 
-        yield return new WaitForSeconds(2f); 
+        yield return new WaitForSeconds(0.9f); 
         meleeArea.enabled = false;
 
-
-
+        
         isChase = true;
         isAttack = false;
         anim.SetBool("isAttack", false);

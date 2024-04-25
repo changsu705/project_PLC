@@ -39,10 +39,6 @@ public abstract class Enemy : MonoBehaviour
 
     [Space(10)] 
     [Header("DissolvingController")]
-    
-    
-    
-    
 
     [Space(10)]
     
@@ -80,7 +76,7 @@ public abstract class Enemy : MonoBehaviour
             originalColors[mesh] = mesh.material.color;
         }
 
-        InitBarSize();
+        //InitBarSize();
 
     }
 
@@ -104,13 +100,10 @@ public abstract class Enemy : MonoBehaviour
             isStart = true;
         }
         
-        
-        
         Debug.DrawRay(transform.position, transform.forward * targetRange, Color.red);
-        
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
 
-        if (!isMino && nav.enabled)
+        if (!isMino && nav.enabled) 
         {
             nav.SetDestination(target.position);
             nav.isStopped = !isChase;
@@ -124,10 +117,10 @@ public abstract class Enemy : MonoBehaviour
         
     }
 
-    private void InitBarSize()
-    {
-        hpBar.rectTransform.localScale = new Vector3(1, 1, 1);
-    }
+    // private void InitBarSize()
+    // {
+    //     hpBar.rectTransform.localScale = new Vector3(1, 1, 1);
+    // }
 
 
     /// <summary>
@@ -165,19 +158,16 @@ public abstract class Enemy : MonoBehaviour
     /// </summary>
     private void Targeting()
     {
-        if (!isMino && !isDead && !isDamage)
+        if (!isMino && !isDead && !isDamage && !isAttack) 
         {
-
+            
             RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward,
                 targetRange,
                 LayerMask.GetMask("Player"));
 
-           
-            if (rayHits.Length > 0 && !isAttack)
+
+            if (rayHits.Length > 0 && !isAttack) 
             {
-                
-                isChase = false;
-                isAttack = true;
                 StartCoroutine(Attack());
             }
         }
@@ -186,7 +176,7 @@ public abstract class Enemy : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (!isDead && other.CompareTag("Skill") && !isDamage)  
+        if (!isDead && other.CompareTag("Skill") && !isDamage ) 
         {
             var container = other.GetComponent<SkillControl>();
             currentHp -= container.Container.ATK;
@@ -203,8 +193,9 @@ public abstract class Enemy : MonoBehaviour
             GameObject hudText = Instantiate(hudDamageText);    
             hudText.transform.position = hudPos.position;
             hudText.GetComponent<DamageText>().damage = container.Container.ATK;
-        
-        
+            
+            isChase= false;
+            isAttack = false;
             StartCoroutine(OnDamage(reactVec));
         }
         
@@ -219,23 +210,23 @@ public abstract class Enemy : MonoBehaviour
 
     private IEnumerator OnDamage(Vector3 reactVec)
     {
-
-
+        
         if (currentHp > 0 ) 
         {
-            
-            isDamage= true;
-            isChase= false;
             anim.SetTrigger("doDamage");
-            
+            isDamage = true;
+            isChase = false;
+            isAttack = false;
+
             foreach (SkinnedMeshRenderer mesh in renderers)
             {
                 mesh.material.color = Color.red;
             }
             
             yield return new WaitForSeconds(0.1f);
-            
+          
             isDamage= false;
+            
             foreach (var pair in originalColors)
             {
                 pair.Key.material.color = pair.Value;
@@ -243,20 +234,12 @@ public abstract class Enemy : MonoBehaviour
             
             
             
+            yield return new WaitForSeconds(1f);
             
             
-            // reactVec = reactVec.normalized;
-            // reactVec+= Vector3.up;
-            // rb.AddForce(reactVec * 5, ForceMode.Impulse);
-            
-            
-            
-            yield return new WaitForSeconds(1.1f);
-
             if (!isMino)
             {
                 isChase = true;
-                isAttack = false;
                 anim.SetBool("isWalk", true);
             }
 

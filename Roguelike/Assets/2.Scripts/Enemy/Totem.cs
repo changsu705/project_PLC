@@ -15,6 +15,8 @@ public class Totem : MonoBehaviour
     private float lastHealTime;
 
     private bool isDamaged;
+
+    public GameObject BuffArea;
     
     [Space(10)]
     
@@ -99,6 +101,7 @@ public class Totem : MonoBehaviour
     private void DestroyTotem()
     {
         StartCoroutine(Dissolve());
+        BuffArea.SetActive(false);
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {
