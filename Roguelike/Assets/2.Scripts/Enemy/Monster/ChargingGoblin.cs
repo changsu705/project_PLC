@@ -6,15 +6,14 @@ using UnityEngine.AI;
 public class ChargingGoblin : Enemy
 {
 
-    private int force = 20;
+    private int force = 50;
 
     public override IEnumerator Attack()
     {
         isChase = false;
         isAttack = true;
-        anim.SetBool("isAttack", true);
+        anim.SetTrigger("doCharge");
         
-
         rb.AddForce(transform.forward * force, ForceMode.Impulse);
         meleeArea.enabled = true;
 
@@ -25,7 +24,5 @@ public class ChargingGoblin : Enemy
         isChase = true;
         isAttack = false;
         
-        anim.SetBool("isAttack", false);
-
     }
 }

@@ -159,7 +159,7 @@ public abstract class Enemy : MonoBehaviour
     /// </summary>
     private void Targeting()
     {
-        if (!isMino && !isDead && !isDamage && !isAttack) 
+        if (!isMino && !isDead && !isDamage && !isAttack && isChase) 
         {
             
             RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward,
@@ -195,8 +195,7 @@ public abstract class Enemy : MonoBehaviour
             hudText.transform.position = hudPos.position;
             hudText.GetComponent<DamageText>().damage = container.Container.ATK;
             
-            isChase= false;
-            isAttack = false;
+            StopAllCoroutines();
             StartCoroutine(OnDamage(reactVec));
         }
         
@@ -241,7 +240,6 @@ public abstract class Enemy : MonoBehaviour
             if (!isMino)
             {
                 isChase = true;
-                anim.SetBool("isWalk", true);
             }
 
         }
@@ -267,10 +265,6 @@ public abstract class Enemy : MonoBehaviour
                 
                 Destroy(gameObject,1f);
             }
-            
-
-            
-
         }
     }
 

@@ -3905,6 +3905,8 @@ MonoBehaviour:
     - {fileID: 2065508545}
     minoSpawnPoints:
     - {fileID: 1603443416}
+  skillSelectCanvas: {fileID: 0}
+  skillObjects: []
 --- !u!4 &1060856354
 Transform:
   m_ObjectHideFlags: 0
@@ -7729,6 +7731,11 @@ PrefabInstance:
     - target: {fileID: 3798574869487626946, guid: 04f23626499bd5048a85a838d420c83a,
         type: 3}
       propertyPath: maxHp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798574869487626946, guid: 04f23626499bd5048a85a838d420c83a,
+        type: 3}
+      propertyPath: currentHp
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3798574869487626946, guid: 04f23626499bd5048a85a838d420c83a,

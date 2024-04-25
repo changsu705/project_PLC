@@ -8,18 +8,19 @@ public class Goblin : Enemy
     {
         isChase = false;
         isAttack = true;
-        anim.SetBool("isAttack", true);
+        anim.SetTrigger("doAttack");
         
-        yield return new WaitForSeconds(1f); 
+        
+        yield return new WaitForSeconds(0.8f); 
         meleeArea.enabled = true;
 
-        yield return new WaitForSeconds(0.9f); 
+        yield return new WaitForSeconds(0.8f); 
         meleeArea.enabled = false;
 
         
         isChase = true;
         isAttack = false;
-        anim.SetBool("isAttack", false);
+        
 
     }
 
