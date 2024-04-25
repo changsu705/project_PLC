@@ -83,6 +83,15 @@ public class GameManager : MonoBehaviour
             StartWave(currentWaveIndex); 
         }
 
+        if (GameObject.Find("Skill Colliders") == null)
+        {
+            Instantiate(Resources.Load("Skill Colliders"));
+        }
+
+        if (GameObject.Find("Skill Effects") == null)
+        {
+            Instantiate(Resources.Load("Skill Effects"));
+        }
     }
 
     private void Update()
