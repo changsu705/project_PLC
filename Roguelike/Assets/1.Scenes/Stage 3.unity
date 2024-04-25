@@ -3114,27 +3114,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 620025272}
     m_Modifications:
-    - target: {fileID: 836681846618426072, guid: 100cc787b17cc24458ff0cd0162e06ad,
-        type: 3}
-      propertyPath: explosionFlowerPrefab
-      value: 
-      objectReference: {fileID: 7679451888943716262, guid: 398096032e52f5f48a42595b8efd6d78,
-        type: 3}
-    - target: {fileID: 7957977963993876004, guid: 100cc787b17cc24458ff0cd0162e06ad,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7957977963993876004, guid: 100cc787b17cc24458ff0cd0162e06ad,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7957977963993876004, guid: 100cc787b17cc24458ff0cd0162e06ad,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7957977963993876004, guid: 100cc787b17cc24458ff0cd0162e06ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3184,11 +3163,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7957977963993876004, guid: 100cc787b17cc24458ff0cd0162e06ad,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8991261036039187780, guid: 100cc787b17cc24458ff0cd0162e06ad,
         type: 3}
@@ -3796,6 +3770,7 @@ MonoBehaviour:
     type: 3}
   shieldGoblinPrefab: {fileID: 7945915606020978431, guid: 89670a26390284e61be79b55911b7392,
     type: 3}
+  minoPrefab: {fileID: 0}
   waves:
   - swordGoblinSpawnPoints:
     - {fileID: 872121194}
@@ -3803,12 +3778,14 @@ MonoBehaviour:
     bowGoblinSpawnPoints:
     - {fileID: 1278904356}
     shieldGoblinSpawnPoints: []
+    minoSpawnPoints: []
   - swordGoblinSpawnPoints: []
     bowGoblinSpawnPoints:
     - {fileID: 965421246}
     - {fileID: 1034427872}
     shieldGoblinSpawnPoints:
     - {fileID: 1956427362}
+    minoSpawnPoints: []
 --- !u!4 &1060856354
 Transform:
   m_ObjectHideFlags: 0

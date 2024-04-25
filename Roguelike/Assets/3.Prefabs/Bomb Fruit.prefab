@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 4
+  explosionRadius: 4.5
+  damage: 70
   explosionFlowerPrefab: {fileID: 7679451888943716262, guid: 398096032e52f5f48a42595b8efd6d78,
     type: 3}
 --- !u!1 &5445399064260449951
@@ -373,7 +375,7 @@ Transform:
   m_GameObject: {fileID: 8991261036039187780}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.2801263, z: -0, w: 0.95996314}
-  m_LocalPosition: {x: 12.078466, y: 1.4, z: -0.42234498}
+  m_LocalPosition: {x: 49.788998, y: 1.4, z: -10.100658}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children:

@@ -3,6 +3,8 @@ using UnityEngine;
 public class BombFruit : MonoBehaviour
 {
     [SerializeField] private float force;
+    [SerializeField] private float explosionRadius;
+    [SerializeField] private float damage;
     [SerializeField] private GameObject explosionFlowerPrefab;
     private Rigidbody rigid;
     private AudioManager audioManager;
@@ -24,14 +26,30 @@ public class BombFruit : MonoBehaviour
         }
         else if (rigid.useGravity)
         {
-            Debug.Log("BOOM!");
-            if (explosionFlowerPrefab != null)
+            BOOM();
+        }
+    }
+
+    private void BOOM()
+    {
+        Debug.Log("BOOM!");
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+
+        foreach (Collider hitCollider in colliders)
+        {
+            if (hitCollider.CompareTag("Enemy"))
             {
-                GameObject explosionFlower = Instantiate(explosionFlowerPrefab, transform.position, Quaternion.identity);
-                audioManager.PlaySFX("explosion");
-                Destroy(explosionFlower, 0.5f);
-                Destroy(gameObject);
+                Debug.Log("Hit");
             }
         }
+
+        if (explosionFlowerPrefab != null)
+        {
+            GameObject explosionFlower = Instantiate(explosionFlowerPrefab, transform.position, Quaternion.identity);
+            audioManager.PlaySFX("explosion");
+            Destroy(explosionFlower, 0.5f);
+        }
+
+        Destroy(gameObject);
     }
 }

@@ -311,7 +311,7 @@ Transform:
   m_GameObject: {fileID: 30130197}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.9, y: 0, z: 1.53}
+  m_LocalPosition: {x: 37.76, y: 0, z: 3.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8017,6 +8017,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 620025272}
     m_Modifications:
+    - target: {fileID: 836681846618426072, guid: 100cc787b17cc24458ff0cd0162e06ad,
+        type: 3}
+      propertyPath: damage
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 836681846618426072, guid: 100cc787b17cc24458ff0cd0162e06ad,
+        type: 3}
+      propertyPath: explosionRadius
+      value: 4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7957977963993876004, guid: 100cc787b17cc24458ff0cd0162e06ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9740,16 +9750,19 @@ MonoBehaviour:
     type: 3}
   shieldGoblinPrefab: {fileID: 7945915606020978431, guid: 89670a26390284e61be79b55911b7392,
     type: 3}
+  minoPrefab: {fileID: 0}
   waves:
   - swordGoblinSpawnPoints:
     - {fileID: 872121194}
     bowGoblinSpawnPoints: []
     shieldGoblinSpawnPoints: []
+    minoSpawnPoints: []
   - swordGoblinSpawnPoints:
     - {fileID: 30130198}
     - {fileID: 1592864563}
     bowGoblinSpawnPoints: []
     shieldGoblinSpawnPoints: []
+    minoSpawnPoints: []
 --- !u!4 &1302356988
 Transform:
   m_ObjectHideFlags: 0
