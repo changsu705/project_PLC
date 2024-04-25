@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public GameObject swordGoblinPrefab;
     public GameObject bowGoblinPrefab;
     public GameObject shieldGoblinPrefab;
+    public GameObject minoPrefab;
 
     /// <summary>
     /// 회귀 시계
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
         public Transform[] swordGoblinSpawnPoints; // sword goblin을 스폰할 위치 배열
         public Transform[] bowGoblinSpawnPoints; // bow goblin을 스폰할 위치 배열
         public Transform[] shieldGoblinSpawnPoints; // shield goblin을 스폰할 위치 배열
+        public Transform[] minoSpawnPoints;
     }
 
     public Wave[] waves; // 웨이브 배열
@@ -191,23 +193,24 @@ public class GameManager : MonoBehaviour
     private void StartWave(int waveIndex)
     {
         Wave wave = waves[waveIndex];
-        SpawnGoblins(wave);
+        SpawnEnemies(wave);
     }
 
     // 고블린 스폰 메소드
-    private void SpawnGoblins(Wave wave)
+    private void SpawnEnemies(Wave wave)
     {
-        SpawnGoblin(swordGoblinPrefab, wave.swordGoblinSpawnPoints);
-        SpawnGoblin(bowGoblinPrefab, wave.bowGoblinSpawnPoints);
-        SpawnGoblin(shieldGoblinPrefab, wave.shieldGoblinSpawnPoints);
+        SpawnEnemy(swordGoblinPrefab, wave.swordGoblinSpawnPoints);
+        SpawnEnemy(bowGoblinPrefab, wave.bowGoblinSpawnPoints);
+        SpawnEnemy(shieldGoblinPrefab, wave.shieldGoblinSpawnPoints);
+        SpawnEnemy(minoPrefab, wave.minoSpawnPoints);
     }
 
     // 고블린 스폰 메소드
-    private void SpawnGoblin(GameObject goblinPrefab, Transform[] spawnPoints)
+    private void SpawnEnemy(GameObject enemyPrefab, Transform[] spawnPoints)
     {
         foreach (Transform spawnPoint in spawnPoints)
         {
-            Instantiate(goblinPrefab, spawnPoint.position, Quaternion.identity);
+            Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
         }
     }
 
