@@ -156,9 +156,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            //portalEffect.SetActive(false);
-            //dust.SetActive(false);
-            //vine.SetActive(true);
+            portalEffect.SetActive(false);
+            dust.SetActive(false);
+            vine.SetActive(true);
         }
     }
 
