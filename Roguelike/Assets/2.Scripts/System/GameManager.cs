@@ -4,11 +4,17 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
+using TMPro;
 
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    public static bool GameStoped => Time.timeScale == 0f;
+
+    private PlayerController playerController;
 
     private float fadeDuration = 3f;
     public GameObject decoPortal;
@@ -24,7 +30,7 @@ public class GameManager : MonoBehaviour
     public GameObject backToTownButton;
 
     private bool isEsc;
-    private bool allWavesCleared = false; // 모든 웨이브가 클리어되었는지 여부
+    private bool allWavesCleared = false;   // 모든 웨이브가 클리어되었는지 여부
 
     // 각 고블린의 프리팹
     public GameObject swordGoblinPrefab;
@@ -54,8 +60,14 @@ public class GameManager : MonoBehaviour
     public Wave[] waves; // 웨이브 배열
     private int currentWaveIndex = 0;
 
+    [Header("Skill Select")]
+    [SerializeField] private GameObject skillSelectCanvas;
+    [SerializeField] private List<SkillObject> skillObjects;
+    private TextMeshProUGUI[] skillNames;
+
     private void Awake()
     {
+        Application.targetFrameRate = 60;
         Instance = this;
 
         var obj = Instantiate(Resources.Load<GameObject>("Timer"), new Vector3(0f, -10f, 0f), Quaternion.identity);
@@ -94,6 +106,9 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(Resources.Load("Skill Effects"));
         }
+
+        playerController = FindObjectOfType<PlayerController>();
+        skillNames = skillSelectCanvas.GetComponentsInChildren<TextMeshProUGUI>();
     }
 
     private void Update()
@@ -150,9 +165,9 @@ public class GameManager : MonoBehaviour
             if (currentWaveIndex == waves.Length - 1 && !allWavesCleared)
             {
                 // 마지막 웨이브가 클리어되면 portal과 vine 작동
-                portalEffect.SetActive(true);
-                dust.SetActive(true);
-                vine.transform.DOLocalMoveY(-8f, 4f);
+                //portalEffect.SetActive(true);
+                //dust.SetActive(true);
+                //vine.transform.DOLocalMoveY(-8f, 4f);
                 SetAllWavesCleared(); // 모든 웨이브가 클리어되었음을 설정
             }
             else
@@ -167,9 +182,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            portalEffect.SetActive(false);
-            dust.SetActive(false);
-            vine.SetActive(true);
+            //portalEffect.SetActive(false);
+            //dust.SetActive(false);
+            //vine.SetActive(true);
         }
     }
 
@@ -218,6 +233,33 @@ public class GameManager : MonoBehaviour
     public void SetAllWavesCleared()
     {
         allWavesCleared = true;
+
+        ShuffleList(skillObjects);
+        for (int idx = 0; idx < 3; idx++)
+        {
+            skillNames[idx].text = skillObjects[idx].name;
+        }
+
+        Time.timeScale = 0f;
+        skillSelectCanvas.SetActive(true);
+    }
+
+    private void ShuffleList<T>(List<T> list)
+    {
+        int len = list.Count;
+        for (int idx = 0; idx < len; idx++)
+        {
+            int randIdx = UnityEngine.Random.Range(0, len);
+            (list[idx], list[randIdx]) = (list[randIdx], list[idx]);
+        }
+    }
+
+    public void SelectSkill(int idx)
+    {
+        playerController.Skills.Add(skillObjects[idx]);
+        skillObjects.RemoveAt(idx);
+        skillSelectCanvas.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     IEnumerator noEnemy()

@@ -28,9 +28,9 @@ public class PlayerController : MonoBehaviour
     
     public Image hpBar;
 
-    [SerializeField] private SkillObject[] skills;
+    [SerializeField] private List<SkillObject> skills;
 
-    public SkillObject[] Skills => skills;
+    public List<SkillObject> Skills => skills;
 
     private float horizontal;
     private float vertical;
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (!isDie && !isDodge)
+        if (!GameStoped && !isDie && !isDodge)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
             transform.LookAt(hitPoint);
 
             //이동 벡터와 시선 벡터의 각에 따라 다른 모션과 속도
-            if (!isDodge && (horizontal != 0f || vertical != 0f))
+            if (horizontal != 0f || vertical != 0f)
             {
                 Vector3 lookNormal = (hitPoint - transform.position).normalized;
 
@@ -299,7 +299,7 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Started)
         {
             int idx = (int)context.ReadValue<float>();
-            if (idx < skills.Length && skills[idx].AttackCoolDown)
+            if (idx < skills.Count && skills[idx].AttackCoolDown)
             {
                 StartCoroutine(skills[idx].PlaySkill(this));
                 animation.PlaySkillAnimation(skills[idx].CurrentContainer.AnimationKey);
