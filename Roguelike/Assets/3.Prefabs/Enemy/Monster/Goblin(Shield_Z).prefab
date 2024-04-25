@@ -779,7 +779,8 @@ MonoBehaviour:
   targetRange: 3
   target: {fileID: 0}
   meleeArea: {fileID: 2603805811819428105}
-  hpBar: {fileID: 2197472859656644203}
+  MaxhpBar: {fileID: 1057371032545331377}
+  CurhpBar: {fileID: 2197472859656644203}
   hudDamageText: {fileID: 3033366498262528374, guid: 06fcaf98d181c43ee91aff679f8a2441,
     type: 3}
   hudPos: {fileID: 4520808460850519253}
@@ -788,6 +789,8 @@ MonoBehaviour:
   isDead: 0
   isMino: 0
   isDamage: 0
+  isStart: 0
+  isUpgraded: 0
   dissolveMaterial: {fileID: 2100000, guid: 4d68af65b28157f4d94296f94e8f2e73, type: 2}
   renderers: []
 --- !u!65 &6776333978285558073
