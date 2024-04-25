@@ -331,7 +331,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 3, y: 3, z: 4.0028563}
+  m_Size: {x: 5, y: 3, z: 4.0028563}
   m_Center: {x: 0, y: 0, z: -0.501428}
 --- !u!114 &1837915477883731650
 MonoBehaviour:
@@ -1452,12 +1452,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 1000
-  currentHp: 1000
+  currentHp: 10
   targetRadius: 0
   targetRange: 0
   target: {fileID: 0}
   meleeArea: {fileID: 4831052984349671299}
-  hpBar: {fileID: 3648976785908318028}
+  MaxhpBar: {fileID: 7826127328951609542}
+  CurhpBar: {fileID: 3648976785908318028}
   hudDamageText: {fileID: 3033366498262528374, guid: 06fcaf98d181c43ee91aff679f8a2441,
     type: 3}
   hudPos: {fileID: 6908875404519787235}

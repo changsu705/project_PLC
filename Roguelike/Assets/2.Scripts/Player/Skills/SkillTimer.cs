@@ -32,14 +32,19 @@ public class SkillTimer : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)&& !isHideSkills[0])
+        if (Input.GetKeyDown(KeyCode.Space)&& !isHideSkills[0])
         {
             HideSkillSetting(0);
         }
         
-        if (Input.GetKeyDown(KeyCode.Space)&& !isHideSkills[1])
+        if (Input.GetMouseButtonDown(0) && !isHideSkills[1]) 
         {
             HideSkillSetting(1);
+        }
+
+        if (Input.GetMouseButtonDown(1) && !isHideSkills[2]) 
+        {
+            HideSkillSetting(2);
         }
         
         HideSkillChk();
@@ -98,7 +103,7 @@ public class SkillTimer : MonoBehaviour
                 hideSkillButtons[skillNum].SetActive(false);
 
             }
-            hideSkillTimeTexts[skillNum].text = getSkillTimes[skillNum].ToString("00");
+            hideSkillTimeTexts[skillNum].text = getSkillTimes[skillNum].ToString("0");
 
 
             float time = getSkillTimes[skillNum] / skillTimes[skillNum];
