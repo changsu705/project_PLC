@@ -41,8 +41,7 @@ public class BombFruit : MonoBehaviour
         {
             if (hitCollider.CompareTag("Enemy"))
             {
-                hitCollider.GetComponent<Enemy>().currentHp -= damage;
-                Debug.Log("Hit");
+                hitCollider.GetComponent<Enemy>().TakeBombFruit(damage);
             }
         }
 

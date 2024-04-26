@@ -202,6 +202,25 @@ public abstract class Enemy : MonoBehaviour
         
     }
 
+    public void TakeBombFruit(float damage)
+    {
+        currentHp -= damage;
+        if (currentHp < 0)
+        {
+            currentHp = 0;
+        }
+        UpdateHpBar();
+        
+        Vector3 reactVec = transform.position ;
+            
+        GameObject hudText = Instantiate(hudDamageText);    
+        hudText.transform.position = hudPos.position;
+        hudText.GetComponent<DamageText>().damage =damage;
+            
+        StopAllCoroutines();
+        StartCoroutine(OnDamage(reactVec));
+    }
+
     private void UpdateHpBar()
     {
         float hpRatio = Mathf.Clamp01(currentHp / (float)maxHp);
@@ -239,6 +258,7 @@ public abstract class Enemy : MonoBehaviour
             
             if (!isMino)
             {
+                anim.SetBool("isWalk",true);
                 isChase = true;
             }
 

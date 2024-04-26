@@ -11,7 +11,7 @@ public class DamageText : MonoBehaviour
     
     private TextMeshPro text;
     private Color alpha;
-    public int damage; // 임시 코드 변경할 예정
+    public float damage; // 임시 코드 변경할 예정
     
     void Start()
     {
